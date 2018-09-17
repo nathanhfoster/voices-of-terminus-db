@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'accounts', #only for the management command 'autosuperuser'
+    'articles',
     'newsletter',
     'pages',
 ]
@@ -66,7 +67,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'cfehome.urls'
+ROOT_URLCONF = 'vot.urls'
 
 TEMPLATES = [
     {
@@ -79,13 +80,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'cfehome.context_processors.hiit_project_name',
+                'vot.context_processors.hiit_project_name',
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'cfehome.wsgi.application'
+WSGI_APPLICATION = 'vot.wsgi.application'
 
 
 # Database

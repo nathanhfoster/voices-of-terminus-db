@@ -1,1 +1,1 @@
-web: gunicorn cfehome.wsgi --log-file -
+web: gunicorn vot.wsgi --log-file -

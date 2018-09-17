@@ -20,25 +20,23 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = '+9!j2(jk7v$7+0b1v(z9+3vnm(jb0u@&w68t#5_e8s9-lbfhv-'
-SECRET_KEY = os.environ.get('SECRET_KEY', '+9!j2(jk7v$7+0b1v(z9+3vnm(jb0u@&w68t#5_e8s9-lbfhv-')
+SECRET_KEY = '+9!j2(jk7v$7+0b1v(z9+3vnm(jb0u@&w68t#5_e8s9-lbfhv-'
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-your_website = os.environ.get('YOUR_WEBSITE', '.example.com')
-ALLOWED_HOSTS = ['.herokuapp.com', '.knockhq.com', your_website]
-PROJECT_NAME  = os.environ.get('PROJECT_NAME', 'HiitLanding')
+ALLOWED_HOSTS = []
 
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_HOST_USER = 'youremail@gmail.com' #my gmail username
-# EMAIL_HOST_PASSWORD = 'yourpassword' #my gmail password
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# DEFAULT_FROM_EMAIL = "Justin <hungrypy@gmail.com>"
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'youremail@gmail.com' #my gmail username
+EMAIL_HOST_PASSWORD = 'yourpassword' #my gmail password
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = "Justin <hungrypy@gmail.com>"
 
 
-# ADMINS = [('Justin', EMAIL_HOST_USER)]
-# MANAGERS = ADMINS
+ADMINS = [('Justin', EMAIL_HOST_USER)]
+MANAGERS = ADMINS
 
 
 
@@ -54,13 +52,13 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'accounts', #only for the management command 'autosuperuser'
+    'articles',
     'newsletter',
     'pages',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -69,7 +67,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'cfehome.urls'
+ROOT_URLCONF = 'vot.urls'
 
 TEMPLATES = [
     {
@@ -82,13 +80,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'cfehome.context_processors.hiit_project_name',
+                'vot.context_processors.hiit_project_name',
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'cfehome.wsgi.application'
+WSGI_APPLICATION = 'vot.wsgi.application'
 
 
 # Database
@@ -101,10 +99,6 @@ DATABASES = {
     }
 }
 
-import dj_database_url
-
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -149,10 +143,6 @@ STATICFILES_DIRS = (
 )
 
 STATIC_ROOT = os.path.join(BASE_DIR, "live-static", "static-root")
-
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-
-#STATIC_ROOT = "/home/cfedeploy/webapps/cfehome_static_root/"
 
 MEDIA_URL = "/media/"
 

@@ -5,7 +5,7 @@
 **Release Notes // Feb 2018**
 - Upgraded to Django 2
 - Upgraded Python to 3.6
-- Changed Django project name from "ideas" to "cfehome"
+- Changed Django project name from "ideas" to "vot"
 - Removed redundant code
 
 
