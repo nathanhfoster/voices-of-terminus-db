@@ -32,7 +32,7 @@ class GetAllDocumentsTest(BaseViewTest):
         """
         # hit the API endpoint
         response = self.client.get(
-            reverse("articles-all", kwargs={"version": "v1"})
+            reverse("articles", kwargs={"version": "v1"})
         )
         # fetch the data from db
         expected = Document.objects.all()

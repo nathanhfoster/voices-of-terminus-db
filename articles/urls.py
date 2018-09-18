@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import ListDocumentsView
+from .views import DocumentsView
 
 
 urlpatterns = [
-    path('articles/', ListDocumentsView.as_view(), name="articles-all")
-]
+    path('articles/', DocumentsView.as_view(), name="articles"),
+   ]
