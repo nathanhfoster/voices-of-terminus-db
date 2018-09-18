@@ -150,7 +150,17 @@ MEDIA_URL = "/media/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "live-static", "media-root")
 
-CORS_ORIGIN_WHITELIST = ('localhost:3000', 'herokuapp.com')
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = ('*')
+CORS_ALLOW_METHODS = (
+        'GET',
+        'POST',
+        'PUT',
+        'PATCH',
+        'DELETE',
+        'OPTIONS'
+)
 CORS_ALLOW_HEADERS = (
         'x-requested-with',
         'content-type',
