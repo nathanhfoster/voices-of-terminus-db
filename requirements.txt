@@ -2,6 +2,7 @@ appdirs==1.4.3
 cfe==0.0.15
 dj-database-url==0.4.2
 Django==2.0.2
+django-cors-headers==2.4.0
 django-crispy-forms==1.7.0
 djangorestframework==3.7.7
 gunicorn==19.7.1
