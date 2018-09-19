@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 # Create your models here.
 class Document(models.Model):
@@ -7,7 +8,7 @@ class Document(models.Model):
     slug = models.SlugField(null=True)
     author = models.ForeignKey(
         User, 
-        related_name='documents',
+        related_name='author_name',
         on_delete=models.CASCADE,
         blank=True,
         default=2)
