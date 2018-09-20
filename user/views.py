@@ -1,13 +1,13 @@
-from .models import Account
+from .models import User
 from rest_framework import generics
-from .serializers import AccountSerializer
+from .serializers import UserSerializer
 
-class AccountMixin:
-    serializer_class = AccountSerializer
-    queryset = Account.objects.all()
+class UserMixin:
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
  
  
-class AccountList(AccountMixin, generics.ListCreateAPIView):
+class UserList(UserMixin, generics.ListCreateAPIView):
     """
     Returns list of all Users or create a new User
     """
@@ -18,7 +18,7 @@ class AccountList(AccountMixin, generics.ListCreateAPIView):
     # pass
  
  
-class AccountDetails(AccountMixin, generics.RetrieveUpdateDestroyAPIView):
+class UserDetails(UserMixin, generics.RetrieveUpdateDestroyAPIView):
     """
     Returns a specific User, updates it or deletes it.
     """

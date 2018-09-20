@@ -24,5 +24,6 @@ urlpatterns = [
     re_path(r'^admin/', admin.site.urls),
     re_path(r'^api/email/join/$', JoinCreateAPIView.as_view(), name='email-join'),
     re_path(r'^(?P<slug>[\w-]+)/$', PageDetailView.as_view(), name='page-detail'),
+    re_path('api/(?P<version>(v1|v2))/', include('accounts.urls')),
     re_path('api/(?P<version>(v1|v2))/', include('articles.urls')),
 ]

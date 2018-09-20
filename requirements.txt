@@ -1,4 +1,5 @@
 appdirs==1.4.3
+bcrypt==3.1.4
 cfe==0.0.15
 dj-database-url==0.4.2
 Django==2.0.2
@@ -8,7 +9,7 @@ djangorestframework==3.7.7
 gunicorn==19.7.1
 olefile==0.45.1
 packaging==16.8
-Pillow==5.0.0
+Pillow==5.2.0
 psycopg2==2.7.4
 psycopg2-binary==2.7.4
 pyparsing==2.2.0

@@ -1,13 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import User
-from django.contrib.auth import get_user_model
+from django.conf import settings
 
 # Create your models here.
 class Document(models.Model):
     title = models.CharField(max_length=250)
     slug = models.SlugField(null=True)
     author = models.ForeignKey(
-        User, 
+        settings.AUTH_USER_MODEL, 
         related_name='author_name',
         on_delete=models.CASCADE,
         blank=True,
@@ -18,7 +17,7 @@ class Document(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
     last_modified = models.DateTimeField(auto_now=True)
     last_modified_by = models.ForeignKey(
-        User, 
+        settings.AUTH_USER_MODEL, 
         related_name='document_modifiers',
         on_delete=models.CASCADE,
         blank=True,

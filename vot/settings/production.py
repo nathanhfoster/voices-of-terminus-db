@@ -27,7 +27,7 @@ DEBUG = False
 
 your_website = os.environ.get('YOUR_WEBSITE', '.example.com')
 ALLOWED_HOSTS = ['.herokuapp.com', '.knockhq.com', your_website]
-PROJECT_NAME  = os.environ.get('PROJECT_NAME', 'HiitLanding')
+PROJECT_NAME  = os.environ.get('Voices of Terminus', 'VoT')
 
 # EMAIL_HOST = 'smtp.gmail.com'
 # EMAIL_HOST_USER = 'youremail@gmail.com' #my gmail username
@@ -39,7 +39,7 @@ PROJECT_NAME  = os.environ.get('PROJECT_NAME', 'HiitLanding')
 
 # ADMINS = [('Justin', EMAIL_HOST_USER)]
 # MANAGERS = ADMINS
-
+AUTH_USER_MODEL = "accounts.Account" 
 
 
 # Application definition
@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
 
-    'accounts', #only for the management command 'autosuperuser'
+    'accounts',
     'articles',
     'corsheaders',
     'newsletter',
@@ -127,6 +127,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+PASSWORD_HASHERS = [
+    'vot.hashers.MyPBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/

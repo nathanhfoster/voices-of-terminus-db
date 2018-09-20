@@ -28,16 +28,16 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'youremail@gmail.com' #my gmail username
-EMAIL_HOST_PASSWORD = 'yourpassword' #my gmail password
+EMAIL_HOST_USER = '' #my gmail username
+EMAIL_HOST_PASSWORD = '' #my gmail password
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = "Justin <hungrypy@gmail.com>"
+DEFAULT_FROM_EMAIL = ""
 
 
 ADMINS = [('Justin', EMAIL_HOST_USER)]
 MANAGERS = ADMINS
-
+AUTH_USER_MODEL = "accounts.Account" 
 
 
 # Application definition
@@ -51,9 +51,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
 
-    'accounts', #only for the management command 'autosuperuser'
+    'accounts',
     'articles',
-     'corsheaders',
+    'corsheaders',
     'newsletter',
     'pages',
 ]
@@ -118,6 +118,14 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+]
+
+PASSWORD_HASHERS = [
+    'vot.hashers.MyPBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
 ]
 
 
