@@ -7,11 +7,12 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-        'id', 'password', 'last_login', 'is_superuser',
-        'username', 'first_name', 'email', 'is_staff',
-        'is_active', 'date_joined', 'last_name', 'bio',
-        'profile_image', 'discord_url', 'twitter_url', 'twitch_url', 'youtube_url',
-        'primary_class', 'primary_role', 'secondary_class', 'secondary_role')
+        'id', 'username', 'password', 'first_name', 'last_name',
+        'bio', 'profile_image', 'primary_role', 'secondary_class', 'secondary_role', 
+        'last_login', 'is_superuser', 'email', 'is_staff',
+        'is_active', 'date_joined',  
+        'discord_url', 'twitter_url', 'twitch_url', 'youtube_url',
+        'primary_class', )
         extra_kwargs = {'password': {'write_only': True}}
         # read_only_fields = ('date_created', 'date_modified, last_modified,last_modified_by')
 
