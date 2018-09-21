@@ -39,7 +39,7 @@ PROJECT_NAME  = os.environ.get('Voices of Terminus', 'VoT')
 
 # ADMINS = [('Justin', EMAIL_HOST_USER)]
 # MANAGERS = ADMINS
-AUTH_USER_MODEL = "accounts.Account" 
+AUTH_USER_MODEL = "user.User" 
 
 
 # Application definition
@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
 
-    'accounts',
+    'user',
     'articles',
     'corsheaders',
     'newsletter',
@@ -134,6 +134,15 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
     'django.contrib.auth.hashers.Argon2PasswordHasher',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/

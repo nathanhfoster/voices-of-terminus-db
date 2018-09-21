@@ -5,6 +5,8 @@ from .serializers import UserSerializer
 class UserMixin:
     serializer_class = UserSerializer
     queryset = User.objects.all()
+    authentication_classes = ()
+    permission_classes = ()
  
  
 class UserList(UserMixin, generics.ListCreateAPIView):
