@@ -1,22 +1,9 @@
 from .models import Document
-from rest_framework import generics
-from .serializers import DocumentsSerializer
+from rest_framework import generics, viewsets
+from .serializers import DocumentSerializer
 
-#Use for inheritance
-class DocumentMixin:
-    serializer_class = DocumentsSerializer
+class DocumentView(viewsets.ModelViewSet):
+    serializer_class = DocumentSerializer
     queryset = Document.objects.all()
- 
- 
-class DocumentList(DocumentMixin, generics.ListCreateAPIView):
-    """
-    Returns list of all Documents or create a new Document
-    """
-    pass
- 
- 
-class DocumentDetails(DocumentMixin, generics.RetrieveUpdateDestroyAPIView):
-    """
-    Returns a specific Document, updates it or deletes it.
-    """
-    pass
+    authentication_classes = ()
+    permission_classes = ()

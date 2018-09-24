@@ -23,10 +23,10 @@ class Document(models.Model):
         blank=True,
         default=2)
     
-    def __str__(self):
-        """Return a human readable representation of the model instance."""
-        return "{}".format(
-            self.title, self.slug, self.author,
-            self.body, self.tags,
-            self.date_created, self.date_modified,
-            self.last_modified, self.last_modified_by)
+    # def __str__(self):
+    #     """Return a human readable representation of the model instance."""
+    #     return "{}".format(
+    #         self.title, self.slug, self.author,
+    #         self.body, self.tags,
+    #         self.date_created, self.date_modified,
+    #         self.last_modified, self.last_modified_by)

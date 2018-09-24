@@ -1,10 +1,10 @@
-from django.conf.urls import url
-from rest_framework.urlpatterns import format_suffix_patterns
-from .views import UserList, UserDetails
+from django.urls import path, include
+from . import views
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register('users', views.UserView)
 
 urlpatterns = [
-    url(r'^user/$', UserList.as_view(), name="user-list"),
-    url(r'^user/(?P<pk>[0-9]+)/$', UserDetails.as_view(), name="user-detail")
+    path('', include(router.urls))
 ]
-
-urlpatterns = format_suffix_patterns(urlpatterns)

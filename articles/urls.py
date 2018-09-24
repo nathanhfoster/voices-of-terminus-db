@@ -1,10 +1,10 @@
-from django.conf.urls import url
-from rest_framework.urlpatterns import format_suffix_patterns
-from .views import DocumentList, DocumentDetails
+from django.urls import path, include
+from . import views
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register('articles', views.DocumentView)
 
 urlpatterns = [
-    url(r'^articles/$', DocumentList.as_view(), name="article-list"),
-    url(r'^articles/(?P<pk>[0-9]+)/$', DocumentDetails.as_view(), name="article-detail")
+    path('', include(router.urls))
 ]
-
-urlpatterns = format_suffix_patterns(urlpatterns)

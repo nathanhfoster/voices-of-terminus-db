@@ -54,8 +54,6 @@ INSTALLED_APPS = [
     'user',
     'articles',
     'corsheaders',
-    'newsletter',
-    'pages',
 ]
 
 MIDDLEWARE = [
@@ -82,7 +80,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'vot.context_processors.hiit_project_name',
             ],
         },
     },
@@ -157,15 +154,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-)
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, "static"),
+# )
 
-STATIC_ROOT = os.path.join(BASE_DIR, "live-static", "static-root")
+# STATIC_ROOT = os.path.join(BASE_DIR, "live-static", "static-root")
 
-MEDIA_URL = "/media/"
+# MEDIA_URL = "/media/"
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "live-static", "media-root")
+# MEDIA_ROOT = os.path.join(BASE_DIR, "live-static", "media-root")
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
