@@ -151,6 +151,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISION_CLASSES' : {'rest_framework.permissions.IsAuthenticated',},
+    'DEFAULT_AUTHENTICATION_CLASSES' : {'rest_framework_simplejwt.authentication.JWTAuthentication',}
+}
+
 # STATICFILES_DIRS = (
 #     os.path.join(BASE_DIR, "static"),
 # )
