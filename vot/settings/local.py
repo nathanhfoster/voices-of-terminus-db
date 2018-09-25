@@ -125,15 +125,6 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.Argon2PasswordHasher',
 ]
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    )
-}
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
@@ -163,6 +154,11 @@ STATIC_URL = '/static/'
 # MEDIA_URL = "/media/"
 
 # MEDIA_ROOT = os.path.join(BASE_DIR, "live-static", "media-root")
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISION_CLASSES' : {'rest_framework.permissions.IsAuthenticated',},
+    'DEFAULT_AUTHENTICATION_CLASSES' : {'rest_framework_simplejwt.authentication.JWTAuthentication',}
+}
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
