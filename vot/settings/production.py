@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
 
     'user',
     'articles',
@@ -125,8 +126,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 PASSWORD_HASHERS = [
-    'vot.hashers.MyPBKDF2PasswordHasher',
-    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
     'django.contrib.auth.hashers.Argon2PasswordHasher',
@@ -151,9 +150,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISION_CLASSES' : {'rest_framework.permissions.IsAuthenticated',},
+#     'DEFAULT_AUTHENTICATION_CLASSES' : {'rest_framework_simplejwt.authentication.JWTAuthentication',}
+# }
+
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISION_CLASSES' : {'rest_framework.permissions.IsAuthenticated',},
-    'DEFAULT_AUTHENTICATION_CLASSES' : {'rest_framework_simplejwt.authentication.JWTAuthentication',}
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated', )
 }
 
 # STATICFILES_DIRS = (
