@@ -101,7 +101,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
+# heroku addons:create heroku-postgresql:hobby-dev
 # heroku config:set DJANGO_SETTINGS_MODULE=vot.settings.production
 # heroku run python manage.py makemigrations
 # heroku run python manage.py migrate
