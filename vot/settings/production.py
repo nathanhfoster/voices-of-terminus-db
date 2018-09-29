@@ -105,7 +105,7 @@ DATABASES = {
 # heroku config:set DJANGO_SETTINGS_MODULE=vot.settings.production
 # heroku run python manage.py makemigrations
 # heroku run python manage.py migrate
-
+# heroku run python manage.py createsuperuser
 import dj_database_url
 
 db_from_env = dj_database_url.config()
