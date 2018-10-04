@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from .views import login
+from .views import CustomAuthToken
 
 urlpatterns = [
     path('', admin.site.urls),
@@ -25,5 +25,5 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('api/token/', TokenObtainPairView.as_view()),
     path('api/token/refresh/', TokenRefreshView.as_view()),
-    path('api/v1/login/', login)
+    path('api/v1/login/', CustomAuthToken.as_view())
 ]
