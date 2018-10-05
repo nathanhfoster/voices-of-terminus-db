@@ -8,7 +8,7 @@ class Document(models.Model):
         settings.AUTH_USER_MODEL, 
         related_name='documentAuthorName',
         on_delete=models.CASCADE,)
-    body = models.TextField()
+    html = models.TextField()
     tags = models.CharField(max_length=128, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)

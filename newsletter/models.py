@@ -8,8 +8,8 @@ class NewsLetter(models.Model):
         settings.AUTH_USER_MODEL, 
         related_name='newsletterAuthorName',
         on_delete=models.CASCADE,)
-    body = models.TextField()
-    tags = models.CharField(max_length=128, blank=True)
+    html = models.TextField()
+    design = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     last_modified = models.DateTimeField(auto_now=True)
