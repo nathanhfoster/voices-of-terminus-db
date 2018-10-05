@@ -9,8 +9,7 @@ class Document(models.Model):
         settings.AUTH_USER_MODEL, 
         related_name='author_name',
         on_delete=models.CASCADE,
-        blank=True,
-        default=2)
+)
     body = models.TextField()
     tags = models.CharField(max_length=128, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -19,9 +18,7 @@ class Document(models.Model):
     last_modified_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, 
         related_name='document_modifiers',
-        on_delete=models.CASCADE,
-        blank=True,
-        default=2)
+        on_delete=models.CASCADE,)
     
     # def __str__(self):
     #     """Return a human readable representation of the model instance."""
