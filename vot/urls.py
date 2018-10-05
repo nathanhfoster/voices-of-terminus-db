@@ -22,6 +22,7 @@ urlpatterns = [
     path('', admin.site.urls),
     path('api/v1/', include('user.urls')),
     path('api/v1/', include('articles.urls')),
+    path('api/v1/', include('newsletter.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('api/token/', TokenObtainPairView.as_view()),
     path('api/token/refresh/', TokenRefreshView.as_view()),

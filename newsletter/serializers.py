@@ -1,13 +1,13 @@
 from rest_framework import serializers
 
-from articles.models import Document
+from newsletter.models import NewsLetter
 from django.contrib.auth.models import User
 
-class DocumentSerializer(serializers.ModelSerializer):
-    #author_name = serializers.StringRelatedField(source='authorName')
+class NewsLetterSerializer(serializers.ModelSerializer):
+    #author_name = serializers.StringRelatedField(source='author_name')
     #author_name = serializers.StringRelatedField(many=True)
     class Meta:
-        model = Document
+        model = NewsLetter
         fields = ('id','title', 'slug', 'author', 'body', 'tags',
         'date_created', 'date_modified','last_modified', 'last_modified_by',
         )
