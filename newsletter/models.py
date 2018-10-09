@@ -9,6 +9,7 @@ class NewsLetter(models.Model):
         related_name='newsletterAuthorName',
         on_delete=models.CASCADE,)
     html = models.TextField()
+    tags = models.CharField(max_length=128, blank=True)
     design = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
