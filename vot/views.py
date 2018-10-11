@@ -24,5 +24,8 @@ class CustomAuthToken(ObtainAuthToken):
             'token': token.key,
             'id': user.pk,
             'isSuperUser': user.is_superuser,
-            'isStaff': user.is_staff
+            'isStaff': user.is_staff,
+            'bio': user.bio,
+            'primaryRole': user.primary_role,
+            'primaryClass': user.primary_class
         })
