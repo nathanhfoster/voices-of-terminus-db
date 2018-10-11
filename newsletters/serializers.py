@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from newsletter.models import NewsLetter
+from newsletters.models import NewsLetter
 from django.contrib.auth.models import User
 
 class NewsLetterSerializer(serializers.ModelSerializer):

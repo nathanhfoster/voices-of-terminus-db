@@ -54,7 +54,7 @@ INSTALLED_APPS = [
 
     'user',
     'articles',
-    'newsletter',
+    'newsletters',
     'corsheaders',
 ]
 
