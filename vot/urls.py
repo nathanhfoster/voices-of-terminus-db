@@ -20,6 +20,7 @@ from .views import CustomAuthToken
 
 urlpatterns = [
     path('', admin.site.urls),
+    path('api/v1/', include('guildcalendar.urls')),
     path('api/v1/', include('user.urls')),
     path('api/v1/', include('articles.urls')),
     path('api/v1/', include('newsletters.urls')),
