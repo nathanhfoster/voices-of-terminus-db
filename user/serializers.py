@@ -10,6 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = (
         'id', 'username', 'password', 'first_name', 'last_name',
         'bio', 'profile_image', 'primary_role', 'secondary_class', 'secondary_role',
+        'profession', 'profession_specialization',
         'last_login', 'is_superuser', 'email', 'is_staff',
         'is_active', 'date_joined',
         'discord_url', 'twitter_url', 'twitch_url', 'youtube_url',
