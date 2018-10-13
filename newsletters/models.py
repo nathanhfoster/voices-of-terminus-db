@@ -8,6 +8,9 @@ class NewsLetter(models.Model):
         settings.AUTH_USER_MODEL, 
         related_name='newsletterAuthorName',
         on_delete=models.CASCADE,)
+    def author_username(self):
+        return self.author. get_username()
+    author_username.short_description = 'Username' 
     html = models.TextField()
     tags = models.CharField(max_length=128, blank=True)
     design = models.TextField()
