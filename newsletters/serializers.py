@@ -9,6 +9,6 @@ class NewsLetterSerializer(serializers.ModelSerializer):
     class Meta:
         model = NewsLetter
         fields = ('id','title', 'slug', 'author', 'author_username', 'html', 'tags', 'design',
-        'date_created', 'date_modified','last_modified', 'last_modified_by',
+        'date_created', 'date_modified','last_modified', 'last_modified_by', 'views'
         )
         read_only_fields = ('date_created', 'date_modified, last_modified,last_modified_by')

@@ -21,3 +21,4 @@ class NewsLetter(models.Model):
         settings.AUTH_USER_MODEL, 
         related_name='newsletterModifier',
         on_delete=models.CASCADE,)
+    views = models.IntegerField(default=0)

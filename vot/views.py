@@ -45,7 +45,8 @@ class CustomAuthToken(ObtainAuthToken):
             'discordUrl': user.discord_url,
             'twitterUrl': user.twitter_url,
             'twitchUrl': user.twitch_url,
-            'youtubeUrl': user.youtube_url
+            'youtubeUrl': user.youtube_url,
+            'guildPoints': user.guild_points
         })
 
         

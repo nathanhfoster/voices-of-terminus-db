@@ -12,7 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
         'bio', 'profile_image', 'primary_role', 'secondary_class', 'secondary_role',
         'profession', 'profession_specialization',
         'last_login', 'is_superuser', 'email', 'is_staff',
-        'is_active', 'date_joined',
+        'is_active', 'date_joined', 'guild_points',
         'discord_url', 'twitter_url', 'twitch_url', 'youtube_url',
         'primary_class', )
         write_only_fields = ('password',)

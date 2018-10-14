@@ -20,6 +20,7 @@ class Document(models.Model):
         settings.AUTH_USER_MODEL, 
         related_name='documentModifier',
         on_delete=models.CASCADE,)
+    views = models.IntegerField(default=0)
     
     # def __str__(self):
     #     """Return a human readable representation of the model instance."""

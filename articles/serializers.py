@@ -8,6 +8,6 @@ class DocumentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Document
         fields = ('id','title', 'slug', 'author', 'author_username', 'html', 'tags',
-        'date_created', 'date_modified','last_modified', 'last_modified_by',
+        'date_created', 'date_modified','last_modified', 'last_modified_by', 'views'
         )
         read_only_fields = ('date_created', 'date_modified, last_modified,last_modified_by')
