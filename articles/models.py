@@ -14,13 +14,15 @@ class Document(models.Model):
     html = models.TextField()
     tags = models.CharField(max_length=128, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
-    date_modified = models.DateTimeField(auto_now=True)
     last_modified = models.DateTimeField(auto_now=True)
     last_modified_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, 
         related_name='documentModifier',
         on_delete=models.CASCADE,)
+    def last_modified_by_username(self):
+        return self.last_modified_by. get_username()
     views = models.IntegerField(default=0)
+
     
     # def __str__(self):
     #     """Return a human readable representation of the model instance."""
