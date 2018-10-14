@@ -2,7 +2,7 @@ from .models import Document
 from rest_framework import viewsets, permissions
 from rest_framework.permissions import AllowAny
 from .serializers import DocumentSerializer
-from articles.permissions import IsOwnerOrReadOnly
+from articles.permissions import IsOwnerOrReadOnly, IsUpdateProfile
 
 class DocumentView(viewsets.ModelViewSet):
     serializer_class = DocumentSerializer
@@ -14,5 +14,5 @@ class DocumentView(viewsets.ModelViewSet):
         if self.request.method == 'GET':
             self.permission_classes = (AllowAny,)
         if self.request.method == 'PATCH':
-            self.permission_classes = (permissions.IsAuthenticated, IsOwnerOrReadOnly,)
+            self.permission_classes = (permissions.IsAuthenticated, IsUpdateProfile,)
         return super(DocumentView, self).get_permissions()

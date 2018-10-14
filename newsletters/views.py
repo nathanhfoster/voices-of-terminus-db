@@ -2,7 +2,7 @@ from .models import NewsLetter
 from rest_framework import viewsets, permissions
 from rest_framework.permissions import AllowAny
 from .serializers import NewsLetterSerializer
-from newsletters.permissions import IsOwnerOrReadOnly
+from newsletters.permissions import IsOwnerOrReadOnly, IsUpdateProfile
 
 class NewsLetterView(viewsets.ModelViewSet):
     serializer_class = NewsLetterSerializer
@@ -14,5 +14,5 @@ class NewsLetterView(viewsets.ModelViewSet):
         if self.request.method == 'GET':
             self.permission_classes = (AllowAny,)
         if self.request.method == 'PATCH':
-            self.permission_classes = (permissions.IsAuthenticated, IsOwnerOrReadOnly,)
+            self.permission_classes = (permissions.IsAuthenticated, IsUpdateProfile)
         return super(NewsLetterView, self).get_permissions()
