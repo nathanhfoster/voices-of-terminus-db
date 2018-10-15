@@ -11,8 +11,8 @@ class UserSerializer(serializers.ModelSerializer):
         'id', 'username', 'password', 'first_name', 'last_name',
         'bio', 'profile_image', 'primary_role', 'secondary_class', 'secondary_role',
         'profession', 'profession_specialization',
-        'last_login', 'is_superuser', 'email', 'is_staff',
-        'is_active', 'date_joined', 'guild_points',
+        'is_superuser', 'email', 'is_staff',
+        'is_active', 'date_joined', 'last_login', 'guild_points',
         'discord_url', 'twitter_url', 'twitch_url', 'youtube_url',
         'primary_class', )
         write_only_fields = ('password',)
@@ -31,14 +31,23 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create(
             email=validated_data['email'],
             username=validated_data['username'],
-            password = make_password(validated_data['password']),
-            bio = validated_data['bio'],
-            primary_class = validated_data['primary_class'],
-            primary_role = validated_data['primary_role']
+            password = make_password(validated_data['password'])
             )
         user.set_password(validated_data["password"])
         user.save()
         return user
+
+    # def create_user(self, username, email, password=None):
+    #     if username is None:
+    #         raise TypeError('Users must have a username.')
+
+    #     if email is None:
+    #         raise TypeError('Users must have an email address.')
+
+    #     user = User(email=validated_data['email'], username=validated_data['username'])
+    #     user.set_password(validated_data['password'])
+    #     user.save()
+    #     return user
 
     def update(self, instance, validated_data):
         for attr, value in validated_data.items():
