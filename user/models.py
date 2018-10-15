@@ -37,7 +37,7 @@ class User(AbstractUser):
     secondary_role = models.CharField(blank=True, max_length=20)
     profession = models.CharField(blank=True, max_length=20)
     profession_specialization = models.CharField(blank=True, max_length=20)
-    guild_points = models.IntegerField(default=0)
+    experience_points = models.IntegerField(default=0)
 
     @receiver(post_save, sender=settings.AUTH_USER_MODEL)
     def create_auth_token(sender, instance=None, created=False, **kwargs):
