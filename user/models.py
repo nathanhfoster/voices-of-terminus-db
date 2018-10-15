@@ -1,11 +1,27 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
+# Allo Spaces in User names
+class MyValidator(UnicodeUsernameValidator):
+    regex = r'^[\w.@+\- ]+$'
+
 class User(AbstractUser):
+    username_validator = MyValidator()
+    username = models.CharField(
+        ('username'),
+        max_length=150,
+        unique=True,
+        help_text = ('Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'),
+        validators=[username_validator],
+            error_messages={
+            'unique': ("A user with that username already exists."),
+        },
+    )
     bio = models.TextField(blank=True)
     profile_image = models.ImageField(null=True)
 
