@@ -30,11 +30,15 @@ class User(AbstractUser):
     twitch_url = models.CharField(blank=True, max_length=250)
     youtube_url = models.CharField(blank=True, max_length=250)
 
-    primary_class = models.CharField(blank=True, max_length=20)
+    primary_race = models.CharField(blank=True, max_length=20)
     primary_role = models.CharField(blank=True, max_length=20)
+    primary_class = models.CharField(blank=True, max_length=20)
+    
+    secondary_race = models.CharField(blank=True, max_length=20)
+    secondary_role = models.CharField(blank=True, max_length=20)
     secondary_class = models.CharField(blank=True, max_length=20)
-    secondary_role = models.CharField(blank=True, max_length=20)
-    secondary_role = models.CharField(blank=True, max_length=20)
+    
+
     profession = models.CharField(blank=True, max_length=20)
     profession_specialization = models.CharField(blank=True, max_length=20)
     experience_points = models.IntegerField(default=0)

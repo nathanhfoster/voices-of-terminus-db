@@ -35,10 +35,15 @@ class CustomAuthToken(ObtainAuthToken):
             'isSuperUser': user.is_superuser,
             'isStaff': user.is_staff,
             'bio': user.bio,
+
+            'primaryRace': user.primary_race,
             'primaryRole': user.primary_role,
             'primaryClass': user.primary_class,
-            'secondaryRole': user.secondary_class,
-            'secondaryClass': user.secondary_role,
+
+            'secondaryRace': user.secondary_race,
+            'secondaryRole': user.secondary_role,
+            'secondaryClass': user.secondary_class,
+
             'profession': user.profession,
             'professionSpecialization': user.profession_specialization,
             'dateJoined': user.date_joined,

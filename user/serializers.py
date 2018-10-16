@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = (
         'id', 'username', 'password', 'first_name', 'last_name',
-        'bio', 'profile_image', 'primary_role', 'secondary_class', 'secondary_role',
+        'bio', 'profile_image', 'primary_race', 'primary_role', 'secondary_class', 'secondary_race', 'secondary_role',
         'profession', 'profession_specialization',
         'is_superuser', 'email', 'is_staff',
         'is_active', 'date_joined', 'last_login', 'experience_points',
