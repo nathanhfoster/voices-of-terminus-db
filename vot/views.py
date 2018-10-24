@@ -26,7 +26,7 @@ class CustomAuthToken(ObtainAuthToken):
         return Response({
             'token': token.key,
             'id': user.pk,
-            'profile_image': user.profile_image.url,
+            'profile_image': request.build_absolute_uri(user.profile_image.url),
             'username': user.username,
             'email': user.email,
             'first_name': user.first_name,
