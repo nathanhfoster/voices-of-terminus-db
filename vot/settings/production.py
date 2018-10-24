@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 #SECRET_KEY = '+9!j2(jk7v$7+0b1v(z9+3vnm(jb0u@&w68t#5_e8s9-lbfhv-'
 SECRET_KEY = os.environ.get('SECRET_KEY', '+9!j2(jk7v$7+0b1v(z9+3vnm(jb0u@&w68t#5_e8s9-lbfhv-')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 your_website = os.environ.get('YOUR_WEBSITE', '.example.com')
 ALLOWED_HOSTS = ['.herokuapp.com', '.knockhq.com', your_website]
@@ -167,21 +167,27 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated', )
 }
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 
+# Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, 'static'),
 )
 
-STATIC_ROOT = os.path.join(BASE_DIR, "live-static", "static-root")
+# STATIC_ROOT = os.path.join(BASE_DIR, "live-static", "static-root")
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "live-static", "media-root")
 
-#STATIC_ROOT = "/home/cfedeploy/webapps/vot_static_root/"
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
