@@ -16,7 +16,8 @@ from django.contrib.auth.models import update_last_login
 class CustomAuthToken(ObtainAuthToken):
 
     def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data, context={'request': request})
+        serializer = self.serializer_class(data=request.data,
+                                           context={'request': request})
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         update_last_login(None, user)   
@@ -27,7 +28,6 @@ class CustomAuthToken(ObtainAuthToken):
             'id': user.pk,
             'username': user.username,
             'email': user.email,
-            # 'profile_image': user.profile_image,
             'first_name': user.first_name,
             'last_name': user.last_name,
             'is_active': user.is_active,

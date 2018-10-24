@@ -143,6 +143,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
+STATIC_URL = '/static/'
+
 # REST_FRAMEWORK = {
 #     'DEFAULT_PERMISION_CLASSES' : {'rest_framework.permissions.IsAuthenticated',},
 #     'DEFAULT_AUTHENTICATION_CLASSES' : {'rest_framework_simplejwt.authentication.JWTAuthentication',}
@@ -156,17 +158,15 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated', )
 }
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-)
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, "static"),
+# )
 
-STATIC_ROOT = os.path.join(BASE_DIR, "live-static", "static-root")
+# STATIC_ROOT = os.path.join(BASE_DIR, "live-static", "static-root")
 
-STATIC_URL = '/static/'
+# MEDIA_URL = "/media/"
 
-MEDIA_URL = "/media/"
-
-MEDIA_ROOT = os.path.join(BASE_DIR, "live-static", "media-root")
+# MEDIA_ROOT = os.path.join(BASE_DIR, "live-static", "media-root")
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
