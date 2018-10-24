@@ -169,19 +169,21 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated', )
 }
 
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, "static"),
-# )
+STATIC_URL = '/static/'
 
-# STATIC_ROOT = os.path.join(BASE_DIR, "live-static", "static-root")
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
 
-# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, "live-static", "static-root")
 
-#STATIC_ROOT = "/home/cfedeploy/webapps/vot_static_root/"
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-# MEDIA_URL = "/media/"
+#STATIC_ROOT = "/home/cfedeploy/webapps/cfehome_static_root/"
 
-# MEDIA_ROOT = os.path.join(BASE_DIR, "live-static", "media-root")
+MEDIA_URL = "/media/"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "live-static", "media-root")
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
