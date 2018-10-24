@@ -30,4 +30,6 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view()),
     path('api/token/refresh/', TokenRefreshView.as_view()),
     path('api/v1/login/', CustomAuthToken.as_view())
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
