@@ -23,7 +23,7 @@ class User(AbstractUser):
         },
     )
     bio = models.TextField(blank=True)
-    profile_image = models.ImageField(null=True, upload_to='images/profiles')
+    profile_image = models.ImageField(default='images/profiles/default.png', upload_to='images/profiles')
 
     discord_url = models.CharField(blank=True, max_length=250)
     twitter_url = models.CharField(blank=True, max_length=250)
