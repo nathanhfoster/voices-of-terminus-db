@@ -16,7 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
         'discord_url', 'twitter_url', 'twitch_url', 'youtube_url',
         'primary_class', )
         write_only_fields = ('password',)
-        read_only_fields = ('is_active', 'date_joined',)
+        read_only_fields = ('date_joined',)
 
 
     # def create(self, validated_data):
