@@ -43,6 +43,15 @@ class User(AbstractUser):
     profession_specialization = models.CharField(blank=True, max_length=20)
     experience_points = models.IntegerField(default=0)
 
+    is_leader = models.BooleanField(default=False)
+    is_council = models.BooleanField(default=False)
+    is_officer = models.BooleanField(default=False)
+    is_member = models.BooleanField(default=False)
+
+    create_article = models.BooleanField(default=True)
+    create_newsletter = models.BooleanField(default=True)
+    create_calendar_event = models.BooleanField(default=False)
+
     @receiver(post_save, sender=settings.AUTH_USER_MODEL)
     def create_auth_token(sender, instance=None, created=False, **kwargs):
         if created:

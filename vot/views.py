@@ -36,6 +36,10 @@ class CustomAuthToken(ObtainAuthToken):
             'last_login': user.last_login,
             'is_superuser': user.is_superuser,
             'is_staff': user.is_staff,
+            'is_leader': user.is_leader,
+            'is_council': user.is_council,
+            'is_officer': user.is_officer,
+            'is_member': user.is_member,
             'bio': user.bio,
 
             'primary_race': user.primary_race,
@@ -53,7 +57,13 @@ class CustomAuthToken(ObtainAuthToken):
             'twitter_url': user.twitter_url,
             'twitch_url': user.twitch_url,
             'youtube_url': user.youtube_url,
-            'experience_points': user.experience_points
+            'experience_points': user.experience_points,
+            
+            'permissions': {
+                'create_article': user.create_article,
+                'create_newsletter': user.create_newsletter,
+                'create_calendar_event': user.create_calendar_event
+            }
         })
 
         

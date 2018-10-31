@@ -11,7 +11,8 @@ class UserSerializer(serializers.ModelSerializer):
         'id', 'username', 'password', 'first_name', 'last_name',
         'bio', 'profile_image', 'primary_race', 'primary_role', 'secondary_class', 'secondary_race', 'secondary_role',
         'profession', 'profession_specialization',
-        'is_superuser', 'email', 'is_staff',
+        'is_superuser', 'email', 'is_staff', 'is_leader', 'is_council', 'is_officer', 'is_member',
+        'create_article', 'create_newsletter', 'create_calendar_event',
         'is_active', 'date_joined', 'last_login', 'experience_points',
         'discord_url', 'twitter_url', 'twitch_url', 'youtube_url',
         'primary_class', )
