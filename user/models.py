@@ -52,6 +52,18 @@ class User(AbstractUser):
     can_create_newsletter = models.BooleanField(default=True)
     can_create_calendar_event = models.BooleanField(default=False)
 
+    can_read_article = models.BooleanField(default=True)
+    can_read_newsletter = models.BooleanField(default=True)
+    can_read_calendar_event = models.BooleanField(default=True)
+
+    can_update_article = models.BooleanField(default=False)
+    can_update_newsletter = models.BooleanField(default=False)
+    can_update_calendar_event = models.BooleanField(default=False)
+
+    can_delete_article = models.BooleanField(default=False)
+    can_delete_newsletter = models.BooleanField(default=False)
+    can_delete_calendar_event = models.BooleanField(default=False)
+
     @receiver(post_save, sender=settings.AUTH_USER_MODEL)
     def create_auth_token(sender, instance=None, created=False, **kwargs):
         if created:

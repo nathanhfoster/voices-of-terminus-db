@@ -61,7 +61,19 @@ class CustomAuthToken(ObtainAuthToken):
 
             'can_create_article': user.can_create_article,
             'can_create_newsletter': user.can_create_newsletter,
-            'can_create_calendar_event': user.can_create_calendar_event
+            'can_create_calendar_event': user.can_create_calendar_event,
+
+            'can_read_article': user.can_read_article,
+            'can_read_newsletter': user.can_read_newsletter,
+            'can_read_calendar_event': user.can_read_calendar_event,
+
+            'can_update_article': user.can_update_article,
+            'can_update_newsletter': user.can_update_newsletter,
+            'can_update_calendar_event': user.can_update_calendar_event,
+
+            'can_delete_article': user.can_delete_article,
+            'can_delete_newsletter': user.can_delete_newsletter,
+            'can_delete_calendar_event': user.can_delete_calendar_event
         })
 
         
