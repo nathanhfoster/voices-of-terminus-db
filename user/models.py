@@ -48,9 +48,9 @@ class User(AbstractUser):
     is_officer = models.BooleanField(default=False)
     is_member = models.BooleanField(default=False)
 
-    create_article = models.BooleanField(default=True)
-    create_newsletter = models.BooleanField(default=True)
-    create_calendar_event = models.BooleanField(default=False)
+    can_create_article = models.BooleanField(default=True)
+    can_create_newsletter = models.BooleanField(default=True)
+    can_create_calendar_event = models.BooleanField(default=False)
 
     @receiver(post_save, sender=settings.AUTH_USER_MODEL)
     def create_auth_token(sender, instance=None, created=False, **kwargs):

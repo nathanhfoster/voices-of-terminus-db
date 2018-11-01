@@ -58,12 +58,10 @@ class CustomAuthToken(ObtainAuthToken):
             'twitch_url': user.twitch_url,
             'youtube_url': user.youtube_url,
             'experience_points': user.experience_points,
-            
-            'permissions': {
-                'create_article': user.create_article,
-                'create_newsletter': user.create_newsletter,
-                'create_calendar_event': user.create_calendar_event
-            }
+
+            'can_create_article': user.can_create_article,
+            'can_create_newsletter': user.can_create_newsletter,
+            'can_create_calendar_event': user.can_create_calendar_event
         })
 
         
