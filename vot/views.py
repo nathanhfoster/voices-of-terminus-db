@@ -34,12 +34,22 @@ class CustomAuthToken(ObtainAuthToken):
             'last_name': user.last_name,
             'is_active': user.is_active,
             'last_login': user.last_login,
+
             'is_superuser': user.is_superuser,
             'is_staff': user.is_staff,
             'is_leader': user.is_leader,
             'is_council': user.is_council,
             'is_officer': user.is_officer,
-            'is_member': user.is_member,
+            'is_senior_member': user.is_senior_member,
+            'is_junior_member': user.is_junior_member,
+            'is_recruit': user.is_recruit,
+
+            'is_raid_leader': user.is_raid_leader,
+            'is_banker': user.is_banker,
+            'is_recruiter': user.is_recruiter,
+            'is_class_lead': user.is_class_lead,
+            'is_crafter_lead': user.is_crafter_lead,
+
             'bio': user.bio,
 
             'primary_race': user.primary_race,

@@ -25,11 +25,13 @@ class User(AbstractUser):
     )
     bio = models.TextField(blank=True)
 
+    # Connections
     discord_url = models.CharField(blank=True, max_length=250)
     twitter_url = models.CharField(blank=True, max_length=250)
     twitch_url = models.CharField(blank=True, max_length=250)
     youtube_url = models.CharField(blank=True, max_length=250)
 
+    # In game
     primary_race = models.CharField(blank=True, max_length=20)
     primary_role = models.CharField(blank=True, max_length=20)
     primary_class = models.CharField(blank=True, max_length=20)
@@ -38,16 +40,26 @@ class User(AbstractUser):
     secondary_role = models.CharField(blank=True, max_length=20)
     secondary_class = models.CharField(blank=True, max_length=20)
     
-
     profession = models.CharField(blank=True, max_length=20)
     profession_specialization = models.CharField(blank=True, max_length=20)
     experience_points = models.IntegerField(default=0)
 
+    # Roles
     is_leader = models.BooleanField(default=False)
     is_council = models.BooleanField(default=False)
+    is_general_officer = models.BooleanField(default=False)
     is_officer = models.BooleanField(default=False)
-    is_member = models.BooleanField(default=False)
+    is_senior_member = models.BooleanField(default=False)
+    is_junior_member = models.BooleanField(default=False)
+    is_recruit = models.BooleanField(default=False)
 
+    is_raid_leader = models.BooleanField(default=False)
+    is_banker = models.BooleanField(default=False)
+    is_recruiter = models.BooleanField(default=False)
+    is_class_lead = models.BooleanField(default=False)
+    is_crafter_lead = models.BooleanField(default=False)
+
+    # Permissions
     can_create_article = models.BooleanField(default=True)
     can_create_newsletter = models.BooleanField(default=True)
     can_create_calendar_event = models.BooleanField(default=False)
