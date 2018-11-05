@@ -39,6 +39,7 @@ class CustomAuthToken(ObtainAuthToken):
             'is_staff': user.is_staff,
             'is_leader': user.is_leader,
             'is_council': user.is_council,
+            'is_general_officer': user.is_general_officer,
             'is_officer': user.is_officer,
             'is_senior_member': user.is_senior_member,
             'is_junior_member': user.is_junior_member,

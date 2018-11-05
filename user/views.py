@@ -14,6 +14,8 @@ class UserView(viewsets.ModelViewSet):
     def get_permissions(self):
 
         # allow an authenticated user to create via POST
+        if self.request.method == 'GET':
+            self.permission_classes = (AllowAny,)
         if self.request.method == 'POST':
             self.permission_classes = (AllowAny,)
         if self.request.method == 'PATCH':
