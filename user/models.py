@@ -60,8 +60,8 @@ class User(AbstractUser):
     is_crafter_lead = models.BooleanField(default=False)
 
     # Permissions
-    can_create_article = models.BooleanField(default=True)
-    can_create_newsletter = models.BooleanField(default=True)
+    can_create_article = models.BooleanField(default=False)
+    can_create_newsletter = models.BooleanField(default=False)
     can_create_calendar_event = models.BooleanField(default=False)
 
     can_read_article = models.BooleanField(default=True)
