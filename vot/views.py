@@ -69,6 +69,7 @@ class CustomAuthToken(ObtainAuthToken):
             'twitch_url': user.twitch_url,
             'youtube_url': user.youtube_url,
             'experience_points': user.experience_points,
+            'guild_points': user.guild_points,
 
             'can_create_article': user.can_create_article,
             'can_create_newsletter': user.can_create_newsletter,

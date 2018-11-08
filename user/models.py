@@ -43,6 +43,7 @@ class User(AbstractUser):
     profession = models.CharField(blank=True, max_length=20)
     profession_specialization = models.CharField(blank=True, max_length=20)
     experience_points = models.IntegerField(default=0)
+    guild_points = models.IntegerField(default=0)
 
     # Roles
     is_leader = models.BooleanField(default=False)

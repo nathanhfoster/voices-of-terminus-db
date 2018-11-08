@@ -18,7 +18,7 @@ class UserSerializer(serializers.ModelSerializer):
         'can_read_article', 'can_read_newsletter', 'can_read_calendar_event',
         'can_update_article', 'can_update_newsletter', 'can_update_calendar_event',
         'can_delete_article', 'can_delete_newsletter', 'can_delete_calendar_event',
-        'is_active', 'date_joined', 'last_login', 'experience_points',
+        'is_active', 'date_joined', 'last_login', 'experience_points', 'guild_points',
         'discord_url', 'twitter_url', 'twitch_url', 'youtube_url',
         'primary_class', )
         write_only_fields = ('password',)
