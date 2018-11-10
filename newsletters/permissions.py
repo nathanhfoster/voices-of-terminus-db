@@ -22,7 +22,7 @@ class IsUpdateProfile(permissions.BasePermission):
     """
     def has_permission(self, request, view):
 
-        if request.user.is_superuser or request.user.is_staff or request.user.can_update_newsletter:
+        if request.user.is_staff or request.user.can_update_newsletter:
             return True
         # print(view.kwargs)
         # print(request.user.id)
