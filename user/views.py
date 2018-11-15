@@ -1,9 +1,13 @@
 from rest_framework.permissions import AllowAny
+from django.db.models import F
+from rest_framework import serializers
 
 from .models import User
 from rest_framework import viewsets, permissions
 from .serializers import UserSerializer
 from user.permissions import IsUpdateProfile, IsStaffOrTargetUser
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
 
 class UserView(viewsets.ModelViewSet):
@@ -21,3 +25,32 @@ class UserView(viewsets.ModelViewSet):
         if self.request.method == 'PATCH':
             self.permission_classes = (permissions.IsAuthenticated, IsUpdateProfile,)
         return super(UserView, self).get_permissions()
+
+    @action(methods=['get'], detail=True, permission_classes=[permission_classes])
+    def view(self, request, pk):
+        qs = User.objects.values(
+        'is_superuser', 'is_staff', 'is_leader', 'is_council','is_general_officer', 'is_officer',
+        'is_senior_member', 'is_junior_member', 'is_recruit',
+        'is_raid_leader', 'is_banker', 'is_recruiter', 'is_class_lead', 'is_crafter_lead',
+        'can_create_article', 'can_create_newsletter', 'can_create_calendar_event',
+        'can_read_article', 'can_read_newsletter', 'can_read_calendar_event',
+        'can_update_article', 'can_update_newsletter', 'can_update_calendar_event',
+        'can_delete_article', 'can_delete_newsletter', 'can_delete_calendar_event',
+        'is_active', 'experience_points', 'guild_points'
+        ).get(pk=pk)
+
+        return Response(Serializer(qs).data)
+
+class Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+        'is_superuser', 'is_staff', 'is_leader', 'is_council','is_general_officer', 'is_officer',
+        'is_senior_member', 'is_junior_member', 'is_recruit',
+        'is_raid_leader', 'is_banker', 'is_recruiter', 'is_class_lead', 'is_crafter_lead',
+        'can_create_article', 'can_create_newsletter', 'can_create_calendar_event',
+        'can_read_article', 'can_read_newsletter', 'can_read_calendar_event',
+        'can_update_article', 'can_update_newsletter', 'can_update_calendar_event',
+        'can_delete_article', 'can_delete_newsletter', 'can_delete_calendar_event',
+        'is_active', 'experience_points', 'guild_points'
+        )
