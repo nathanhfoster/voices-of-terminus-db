@@ -1,4 +1,5 @@
 from .models import NewsLetter
+from django.db.models import F
 from rest_framework import viewsets, permissions
 from rest_framework.permissions import AllowAny
 from .serializers import NewsLetterSerializer
@@ -23,8 +24,9 @@ class NewsLetterView(viewsets.ModelViewSet):
     def view(self, request, pk):
         # TODO Check that the object exist
         # Query database for the object with the given PK
+        NewsLetter.objects.filter(pk=pk).update(views=F('views') + 1)
         qs = NewsLetter.objects.get(pk=pk)
         # Increment the view count
-        qs.views += 1
-        qs.save()  # save
+        # qs.views += 1
+        # qs.save()  # save
         return Response(NewsLetterSerializer(qs).data)
