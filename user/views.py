@@ -30,7 +30,7 @@ class UserView(viewsets.ModelViewSet):
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
     def refresh(self, request, pk):
         qs = User.objects.values(
-        'primary_race', 'primary_role', 'secondary_class', 'secondary_race', 'secondary_role',
+        'primary_race', 'primary_role', 'primary_class', 'secondary_race', 'secondary_role', 'secondary_class',
         'profession', 'profession_specialization',
         'is_superuser', 'is_staff', 'is_leader', 'is_council','is_general_officer', 'is_officer',
         'is_senior_member', 'is_junior_member', 'is_recruit',
@@ -54,7 +54,7 @@ class Serializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-        'primary_race', 'primary_role', 'secondary_class', 'secondary_race', 'secondary_role',
+        'primary_race', 'primary_role', 'primary_class', 'secondary_race', 'secondary_role', 'secondary_class',
         'profession', 'profession_specialization',
         'is_superuser', 'is_staff', 'is_leader', 'is_council','is_general_officer', 'is_officer',
         'is_senior_member', 'is_junior_member', 'is_recruit',
@@ -71,7 +71,7 @@ class AdminSerializer(serializers.ModelSerializer):
         model = User
         fields = (
         'id', 'username', 'first_name', 'last_name',
-        'bio', 'primary_race', 'primary_role', 'secondary_class', 'secondary_race', 'secondary_role',
+        'bio', 'primary_race', 'primary_role', 'primary_class', 'secondary_race', 'secondary_role', 'secondary_class',
         'profession', 'profession_specialization',
         'is_superuser', 'email', 'is_staff', 'is_leader', 'is_council','is_general_officer', 'is_officer',
         'is_senior_member', 'is_junior_member', 'is_recruit',
