@@ -28,8 +28,10 @@ class UserView(viewsets.ModelViewSet):
         return super(UserView, self).get_permissions()
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
-    def view(self, request, pk):
+    def refresh(self, request, pk):
         qs = User.objects.values(
+        'primary_race', 'primary_role', 'secondary_class', 'secondary_race', 'secondary_role',
+        'profession', 'profession_specialization',
         'is_superuser', 'is_staff', 'is_leader', 'is_council','is_general_officer', 'is_officer',
         'is_senior_member', 'is_junior_member', 'is_recruit',
         'is_raid_leader', 'is_banker', 'is_recruiter', 'is_class_lead', 'is_crafter_lead',
@@ -52,6 +54,8 @@ class Serializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
+        'primary_race', 'primary_role', 'secondary_class', 'secondary_race', 'secondary_role',
+        'profession', 'profession_specialization',
         'is_superuser', 'is_staff', 'is_leader', 'is_council','is_general_officer', 'is_officer',
         'is_senior_member', 'is_junior_member', 'is_recruit',
         'is_raid_leader', 'is_banker', 'is_recruiter', 'is_class_lead', 'is_crafter_lead',
