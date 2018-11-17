@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 
-class NewsLetter(models.Model):
+class Newsletter(models.Model):
     title = models.CharField(max_length=250)
     slug = models.SlugField(null=True)
     author = models.ForeignKey(
