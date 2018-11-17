@@ -1,14 +1,14 @@
-from .models import Newsletter
+from .models import Newsletter, NewsletterComment
 from django.db.models import F
 from rest_framework import viewsets, permissions
 from rest_framework.permissions import AllowAny
-from .serializers import NewsLetterSerializer
+from .serializers import NewsletterSerializer, NewsletterCommentSerializer
 from newsletters.permissions import IsOwnerOrReadOnly, IsUpdateProfile
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-class NewsLetterView(viewsets.ModelViewSet):
-    serializer_class = NewsLetterSerializer
+class NewsletterView(viewsets.ModelViewSet):
+    serializer_class = NewsletterSerializer
     queryset = Newsletter.objects.all()
     permission_classes = (permissions.IsAuthenticated,)
 
@@ -18,7 +18,7 @@ class NewsLetterView(viewsets.ModelViewSet):
             self.permission_classes = (AllowAny,)
         if self.request.method == 'PATCH':
             self.permission_classes = (permissions.IsAuthenticated, IsUpdateProfile)
-        return super(NewsLetterView, self).get_permissions()
+        return super(NewsletterView, self).get_permissions()
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
     def view(self, request, pk):
@@ -29,4 +29,25 @@ class NewsLetterView(viewsets.ModelViewSet):
         # Increment the view count
         # qs.views += 1
         # qs.save()  # save
-        return Response(NewsLetterSerializer(qs).data)
+        return Response(NewsletterSerializer(qs).data)
+
+class NewsletterCommentView(viewsets.ModelViewSet):
+    serializer_class = NewsletterCommentSerializer
+    queryset = NewsletterComment.objects.all()
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_permissions(self):
+        # allow an authenticated user to create via POST
+        if self.request.method == 'GET':
+            self.permission_classes = (AllowAny,)
+        if self.request.method == 'PATCH':
+            self.permission_classes = (permissions.IsAuthenticated, IsUpdateProfile,)
+        return super(NewsletterCommentView, self).get_permissions()
+
+    @action(methods=['get'], detail=True, permission_classes=[permission_classes])
+    def view(self, request, pk):
+        # TODO Check that the object exist
+        # Query database for the object with the given PK
+        qs = NewsletterComment.objects.all().filter(document_id=pk)
+        serializer = NewsletterCommentSerializer(qs, many=True)
+        return Response(serializer.data)

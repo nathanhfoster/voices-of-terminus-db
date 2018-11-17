@@ -30,7 +30,7 @@ class Article(models.Model):
 
     
 class ArticleComment(models.Model):
-    article = models.ForeignKey(
+    document_id = models.ForeignKey(
         Article,
         related_name='comments',
         null=True,
@@ -56,7 +56,3 @@ class ArticleComment(models.Model):
         verbose_name = 'Article Comment'
         verbose_name_plural = 'Article Comments'
         ordering = ('-last_modified',)
-
-
-    def __str__(self):
-        return self.text 

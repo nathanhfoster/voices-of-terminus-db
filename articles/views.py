@@ -7,10 +7,10 @@ from rest_framework.response import Response
 from articles.permissions import IsOwnerOrReadOnly, IsUpdateProfile
 
 from .models import Article, ArticleComment
-from .serializers import ArticleSerializer, CommentSerializer
+from .serializers import ArticleSerializer, ArticleCommentSerializer
 
 
-class DocumentView(viewsets.ModelViewSet):
+class ArticleView(viewsets.ModelViewSet):
     serializer_class = ArticleSerializer
     queryset = Article.objects.all()
     permission_classes = (permissions.IsAuthenticated,)
@@ -21,7 +21,7 @@ class DocumentView(viewsets.ModelViewSet):
             self.permission_classes = (AllowAny,)
         if self.request.method == 'PATCH':
             self.permission_classes = (permissions.IsAuthenticated, IsUpdateProfile,)
-        return super(DocumentView, self).get_permissions()
+        return super(ArticleView, self).get_permissions()
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
     def view(self, request, pk):
@@ -34,8 +34,8 @@ class DocumentView(viewsets.ModelViewSet):
         # qs.save() # save
         return Response(ArticleSerializer(qs).data)
 
-class CommentView(viewsets.ModelViewSet):
-    serializer_class = CommentSerializer
+class ArticleCommentView(viewsets.ModelViewSet):
+    serializer_class = ArticleCommentSerializer
     queryset = ArticleComment.objects.all()
     permission_classes = (permissions.IsAuthenticated,)
 
@@ -45,14 +45,14 @@ class CommentView(viewsets.ModelViewSet):
             self.permission_classes = (AllowAny,)
         if self.request.method == 'PATCH':
             self.permission_classes = (permissions.IsAuthenticated, IsUpdateProfile,)
-        return super(CommentView, self).get_permissions()
+        return super(ArticleCommentView, self).get_permissions()
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
     def view(self, request, pk):
         # TODO Check that the object exist
         # Query database for the object with the given PK
-        qs = ArticleComment.objects.all().filter(article=pk)
-        serializer = CommentSerializer(qs, many=True)
+        qs = ArticleComment.objects.all().filter(document_id=pk)
+        serializer = ArticleCommentSerializer(qs, many=True)
         return Response(serializer.data)
 
 
