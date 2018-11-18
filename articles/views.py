@@ -6,8 +6,8 @@ from rest_framework.response import Response
 
 from articles.permissions import IsOwnerOrReadOnly, IsUpdateProfile
 
-from .models import Article, ArticleComment
-from .serializers import ArticleSerializer, ArticleCommentSerializer
+from .models import Article, ArticleLikes, ArticleComment
+from .serializers import ArticleSerializer, ArticleLikesSerializer, ArticleCommentSerializer
 
 
 class ArticleView(viewsets.ModelViewSet):
@@ -34,6 +34,27 @@ class ArticleView(viewsets.ModelViewSet):
         # qs.save() # save
         return Response(ArticleSerializer(qs).data)
 
+class ArticleLikesView(viewsets.ModelViewSet):
+    serializer_class = ArticleLikesSerializer
+    queryset = ArticleLikes.objects.all()
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_permissions(self):
+        # allow an authenticated user to create via POST
+        if self.request.method == 'GET':
+            self.permission_classes = (AllowAny,)
+        if self.request.method == 'PATCH':
+            self.permission_classes = (permissions.IsAuthenticated, IsUpdateProfile,)
+        return super(ArticleLikesView, self).get_permissions()
+
+    @action(methods=['get'], detail=True, permission_classes=[permission_classes])
+    def view(self, request, pk):
+        # TODO Check that the object exist
+        # Query database for the object with the given PK
+        qs = ArticleLikes.objects.all().filter(document_id=pk)
+        serializer = ArticleLikesSerializer(qs, many=True)
+        return Response(serializer.data)
+
 class ArticleCommentView(viewsets.ModelViewSet):
     serializer_class = ArticleCommentSerializer
     queryset = ArticleComment.objects.all()
@@ -54,26 +75,3 @@ class ArticleCommentView(viewsets.ModelViewSet):
         qs = ArticleComment.objects.all().filter(document_id=pk)
         serializer = ArticleCommentSerializer(qs, many=True)
         return Response(serializer.data)
-
-
-# class SingleArticleView(APIView):
-#     serializer_class = ArticleSerializer
-#     queryset = Article.objects.all()
-#     # queryset = Article.objects.get(pk=6)
-#     print("querry set Is not here",)
-#     permission_classes = (permissions.IsAuthenticated,)
-#
-#     def get(self, request, format=None):
-#         """
-#         Return a list of all users.
-#         """
-#         articles = [a.title for a in Article.objects.all()]
-#         return Response(articles)
-#
-#     def get_permissions(self):
-#         # allow an authenticated user to create via POST
-#         if self.request.method == 'GET':
-#             self.permission_classes = (AllowAny,)
-#         if self.request.method == 'PATCH':
-#             self.permission_classes = (permissions.IsAuthenticated, IsUpdateProfile,)
-#         return super(SingleArticleView, self).get_permissions()

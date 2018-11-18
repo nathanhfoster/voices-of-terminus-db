@@ -21,12 +21,32 @@ class Article(models.Model):
         on_delete=models.CASCADE,)
     def last_modified_by_username(self):
         return self.last_modified_by. get_username()
-    views = models.IntegerField(default=0)
+    views = models.PositiveIntegerField(default=0)
 
     class Meta:
         verbose_name = 'Article'
         verbose_name_plural = 'Articles'
         ordering = ('-last_modified',)
+
+class ArticleLikes(models.Model):
+    document_id = models.ForeignKey(
+        Article,
+        related_name='likes',
+        null=True,
+        on_delete=models.CASCADE,)
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,)
+    def author_username(self):
+        return self.author. get_username()
+    author_username.short_description = 'Username' 
+    count = models.PositiveIntegerField(default=0)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Article Like'
+        verbose_name_plural = 'Articles Likes'
+        ordering = ('-date_created',)
 
     
 class ArticleComment(models.Model):

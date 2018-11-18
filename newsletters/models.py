@@ -22,7 +22,27 @@ class Newsletter(models.Model):
         on_delete=models.CASCADE,)
     def last_modified_by_username(self):
         return self.last_modified_by. get_username()
-    views = models.IntegerField(default=0)
+    views = models.PositiveIntegerField(default=0)
+
+class NewsletterLikes(models.Model):
+    document_id = models.ForeignKey(
+        Newsletter,
+        related_name='likes',
+        null=True,
+        on_delete=models.CASCADE,)
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,)
+    def author_username(self):
+        return self.author. get_username()
+    author_username.short_description = 'Username' 
+    count = models.PositiveIntegerField(default=0)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Newsletter Like'
+        verbose_name_plural = 'Newsletters Likes'
+        ordering = ('-date_created',)
 
 class NewsletterComment(models.Model):
     document_id = models.ForeignKey(

@@ -4,6 +4,7 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register('articles', views.ArticleView)
+router.register('article/likes', views.ArticleLikesView)
 router.register('article/comments', views.ArticleCommentView)
 
 urlpatterns = [
