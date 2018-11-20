@@ -12,7 +12,7 @@ class Article(models.Model):
         return self.author. get_username()
     author_username.short_description = 'Username' 
     html = models.TextField()
-    tags = models.CharField(max_length=128, blank=True)
+    tags = models.CharField(max_length=128, default='Article')
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
     last_modified_by = models.ForeignKey(
