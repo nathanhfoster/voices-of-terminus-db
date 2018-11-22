@@ -8,7 +8,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-        'id', 'username', 'password', 'first_name', 'last_name',
+        'id', 'username', 'password', 'first_name', 'last_name', 'opt_in',
         'bio', 'profile_image', 'primary_race', 'primary_role', 'primary_class', 'secondary_race', 'secondary_role', 'secondary_class',
         'profession', 'profession_specialization',
         'is_superuser', 'email', 'is_staff', 'is_leader', 'is_council','is_general_officer', 'is_officer',
@@ -19,8 +19,7 @@ class UserSerializer(serializers.ModelSerializer):
         'can_update_article', 'can_update_newsletter', 'can_update_calendar_event',
         'can_delete_article', 'can_delete_newsletter', 'can_delete_calendar_event',
         'is_active', 'date_joined', 'last_login', 'experience_points', 'guild_points',
-        'discord_url', 'twitter_url', 'twitch_url', 'youtube_url',
-        'primary_class', )
+        'discord_url', 'twitter_url', 'twitch_url', 'youtube_url',)
         write_only_fields = ('password',)
         extra_kwargs = {'password': {'write_only': True}}
         read_only_fields = ('date_joined',)
@@ -39,7 +38,8 @@ class UserSerializer(serializers.ModelSerializer):
             email=validated_data['email'],
             username=validated_data['username'],
             password = make_password(validated_data['password']),
-            profile_image = validated_data['profile_image']
+            profile_image = validated_data['profile_image'],
+            opt_in = validated_data['opt_in']
             )
         user.set_password(validated_data["password"])
         user.save()

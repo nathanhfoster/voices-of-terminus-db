@@ -34,6 +34,7 @@ class CustomAuthToken(ObtainAuthToken):
             'last_name': user.last_name,
             'is_active': user.is_active,
             'last_login': user.last_login,
+            'opt_in': user.opt_in,
 
             'is_superuser': user.is_superuser,
             'is_staff': user.is_staff,

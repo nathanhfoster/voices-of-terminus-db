@@ -39,7 +39,7 @@ class UserView(viewsets.ModelViewSet):
         'can_read_article', 'can_read_newsletter', 'can_read_calendar_event',
         'can_update_article', 'can_update_newsletter', 'can_update_calendar_event',
         'can_delete_article', 'can_delete_newsletter', 'can_delete_calendar_event',
-        'is_active', 'experience_points', 'guild_points'
+        'is_active', 'experience_points', 'guild_points', 'opt_in'
         ).get(pk=pk)
 
         return Response(Serializer(qs).data)
@@ -70,7 +70,7 @@ class AdminSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-        'id', 'username', 'first_name', 'last_name',
+        'id', 'username', 'first_name', 'last_name', 'opt_in',
         'bio', 'primary_race', 'primary_role', 'primary_class', 'secondary_race', 'secondary_role', 'secondary_class',
         'profession', 'profession_specialization',
         'is_superuser', 'email', 'is_staff', 'is_leader', 'is_council','is_general_officer', 'is_officer',
