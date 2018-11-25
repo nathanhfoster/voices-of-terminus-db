@@ -83,3 +83,7 @@ class User(AbstractUser):
         if created:
             Token.objects.create(user=instance)
     pass
+
+    @property
+    def get_profile_image(self):
+        return self.profile_image
