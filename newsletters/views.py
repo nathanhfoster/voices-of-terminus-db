@@ -1,14 +1,20 @@
 from .models import Newsletter, NewsletterLikes, NewsletterComment
 from django.db.models import F
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, pagination
 from rest_framework.permissions import AllowAny
 from .serializers import NewsletterSerializer, NewsletterLikesSerializer, NewsletterCommentSerializer
 from newsletters.permissions import IsOwnerOrReadOnly, IsUpdateProfile
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
+class StandardResultsSetPagination(pagination.PageNumberPagination):
+    page_size = 5
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
 class NewsletterView(viewsets.ModelViewSet):
     serializer_class = NewsletterSerializer
+    pagination_class = StandardResultsSetPagination
     queryset = Newsletter.objects.all()
     permission_classes = (permissions.IsAuthenticated,)
 

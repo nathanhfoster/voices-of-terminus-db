@@ -1,5 +1,5 @@
 from django.db.models import F
-from rest_framework import permissions, viewsets
+from rest_framework import permissions, viewsets, pagination
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -9,9 +9,15 @@ from articles.permissions import IsOwnerOrReadOnly, IsUpdateProfile
 from .models import Article, ArticleLikes, ArticleComment
 from .serializers import ArticleSerializer, ArticleLikesSerializer, ArticleCommentSerializer
 
+class StandardResultsSetPagination(pagination.PageNumberPagination):
+    page_size = 5
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
 
 class ArticleView(viewsets.ModelViewSet):
     serializer_class = ArticleSerializer
+    pagination_class = StandardResultsSetPagination
     queryset = Article.objects.all()
     permission_classes = (permissions.IsAuthenticated,)
 
