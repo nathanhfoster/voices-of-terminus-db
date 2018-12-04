@@ -1,1 +1,1 @@
-web: newrelic-admin run-program gunicorn vot.wsgi --log-file -
+web: newrelic-admin run-program gunicorn vot.wsgi
