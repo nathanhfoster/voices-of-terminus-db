@@ -48,6 +48,7 @@ class User(AbstractUser):
 
     # Roles
     is_leader = models.BooleanField(default=False)
+    is_advisor = models.BooleanField(default=False)
     is_council = models.BooleanField(default=False)
     is_general_officer = models.BooleanField(default=False)
     is_officer = models.BooleanField(default=False)
