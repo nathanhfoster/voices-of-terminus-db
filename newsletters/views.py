@@ -12,6 +12,11 @@ class StandardResultsSetPagination(pagination.PageNumberPagination):
     page_size_query_param = 'page_size'
     max_page_size = 100
 
+class LargeResultsSetPagination(pagination.PageNumberPagination):
+    page_size = 100
+    page_size_query_param = 'page_size'
+    max_page_size = 1000
+
 class NewsletterView(viewsets.ModelViewSet):
     serializer_class = NewsletterSerializer
     pagination_class = StandardResultsSetPagination
@@ -39,6 +44,7 @@ class NewsletterView(viewsets.ModelViewSet):
 
 class NewsletterLikesView(viewsets.ModelViewSet):
     serializer_class = NewsletterLikesSerializer
+    pagination_class = LargeResultsSetPagination
     queryset = NewsletterLikes.objects.all()
     permission_classes = (permissions.IsAuthenticated,)
 
@@ -54,12 +60,19 @@ class NewsletterLikesView(viewsets.ModelViewSet):
     def view(self, request, pk):
         # TODO Check that the object exist
         # Query database for the object with the given PK
-        qs = NewsletterLikes.objects.all().filter(document_id=pk)
-        serializer = NewsletterLikesSerializer(qs, many=True)
+        queryset = NewsletterLikes.objects.all().filter(document_id=pk)
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = NewsletterLikesSerializer(queryset, many=True)
         return Response(serializer.data)
 
 class NewsletterCommentView(viewsets.ModelViewSet):
     serializer_class = NewsletterCommentSerializer
+    pagination_class = LargeResultsSetPagination
     queryset = NewsletterComment.objects.all()
     permission_classes = (permissions.IsAuthenticated,)
 
@@ -75,6 +88,12 @@ class NewsletterCommentView(viewsets.ModelViewSet):
     def view(self, request, pk):
         # TODO Check that the object exist
         # Query database for the object with the given PK
-        qs = NewsletterComment.objects.all().filter(document_id=pk)
-        serializer = NewsletterCommentSerializer(qs, many=True)
+        queryset = NewsletterComment.objects.all().filter(document_id=pk)
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = NewsletterCommentSerializer(queryset, many=True)
         return Response(serializer.data)

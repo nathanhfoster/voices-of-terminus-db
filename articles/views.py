@@ -14,6 +14,11 @@ class StandardResultsSetPagination(pagination.PageNumberPagination):
     page_size_query_param = 'page_size'
     max_page_size = 100
 
+class LargeResultsSetPagination(pagination.PageNumberPagination):
+    page_size = 100
+    page_size_query_param = 'page_size'
+    max_page_size = 1000
+
 
 class ArticleView(viewsets.ModelViewSet):
     serializer_class = ArticleSerializer
@@ -42,6 +47,7 @@ class ArticleView(viewsets.ModelViewSet):
 
 class ArticleLikesView(viewsets.ModelViewSet):
     serializer_class = ArticleLikesSerializer
+    pagination_class = LargeResultsSetPagination
     queryset = ArticleLikes.objects.all()
     permission_classes = (permissions.IsAuthenticated,)
 
@@ -57,12 +63,19 @@ class ArticleLikesView(viewsets.ModelViewSet):
     def view(self, request, pk):
         # TODO Check that the object exist
         # Query database for the object with the given PK
-        qs = ArticleLikes.objects.all().filter(document_id=pk)
-        serializer = ArticleLikesSerializer(qs, many=True)
+        queryset = ArticleLikes.objects.all().filter(document_id=pk)
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = ArticleLikesSerializer(queryset, many=True)
         return Response(serializer.data)
 
 class ArticleCommentView(viewsets.ModelViewSet):
     serializer_class = ArticleCommentSerializer
+    pagination_class = LargeResultsSetPagination
     queryset = ArticleComment.objects.all()
     permission_classes = (permissions.IsAuthenticated,)
 
@@ -78,6 +91,12 @@ class ArticleCommentView(viewsets.ModelViewSet):
     def view(self, request, pk):
         # TODO Check that the object exist
         # Query database for the object with the given PK
-        qs = ArticleComment.objects.all().filter(document_id=pk)
-        serializer = ArticleCommentSerializer(qs, many=True)
+        queryset = ArticleComment.objects.all().filter(document_id=pk)
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = ArticleCommentSerializer(queryset, many=True)
         return Response(serializer.data)
