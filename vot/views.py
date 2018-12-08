@@ -76,6 +76,7 @@ class CustomAuthToken(ObtainAuthToken):
             'can_create_article': user.can_create_article,
             'can_create_newsletter': user.can_create_newsletter,
             'can_create_calendar_event': user.can_create_calendar_event,
+            'can_create_galleries': user.can_create_galleries,
 
             'can_read_article': user.can_read_article,
             'can_read_newsletter': user.can_read_newsletter,
