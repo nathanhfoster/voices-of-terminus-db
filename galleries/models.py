@@ -4,6 +4,7 @@ from django.conf import settings
 class Gallery(models.Model):
     title = models.CharField(max_length=150, null=True)
     description = models.CharField(max_length=250, null=True)
+    image = models.TextField(blank=True)
     slug = models.SlugField(null=True)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, 
