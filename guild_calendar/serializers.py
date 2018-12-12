@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from guildcalendar.models import Event
+from guild_calendar.models import Event
 
 class EventSerializer(serializers.ModelSerializer):
     class Meta:

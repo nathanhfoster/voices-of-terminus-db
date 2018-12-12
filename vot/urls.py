@@ -21,11 +21,12 @@ from .views import CustomAuthToken
 
 urlpatterns = [
     path('', admin.site.urls),
-    path('api/v1/', include('guildcalendar.urls')),
+    path('api/v1/', include('guild_calendar.urls')),
     path('api/v1/', include('user.urls')),
     path('api/v1/', include('articles.urls')),
     path('api/v1/', include('newsletters.urls')),
     path('api/v1/', include('galleries.urls')),
+    path('api/v1/', include('message_system.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('api/token/', TokenObtainPairView.as_view()),
     path('api/token/refresh/', TokenRefreshView.as_view()),

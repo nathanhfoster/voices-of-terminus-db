@@ -1,3 +1,4 @@
+import dj_database_url
 """
 Django settings for ideas project.
 
@@ -13,20 +14,22 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+BASE_DIR = os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))))
 DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = '+9!j2(jk7v$7+0b1v(z9+3vnm(jb0u@&w68t#5_e8s9-lbfhv-'
-SECRET_KEY = os.environ.get('SECRET_KEY', '+9!j2(jk7v$7+0b1v(z9+3vnm(jb0u@&w68t#5_e8s9-lbfhv-')
+# SECRET_KEY = '+9!j2(jk7v$7+0b1v(z9+3vnm(jb0u@&w68t#5_e8s9-lbfhv-'
+SECRET_KEY = os.environ.get(
+    'SECRET_KEY', '+9!j2(jk7v$7+0b1v(z9+3vnm(jb0u@&w68t#5_e8s9-lbfhv-')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 your_website = os.environ.get('YOUR_WEBSITE', '.example.com')
 ALLOWED_HOSTS = ['.herokuapp.com', '.knockhq.com', your_website]
-PROJECT_NAME  = os.environ.get('Voices of Terminus', 'VoT')
+PROJECT_NAME = os.environ.get('Voices of Terminus', 'VoT')
 
 # EMAIL_HOST = 'smtp.gmail.com'
 # EMAIL_HOST_USER = 'youremail@gmail.com' #my gmail username
@@ -38,7 +41,7 @@ PROJECT_NAME  = os.environ.get('Voices of Terminus', 'VoT')
 
 # ADMINS = [('Justin', EMAIL_HOST_USER)]
 # MANAGERS = ADMINS
-AUTH_USER_MODEL = "user.User" 
+AUTH_USER_MODEL = "user.User"
 
 # Application definition
 
@@ -52,11 +55,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
 
-    'guildcalendar',
+    'guild_calendar',
     'user',
     'articles',
     'newsletters',
     'galleries',
+    'message_system',
     'corsheaders',
 ]
 
@@ -106,7 +110,6 @@ DATABASES = {
 # heroku run python manage.py makemigrations
 # heroku run python manage.py migrate
 # heroku run python manage.py createsuperuser
-import dj_database_url
 
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)

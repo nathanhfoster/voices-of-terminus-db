@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class GallerySerializer(serializers.ModelSerializer):
     class Meta:
         model = Gallery
-        fields = ('id', 'title', 'description', 'image', 'slug', 'author', 'author_username', 'author_profile_image', 'tags',
+        fields = ('id', 'title', 'description', 'image', 'slug', 'author', 'author_username', 'tags',
                   'date_created', 'last_modified', 'last_modified_by', 'last_modified_by_username',
                   )
         read_only_fields = (

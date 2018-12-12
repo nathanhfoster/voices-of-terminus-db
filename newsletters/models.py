@@ -10,8 +10,6 @@ class Newsletter(models.Model):
         on_delete=models.CASCADE,)
     def author_username(self):
         return self.author. get_username()
-    def author_profile_image(self):
-        return self.author. get_profile_image
     author_username.short_description = 'Username' 
     html = models.TextField()
     tags = models.CharField(max_length=128, default='Newsletter')

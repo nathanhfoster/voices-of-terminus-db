@@ -51,11 +51,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
 
-    'guildcalendar',
+    'guild_calendar',
     'user',
     'articles',
     'newsletters',
     'galleries',
+    'message_system',
     'corsheaders',
 ]
 
