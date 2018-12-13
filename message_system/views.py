@@ -31,7 +31,7 @@ class UserGroupView(viewsets.ModelViewSet):
     def get_permissions(self):
         # allow an authenticated user to create via POST
         if self.request.method == 'GET':
-            self.permission_classes = (AllowAny,)
+            self.permission_classes = (permissions.IsAuthenticated,)
         if self.request.method == 'PATCH':
             self.permission_classes = (
                 permissions.IsAuthenticated, IsUpdateProfile,)
@@ -47,7 +47,7 @@ class MessageView(viewsets.ModelViewSet):
     def get_permissions(self):
         # allow an authenticated user to create via POST
         if self.request.method == 'GET':
-            self.permission_classes = (AllowAny,)
+            self.permission_classes = (permissions.IsAuthenticated,)
         if self.request.method == 'PATCH':
             self.permission_classes = (
                 permissions.IsAuthenticated, IsUpdateProfile,)
@@ -77,7 +77,7 @@ class MessageRecipientView(viewsets.ModelViewSet):
     def get_permissions(self):
         # allow an authenticated user to create via POST
         if self.request.method == 'GET':
-            self.permission_classes = (AllowAny,)
+            self.permission_classes = (permissions.IsAuthenticated,)
         if self.request.method == 'PATCH':
             self.permission_classes = (
                 permissions.IsAuthenticated, IsUpdateProfile,)
