@@ -48,9 +48,6 @@ class Message(models.Model):
 
     body = models.CharField(max_length=280)
 
-    def message_body(self):
-        return self.body
-
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 

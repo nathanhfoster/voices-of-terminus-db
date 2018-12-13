@@ -28,3 +28,12 @@ class MessageRecipientSeializer(serializers.ModelSerializer):
                   'recipient_group_id', 'group_author', 'group_title', 'group_last_modified', 'group_uri',
                   'message_id', 'message_body',)
         read_only_fields = ('id',)
+
+
+class MessageRecipientViewSeializer(serializers.ModelSerializer):
+    class Meta:
+        model = MessageRecipient
+        fields = ('id', 'is_read',
+                  'recipient_group_id', 'group_author', 'group_title', 'group_last_modified', 'group_uri',
+                  'message_id', 'message_body',)
+        read_only_fields = ('id',)

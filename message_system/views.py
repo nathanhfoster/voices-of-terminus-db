@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from message_system.permissions import IsOwnerOrReadOnly, IsUpdateProfile
 
 from .models import UserGroup, Message, MessageRecipient
-from .serializers import UserGroupSeializer, MessageSeializer, MessageRecipientSeializer
+from .serializers import UserGroupSeializer, MessageSeializer, MessageRecipientSeializer, MessageRecipientViewSeializer
 
 
 class StandardResultsSetPagination(pagination.PageNumberPagination):
@@ -91,8 +91,8 @@ class MessageRecipientView(viewsets.ModelViewSet):
 
         page = self.paginate_queryset(queryset)
         if page is not None:
-            serializer = self.get_serializer(page, many=True)
+            serializer = MessageRecipientViewSeializer(page, many=True)
             return self.get_paginated_response(serializer.data)
 
-        serializer = MessageRecipientSeializer(queryset, many=True)
+        serializer = MessageRecipientViewSeializer(queryset, many=True)
         return Response(serializer.data)
