@@ -41,8 +41,8 @@ class UserGroup(models.Model):
 class Message(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        null=True,
-        on_delete=models.CASCADE,)
+        on_delete=models.CASCADE,
+        blank=True, null=True,)
 
     def author_username(self):
         return self.author. get_username()
