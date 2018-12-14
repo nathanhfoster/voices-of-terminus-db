@@ -18,7 +18,7 @@ class UserGroup(models.Model):
     last_modified = models.DateTimeField(auto_now=True)
 
     is_active = models.BooleanField(default=True)
-    uri = models.CharField(null=False, max_length=280)
+    uri = models.CharField(blank=True, null=True, max_length=280)
 
     @property
     def get_group_title(self):
