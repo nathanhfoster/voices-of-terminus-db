@@ -18,7 +18,7 @@ class MessageSeializer(serializers.ModelSerializer):
         fields = ('id', 'author', 'author_username', 'body',
                   'date_created', 'last_modified', 'parent_message_id',
                   )
-        read_only_fields = ('id', 'author', 'author_username', 'date_created',)
+        read_only_fields = ('id', 'date_created',)
 
 
 class MessageRecipientSeializer(serializers.ModelSerializer):

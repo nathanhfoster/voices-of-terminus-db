@@ -40,6 +40,7 @@ class UserGroup(models.Model):
 class Message(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
+        related_name='messageAuthorName',
         on_delete=models.CASCADE, )
 
     def author_username(self):
@@ -76,7 +77,7 @@ class MessageRecipient(models.Model):
         settings.AUTH_USER_MODEL,
         related_name='recipient',
         null=True,
-        on_delete=models.PROTECT)
+        on_delete=models.PROTECT,)
 
     def recipient_username(self):
         return self.recipient. get_username()
