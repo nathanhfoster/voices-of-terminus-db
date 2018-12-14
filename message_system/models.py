@@ -61,6 +61,9 @@ class Message(models.Model):
     @property
     def get_message_body(self):
         return self.body
+    @property
+    def get_message_last_modified(self):
+        return self.last_modified
 
     class Meta:
         verbose_name = 'Message'
@@ -106,5 +109,8 @@ class MessageRecipient(models.Model):
 
     def message_body(self):
         return self.message_id. get_message_body
+
+    def message_last_modified(self):
+        return self.message_id. get_message_last_modified
 
     is_read = models.BooleanField(default=False)
