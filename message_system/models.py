@@ -61,6 +61,7 @@ class Message(models.Model):
     @property
     def get_message_body(self):
         return self.body
+
     @property
     def get_message_last_modified(self):
         return self.last_modified
@@ -90,17 +91,17 @@ class MessageRecipient(models.Model):
         null=True,
         on_delete=models.PROTECT,)
 
-    def group_title(self):
-        return self.recipient_group_id. get_group_title
+    # def group_title(self):
+    #     return self.recipient_group_id. get_group_title
 
-    def group_author(self):
-        return self.recipient_group_id. get_group_author
+    # def group_author(self):
+    #     return self.recipient_group_id. get_group_author
 
-    def group_last_modified(self):
-        return self.recipient_group_id. last_modified
+    # def group_last_modified(self):
+    #     return self.recipient_group_id. last_modified
 
-    def group_uri(self):
-        return self.recipient_group_id. uri
+    # def group_uri(self):
+    #     return self.recipient_group_id. uri
 
     message_id = models.ForeignKey(
         Message,
