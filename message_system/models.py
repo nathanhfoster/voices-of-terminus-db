@@ -7,8 +7,7 @@ class UserGroup(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='groupAuthorName',
-        on_delete=models.PROTECT,
-        blank=True, null=True,)
+        on_delete=models.PROTECT, )
 
     def author_username(self):
         return self.author. get_username()
@@ -41,8 +40,7 @@ class UserGroup(models.Model):
 class Message(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        blank=True, null=True,)
+        on_delete=models.CASCADE, )
 
     def author_username(self):
         return self.author. get_username()
