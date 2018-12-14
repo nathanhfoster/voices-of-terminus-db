@@ -7,7 +7,8 @@ class UserGroup(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='groupAuthorName',
-        on_delete=models.PROTECT,)
+        on_delete=models.PROTECT,
+        blank=True, null=True,)
 
     def author_username(self):
         return self.author. get_username()
