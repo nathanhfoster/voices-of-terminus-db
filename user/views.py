@@ -47,7 +47,7 @@ class UserView(viewsets.ModelViewSet):
 
     @action(methods=['get'], detail=False, permission_classes=[permission_classes])
     def all(self, request):
-        qs = User.objects.all().order_by('-username')
+        qs = User.objects.all()
         serializer = AdminSerializer(qs, many=True)
         return Response(serializer.data)
 

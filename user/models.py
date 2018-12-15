@@ -7,8 +7,11 @@ from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
 # Allo Spaces in User names
+
+
 class MyValidator(UnicodeUsernameValidator):
     regex = r'^[\w.@+\- ]+$'
+
 
 class User(AbstractUser):
     profile_image = models.TextField(blank=True)
@@ -17,9 +20,10 @@ class User(AbstractUser):
         ('username'),
         max_length=150,
         unique=True,
-        help_text = ('Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'),
+        help_text=(
+            'Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'),
         validators=[username_validator],
-            error_messages={
+        error_messages={
             'unique': ("A user with that username already exists."),
         },
     )
@@ -36,11 +40,11 @@ class User(AbstractUser):
     primary_race = models.CharField(blank=True, max_length=20)
     primary_role = models.CharField(blank=True, max_length=20)
     primary_class = models.CharField(blank=True, max_length=20)
-    
+
     secondary_race = models.CharField(blank=True, max_length=20)
     secondary_role = models.CharField(blank=True, max_length=20)
     secondary_class = models.CharField(blank=True, max_length=20)
-    
+
     profession = models.CharField(blank=True, max_length=20)
     profession_specialization = models.CharField(blank=True, max_length=20)
     experience_points = models.IntegerField(default=0)
@@ -79,6 +83,11 @@ class User(AbstractUser):
     can_delete_article = models.BooleanField(default=False)
     can_delete_newsletter = models.BooleanField(default=False)
     can_delete_calendar_event = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = 'User'
+        verbose_name_plural = 'Users'
+        ordering = ('-username',)
 
     @receiver(post_save, sender=settings.AUTH_USER_MODEL)
     def create_auth_token(sender, instance=None, created=False, **kwargs):
