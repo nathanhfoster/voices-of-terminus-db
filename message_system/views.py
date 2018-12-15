@@ -4,7 +4,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from message_system.permissions import IsOwnerOrReadOnly, IsUpdateProfile
+from message_system.permissions import IsOwnerOrReadOnly, CanUpdateMessage
 
 from .models import UserGroup, Message, MessageRecipient
 from .serializers import UserGroupSeializer, MessageSeializer, MessageRecipientSeializer, MessageRecipientViewSeializer
@@ -34,7 +34,7 @@ class UserGroupView(viewsets.ModelViewSet):
             self.permission_classes = (permissions.IsAuthenticated,)
         if self.request.method == 'PATCH':
             self.permission_classes = (
-                permissions.IsAuthenticated, IsUpdateProfile,)
+                permissions.IsAuthenticated, CanUpdateMessage,)
         return super(UserGroupView, self).get_permissions()
 
 
@@ -50,7 +50,7 @@ class MessageView(viewsets.ModelViewSet):
             self.permission_classes = (permissions.IsAuthenticated,)
         if self.request.method == 'PATCH':
             self.permission_classes = (
-                permissions.IsAuthenticated, IsUpdateProfile,)
+                permissions.IsAuthenticated, CanUpdateMessage,)
         return super(MessageView, self).get_permissions()
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
@@ -80,7 +80,7 @@ class MessageRecipientView(viewsets.ModelViewSet):
             self.permission_classes = (permissions.IsAuthenticated,)
         if self.request.method == 'PATCH':
             self.permission_classes = (
-                permissions.IsAuthenticated, IsUpdateProfile,)
+                permissions.IsAuthenticated, CanUpdateMessage,)
         return super(MessageRecipientView, self).get_permissions()
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
