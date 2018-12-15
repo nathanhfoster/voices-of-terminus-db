@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from message_system.permissions import IsOwnerOrReadOnly, CanUpdateMessage
 
 from .models import UserGroup, Message, MessageRecipient
-from .serializers import UserGroupSeializer, MessageSeializer, MessageRecipientSeializer, MessageRecipientViewSeializer
+from .serializers import UserGroupSeializer, MessageSeializer, MessageRecipientSeializer, MessageRecipientViewSeializer, MessageGroupRecipientsSeializer
 
 
 class StandardResultsSetPagination(pagination.PageNumberPagination):
@@ -98,4 +98,23 @@ class MessageRecipientView(viewsets.ModelViewSet):
             return self.get_paginated_response(serializer.data)
 
         serializer = MessageRecipientViewSeializer(queryset, many=True)
+        return Response(serializer.data)
+
+    @action(methods=['get'], detail=True, permission_classes=[permission_classes])
+    def group(self, request, pk):
+        # TODO Check that the object exist
+        # Query database for the object with the given PK
+        # .distinct('recipient')
+        queryset = MessageRecipient.objects.all().filter(
+            recipient_group_id=pk).values('recipient_id').distinct()
+
+        newlist = []
+        for i in queryset:
+            print(i)
+        #     if i.recipient_id not in newlist:
+        #         newlist.append(i.recipient_id)
+
+        # print(newlist)
+
+        serializer = MessageGroupRecipientsSeializer(queryset, many=True)
         return Response(serializer.data)
