@@ -51,6 +51,9 @@ class MessageView(viewsets.ModelViewSet):
         if self.request.method == 'PATCH':
             self.permission_classes = (
                 permissions.IsAuthenticated, CanUpdateMessage,)
+        if self.request.method == 'DELETE':
+            self.permission_classes = (
+                permissions.IsAuthenticated, CanUpdateMessage,)
         return super(MessageView, self).get_permissions()
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
