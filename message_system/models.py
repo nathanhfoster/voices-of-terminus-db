@@ -51,11 +51,9 @@ class Message(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 
-    parent_message_id = models.ForeignKey(
-        "self",
-        related_name='reply',
-        blank=True,
-        null=True,
+    group_message_id = models.ForeignKey(
+        UserGroup,
+        related_name='groupMessage',
         on_delete=models.PROTECT,)
 
     @property
@@ -69,7 +67,7 @@ class Message(models.Model):
     class Meta:
         verbose_name = 'Message'
         verbose_name_plural = 'Messages'
-        ordering = ('-date_created',)
+        ordering = ('date_created',)
 
 
 class MessageRecipient(models.Model):

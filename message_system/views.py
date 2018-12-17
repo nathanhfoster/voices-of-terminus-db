@@ -60,7 +60,7 @@ class MessageView(viewsets.ModelViewSet):
     def view(self, request, pk):
         # TODO Check that the object exist
         # Query database for the object with the given PK
-        queryset = Message.objects.all().filter(id=pk)
+        queryset = Message.objects.all().filter(group_message_id=pk)
 
         page = self.paginate_queryset(queryset)
         if page is not None:
@@ -108,9 +108,9 @@ class MessageRecipientView(viewsets.ModelViewSet):
         queryset = MessageRecipient.objects.all().filter(
             recipient_group_id=pk).values('recipient_id').distinct()
 
-        newlist = []
-        for i in queryset:
-            print(i)
+        # newlist = []
+        # for i in queryset:
+        #     print(i)
         #     if i.recipient_id not in newlist:
         #         newlist.append(i.recipient_id)
 
