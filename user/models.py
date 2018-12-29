@@ -28,7 +28,7 @@ class User(AbstractUser):
         },
     )
     bio = models.TextField(blank=True)
-    opt_in = models.BooleanField(default=False)
+    opt_in = models.BooleanField(blank=True, default=False)
 
     # Connections
     discord_url = models.CharField(blank=True, max_length=250)
