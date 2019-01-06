@@ -7,12 +7,14 @@ from rest_framework.response import Response
 from articles.permissions import IsOwnerOrReadOnly, IsUpdateProfile
 
 from .models import Article, ArticleLikes, ArticleComment
-from .serializers import ArticleSerializer, ArticleLikesSerializer, ArticleCommentSerializer
+from .serializers import ArticleSerializer, ArticleNoHtmlSerializer, ArticleHtmlSerializer, ArticleLikesSerializer, ArticleCommentSerializer
+
 
 class StandardResultsSetPagination(pagination.PageNumberPagination):
     page_size = 10
     page_size_query_param = 'page_size'
     max_page_size = 100
+
 
 class LargeResultsSetPagination(pagination.PageNumberPagination):
     page_size = 100
@@ -31,7 +33,8 @@ class ArticleView(viewsets.ModelViewSet):
         if self.request.method == 'GET':
             self.permission_classes = (AllowAny,)
         if self.request.method == 'PATCH':
-            self.permission_classes = (permissions.IsAuthenticated, IsUpdateProfile,)
+            self.permission_classes = (
+                permissions.IsAuthenticated, IsUpdateProfile,)
         return super(ArticleView, self).get_permissions()
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
@@ -45,6 +48,26 @@ class ArticleView(viewsets.ModelViewSet):
         # qs.save() # save
         return Response(ArticleSerializer(qs).data)
 
+    @action(methods=['get'], detail=False, permission_classes=[permission_classes])
+    def all(self, request):
+        queryset = Article.objects.all()
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = ArticleNoHtmlSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = ArticleNoHtmlSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    @action(methods=['get'], detail=True, permission_classes=[permission_classes])
+    def html(self, request, pk):
+        # TODO Check that the object exist
+        # Query database for the object with the given PK
+        qs = Article.objects.get(pk=pk)
+        return Response(ArticleHtmlSerializer(qs).data)
+
+
 class ArticleLikesView(viewsets.ModelViewSet):
     serializer_class = ArticleLikesSerializer
     pagination_class = LargeResultsSetPagination
@@ -56,7 +79,8 @@ class ArticleLikesView(viewsets.ModelViewSet):
         if self.request.method == 'GET':
             self.permission_classes = (AllowAny,)
         if self.request.method == 'PATCH':
-            self.permission_classes = (permissions.IsAuthenticated, IsUpdateProfile,)
+            self.permission_classes = (
+                permissions.IsAuthenticated, IsUpdateProfile,)
         return super(ArticleLikesView, self).get_permissions()
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
@@ -73,6 +97,7 @@ class ArticleLikesView(viewsets.ModelViewSet):
         serializer = ArticleLikesSerializer(queryset, many=True)
         return Response(serializer.data)
 
+
 class ArticleCommentView(viewsets.ModelViewSet):
     serializer_class = ArticleCommentSerializer
     pagination_class = LargeResultsSetPagination
@@ -84,7 +109,8 @@ class ArticleCommentView(viewsets.ModelViewSet):
         if self.request.method == 'GET':
             self.permission_classes = (AllowAny,)
         if self.request.method == 'PATCH':
-            self.permission_classes = (permissions.IsAuthenticated, IsUpdateProfile,)
+            self.permission_classes = (
+                permissions.IsAuthenticated, IsUpdateProfile,)
         return super(ArticleCommentView, self).get_permissions()
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
