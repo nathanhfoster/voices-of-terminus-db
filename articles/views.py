@@ -10,7 +10,7 @@ from .models import Article, ArticleLikes, ArticleComment
 from .serializers import ArticleSerializer, ArticleLikesSerializer, ArticleCommentSerializer
 
 class StandardResultsSetPagination(pagination.PageNumberPagination):
-    page_size = 20
+    page_size = 10
     page_size_query_param = 'page_size'
     max_page_size = 100
 
