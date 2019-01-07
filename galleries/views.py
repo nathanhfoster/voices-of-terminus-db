@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from galleries.permissions import IsOwnerOrReadOnly, IsUpdateProfile
 
 from .models import Gallery, GalleryImages
-from .serializers import GallerySerializer, GalleryImageSerializer, GalleryImagesSerializer, GalleryImagesImageSerializer
+from .serializers import GallerySerializer, GalleryNoImageSerializer, GalleryImageSerializer, GalleryImagesSerializer, GalleryNoImagesSerializer, GalleryImagesImageSerializer
 
 
 class StandardResultsSetPagination(pagination.PageNumberPagination):
@@ -42,6 +42,18 @@ class GalleryView(viewsets.ModelViewSet):
         # qs.save() # save
         return Response(GallerySerializer(qs).data)
 
+    @action(methods=['get'], detail=False, permission_classes=[permission_classes])
+    def all(self, request):
+        queryset = Gallery.objects.all()
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = GalleryNoImageSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = GalleryNoImageSerializer(queryset, many=True)
+        return Response(serializer.data)
+
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
     def image(self, request, pk):
         # TODO Check that the object exist
@@ -74,10 +86,10 @@ class GalleryImagesView(viewsets.ModelViewSet):
 
         page = self.paginate_queryset(queryset)
         if page is not None:
-            serializer = self.get_serializer(page, many=True)
+            serializer = GalleryNoImagesSerializer(page, many=True)
             return self.get_paginated_response(serializer.data)
 
-        serializer = GalleryImagesSerializer(queryset, many=True)
+        serializer = GalleryNoImagesSerializer(queryset, many=True)
         return Response(serializer.data)
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
