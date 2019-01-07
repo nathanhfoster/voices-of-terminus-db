@@ -12,6 +12,7 @@ class GallerySerializer(serializers.ModelSerializer):
         read_only_fields = (
             'date_created', 'date_modified, last_modified,last_modified_by')
 
+
 class GalleryNoImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Gallery
@@ -32,14 +33,15 @@ class GalleryImagesSerializer(serializers.ModelSerializer):
     class Meta:
         model = GalleryImages
         fields = ('id', 'title', 'description', 'gallery_id', 'image', 'author', 'author_username',
-                  'date_created', 'tags', 'views',)
+                  'date_created', 'last_modified', 'last_modified_by', 'last_modified_by_username', 'tags', 'views',)
         read_only_fields = ('date_created',)
+
 
 class GalleryNoImagesSerializer(serializers.ModelSerializer):
     class Meta:
         model = GalleryImages
         fields = ('id', 'title', 'description', 'gallery_id', 'author', 'author_username',
-                  'date_created', 'tags', 'views',)
+                  'date_created', 'last_modified', 'last_modified_by', 'last_modified_by_username', 'tags', 'views',)
         read_only_fields = ('date_created',)
 
 
