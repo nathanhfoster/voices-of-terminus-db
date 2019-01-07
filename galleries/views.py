@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from galleries.permissions import IsOwnerOrReadOnly, IsUpdateProfile
 
 from .models import Gallery, GalleryImages
-from .serializers import GallerySerializer, GalleryImagesSerializer
+from .serializers import GallerySerializer, GalleryImageSerializer, GalleryImagesSerializer, GalleryImagesImageSerializer
 
 
 class StandardResultsSetPagination(pagination.PageNumberPagination):
@@ -42,6 +42,13 @@ class GalleryView(viewsets.ModelViewSet):
         # qs.save() # save
         return Response(GallerySerializer(qs).data)
 
+    @action(methods=['get'], detail=True, permission_classes=[permission_classes])
+    def image(self, request, pk):
+        # TODO Check that the object exist
+        # Query database for the object with the given PK
+        qs = Gallery.objects.get(pk=pk)
+        return Response(GalleryImageSerializer(qs).data)
+
 
 class GalleryImagesView(viewsets.ModelViewSet):
     serializer_class = GalleryImagesSerializer
@@ -72,3 +79,10 @@ class GalleryImagesView(viewsets.ModelViewSet):
 
         serializer = GalleryImagesSerializer(queryset, many=True)
         return Response(serializer.data)
+
+    @action(methods=['get'], detail=True, permission_classes=[permission_classes])
+    def image(self, request, pk):
+        # TODO Check that the object exist
+        # Query database for the object with the given PK
+        qs = GalleryImages.objects.get(pk=pk)
+        return Response(GalleryImagesImageSerializer(qs).data)
