@@ -73,7 +73,7 @@ class Message(models.Model):
 class MessageRecipient(models.Model):
     recipient = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        related_name='recipient',
+        related_name='messageRecipient',
         null=True,
         on_delete=models.PROTECT,)
 
@@ -84,7 +84,7 @@ class MessageRecipient(models.Model):
 
     recipient_group_id = models.ForeignKey(
         UserGroup,
-        related_name='group',
+        related_name='messageGroup',
         blank=True,
         null=True,
         on_delete=models.PROTECT,)

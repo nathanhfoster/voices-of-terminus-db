@@ -8,8 +8,7 @@ class UserGroupSeializer(serializers.ModelSerializer):
         model = UserGroup
         fields = ('id', 'title', 'author', 'author_username',
                   'date_created', 'last_modified', 'uri', 'is_active',)
-        read_only_fields = ('id', 'user', 'username',
-                            'date_created', 'last_modified')
+        read_only_fields = ('id', 'date_created', )
 
 
 class MessageSeializer(serializers.ModelSerializer):

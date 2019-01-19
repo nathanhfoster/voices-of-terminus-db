@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'newsletters',
     'galleries',
     'message_system',
+    'poll_system',
     'corsheaders',
 ]
 
