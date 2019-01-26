@@ -6,8 +6,8 @@ from rest_framework.response import Response
 
 from poll_system.permissions import IsOwnerOrReadOnly, CanUpdateRecipient
 
-from .models import Poll, PollQuestion, PollResponse, PollRecipient
-from .serializers import PollSeializer, PollQuestionSeializer, PollResponseSeializer, PollRecipientSeializer
+from .models import Poll, PollQuestion, PollChoice, PollResponse, PollRecipient
+from .serializers import PollSeializer, PollQuestionSeializer, PollChoiceSeializer, PollResponseSeializer, PollRecipientSeializer
 
 
 class StandardResultsSetPagination(pagination.PageNumberPagination):
@@ -37,15 +37,10 @@ class PollView(viewsets.ModelViewSet):
                 permissions.IsAuthenticated, CanUpdateRecipient,)
         return super(PollView, self).get_permissions()
 
-    class Meta:
-        verbose_name = 'Poll'
-        verbose_name_plural = 'Polls'
-        ordering = ('-last_modified',)
-
 
 class PollQuestionView(viewsets.ModelViewSet):
     serializer_class = PollQuestionSeializer
-    pagination_class = LargeResultsSetPagination
+    # pagination_class = LargeResultsSetPagination
     queryset = PollQuestion.objects.all()
     permission_classes = (permissions.IsAuthenticated,)
 
@@ -75,20 +70,48 @@ class PollQuestionView(viewsets.ModelViewSet):
         serializer = PollQuestionSeializer(queryset, many=True)
         return Response(serializer.data)
 
-    class Meta:
-        verbose_name = 'PollQuestion'
-        verbose_name_plural = 'PollQuestions'
-        ordering = ('-id',)
 
-
-class PollResponseView(viewsets.ModelViewSet):
-    serializer_class = PollResponseSeializer
-    pagination_class = LargeResultsSetPagination
-    queryset = PollResponse.objects.all()
+class PollChoiceView(viewsets.ModelViewSet):
+    serializer_class = PollChoiceSeializer
+    # pagination_class = LargeResultsSetPagination
+    queryset = PollChoice.objects.all()
     permission_classes = (permissions.IsAuthenticated,)
 
     def get_permissions(self):
         # allow an authenticated user to create via POST
+        if self.request.method == 'GET':
+            self.permission_classes = (permissions.IsAuthenticated,)
+        if self.request.method == 'PATCH':
+            self.permission_classes = (
+                permissions.IsAuthenticated, CanUpdateRecipient,)
+        if self.request.method == 'DELETE':
+            self.permission_classes = (
+                permissions.IsAuthenticated, CanUpdateRecipient,)
+        return super(PollChoiceView, self).get_permissions()
+
+    @action(methods=['get'], detail=True, permission_classes=[permission_classes])
+    def view(self, request, pk):
+        # TODO Check that the object exist
+        # Query database for the object with the given PK
+        queryset = PollChoice.objects.all().filter(question_id=pk)
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = PollChoiceSeializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class PollResponseView(viewsets.ModelViewSet):
+    serializer_class = PollResponseSeializer
+    # pagination_class = LargeResultsSetPagination
+    queryset = PollResponse.objects.all()
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_permissions(self):
+            # allow an authenticated user to create via POST
         if self.request.method == 'GET':
             self.permission_classes = (permissions.IsAuthenticated,)
         if self.request.method == 'PATCH':
@@ -103,7 +126,7 @@ class PollResponseView(viewsets.ModelViewSet):
     def view(self, request, pk):
         # TODO Check that the object exist
         # Query database for the object with the given PK
-        queryset = PollResponse.objects.all().filter(question_id=pk)
+        queryset = PollResponse.objects.all().filter(choice_id=pk)
 
         page = self.paginate_queryset(queryset)
         if page is not None:
@@ -113,15 +136,10 @@ class PollResponseView(viewsets.ModelViewSet):
         serializer = PollResponseSeializer(queryset, many=True)
         return Response(serializer.data)
 
-    class Meta:
-        verbose_name = 'PollResponse'
-        verbose_name_plural = 'PollResponses'
-        ordering = ('-id',)
-
 
 class PollRecipientView(viewsets.ModelViewSet):
     serializer_class = PollRecipientSeializer
-    pagination_class = LargeResultsSetPagination
+    # pagination_class = LargeResultsSetPagination
     queryset = PollRecipient.objects.all()
     permission_classes = (permissions.IsAuthenticated,)
 
@@ -138,7 +156,7 @@ class PollRecipientView(viewsets.ModelViewSet):
     def view(self, request, pk):
         # TODO Check that the object exist
         # Query database for the object with the given PK
-        queryset = PollRecipient.objects.all().filter(recipient=pk)
+        queryset = PollRecipient.objects.all().filter(recipient_poll_id=pk)
 
         page = self.paginate_queryset(queryset)
         if page is not None:
@@ -166,8 +184,3 @@ class PollRecipientView(viewsets.ModelViewSet):
 
         serializer = PollRecipientSeializer(queryset, many=True)
         return Response(serializer.data)
-
-    class Meta:
-        verbose_name = 'PollRecipient'
-        verbose_name_plural = 'PollRecipients'
-        ordering = ('-id',)

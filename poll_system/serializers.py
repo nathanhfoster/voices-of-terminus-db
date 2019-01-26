@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from poll_system.models import Poll, PollQuestion, PollResponse, PollRecipient
+from poll_system.models import Poll, PollQuestion, PollChoice, PollResponse, PollRecipient
 from django.contrib.auth.models import User
 
 
@@ -20,12 +20,21 @@ class PollQuestionSeializer(serializers.ModelSerializer):
         read_only_fields = ('id', 'date_created',)
 
 
+class PollChoiceSeializer(serializers.ModelSerializer):
+    class Meta:
+        model = PollChoice
+        fields = ('id', 'author', 'author_username', 'title',
+                  'date_created', 'last_modified',
+                  'question_id', )
+        read_only_fields = ('id',)
+
+
 class PollResponseSeializer(serializers.ModelSerializer):
     class Meta:
         model = PollResponse
         fields = ('id', 'author', 'author_username', 'response',
                   'date_created', 'last_modified',
-                  'question_id', )
+                  'choice_id', )
         read_only_fields = ('id',)
 
 

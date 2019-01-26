@@ -7,7 +7,7 @@ class Poll(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='pollAuthorName',
-        on_delete=models.PROTECT, )
+        on_delete=models.CASCADE, )
 
     def author_username(self):
         return self.author. get_username()
@@ -16,6 +16,11 @@ class Poll(models.Model):
 
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Poll'
+        verbose_name_plural = 'Polls'
+        ordering = ('-last_modified',)
 
 
 class PollQuestion(models.Model):
@@ -36,13 +41,33 @@ class PollQuestion(models.Model):
     poll_id = models.ForeignKey(
         Poll,
         related_name='pollQuestion',
-        on_delete=models.PROTECT,)
+        on_delete=models.CASCADE,)
+
+
+class PollChoice(models.Model):
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='PollChoiceAuthorName',
+        on_delete=models.CASCADE, )
+
+    def author_username(self):
+        return self.author. get_username()
+
+    title = models.CharField(max_length=280)
+
+    date_created = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now=True)
+
+    question_id = models.ForeignKey(
+        PollQuestion,
+        related_name='PollChoice',
+        on_delete=models.CASCADE,)
 
 
 class PollResponse(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        related_name='pollResponseAuthorName',
+        related_name='PollResponseAuthorName',
         on_delete=models.CASCADE, )
 
     def author_username(self):
@@ -53,10 +78,16 @@ class PollResponse(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 
-    question_id = models.ForeignKey(
-        PollQuestion,
-        related_name='pollResponse',
-        on_delete=models.PROTECT,)
+    choice_id = models.ForeignKey(
+        PollChoice,
+        related_name='PollResponse',
+        on_delete=models.CASCADE,)
+
+    class Meta:
+        verbose_name = 'Response'
+        verbose_name_plural = 'Responses'
+        ordering = ('-last_modified',)
+        unique_together = ('author', 'choice_id',)
 
 
 class PollRecipient(models.Model):
@@ -64,7 +95,7 @@ class PollRecipient(models.Model):
         settings.AUTH_USER_MODEL,
         related_name='pollRecipient',
         null=True,
-        on_delete=models.PROTECT,)
+        on_delete=models.CASCADE,)
 
     def recipient_username(self):
         return self.recipient. get_username()
@@ -76,4 +107,4 @@ class PollRecipient(models.Model):
         related_name='pollGroup',
         blank=True,
         null=True,
-        on_delete=models.PROTECT,)
+        on_delete=models.CASCADE,)
