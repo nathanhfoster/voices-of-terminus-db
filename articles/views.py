@@ -60,6 +60,18 @@ class ArticleView(viewsets.ModelViewSet):
         serializer = ArticleNoHtmlSerializer(queryset, many=True)
         return Response(serializer.data)
 
+    @action(methods=['get'], detail=False, permission_classes=[permission_classes])
+    def allhtml(self, request):
+        queryset = Article.objects.all()
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = ArticleSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = ArticleSerializer(queryset, many=True)
+        return Response(serializer.data)
+
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
     def html(self, request, pk):
         # TODO Check that the object exist

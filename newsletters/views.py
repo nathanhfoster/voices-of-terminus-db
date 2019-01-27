@@ -2,7 +2,7 @@ from .models import Newsletter, NewsletterLikes, NewsletterComment
 from django.db.models import F
 from rest_framework import viewsets, permissions, pagination
 from rest_framework.permissions import AllowAny
-from .serializers import NewsletterSerializer, NewsletterNoHtmlSerializer, NewsletterHtmlSerializer, NewsletterLikesSerializer, NewsletterCommentSerializer
+from .serializers import NewsletterSerializer, NewsletterNoDesignSerializer, NewsletterNoHtmlSerializer, NewsletterHtmlSerializer, NewsletterLikesSerializer, NewsletterCommentSerializer
 from newsletters.permissions import IsOwnerOrReadOnly, IsUpdateProfile
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -56,6 +56,18 @@ class NewsletterView(viewsets.ModelViewSet):
             return self.get_paginated_response(serializer.data)
 
         serializer = NewsletterNoHtmlSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    @action(methods=['get'], detail=False, permission_classes=[permission_classes])
+    def allhtml(self, request):
+        queryset = Newsletter.objects.all()
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = NewsletterNoDesignSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = NewsletterNoDesignSerializer(queryset, many=True)
         return Response(serializer.data)
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])

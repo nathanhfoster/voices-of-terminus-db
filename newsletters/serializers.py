@@ -11,6 +11,14 @@ class NewsletterSerializer(serializers.ModelSerializer):
         read_only_fields = (
             'date_created', 'date_modified, last_modified,last_modified_by')
 
+class NewsletterNoDesignSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Newsletter
+        fields = ('id', 'title', 'slug', 'author', 'author_username', 'html', 'tags', 'design',
+                  'date_created', 'last_modified', 'last_modified_by', 'last_modified_by_username', 'views',)
+        read_only_fields = (
+            'date_created', 'date_modified, last_modified,last_modified_by')
+
 
 class NewsletterNoHtmlSerializer(serializers.ModelSerializer):
     class Meta:
