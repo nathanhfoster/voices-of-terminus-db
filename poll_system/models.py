@@ -58,7 +58,7 @@ class PollChoice(models.Model):
     def author_username(self):
         return self.author. get_username()
 
-    title = models.CharField(max_length=280)
+    title = models.CharField(blank=True, null=True, max_length=280)
 
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
