@@ -43,5 +43,5 @@ class MessageRecipientViewSeializer(serializers.ModelSerializer):
 class MessageGroupRecipientsSeializer(serializers.ModelSerializer):
     class Meta:
         model = MessageRecipient
-        fields = ('recipient_id', )
+        fields = ('id', 'recipient_id', 'message_id', )
         read_only_fields = ('recipient_id',)

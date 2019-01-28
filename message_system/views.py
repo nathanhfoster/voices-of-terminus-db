@@ -106,7 +106,8 @@ class MessageRecipientView(viewsets.ModelViewSet):
         # Query database for the object with the given PK
         # .distinct('recipient')
         queryset = MessageRecipient.objects.all().filter(
-            recipient_group_id=pk).values('recipient_id').distinct()
+            recipient_group_id=pk).all()
+        # .values('recipient_id').distinct()
 
         # newlist = []
         # for i in queryset:

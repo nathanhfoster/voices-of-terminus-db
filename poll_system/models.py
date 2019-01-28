@@ -46,7 +46,7 @@ class PollQuestion(models.Model):
     class Meta:
         verbose_name = 'Question'
         verbose_name_plural = 'Questions'
-        ordering = ('last_modified',)
+        ordering = ('id',)
 
 
 class PollChoice(models.Model):
