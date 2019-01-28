@@ -7,7 +7,7 @@ class UserGroup(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='groupAuthorName',
-        on_delete=models.PROTECT, )
+        on_delete=models.CASCADE, )
 
     def author_username(self):
         return self.author. get_username()
@@ -59,7 +59,7 @@ class Message(models.Model):
     group_message_id = models.ForeignKey(
         UserGroup,
         related_name='groupMessage',
-        on_delete=models.PROTECT,)
+        on_delete=models.CASCADE,)
 
     @property
     def get_message_body(self):
@@ -80,7 +80,7 @@ class MessageRecipient(models.Model):
         settings.AUTH_USER_MODEL,
         related_name='messageRecipient',
         null=True,
-        on_delete=models.PROTECT,)
+        on_delete=models.CASCADE,)
 
     def recipient_username(self):
         return self.recipient. get_username()
@@ -92,7 +92,7 @@ class MessageRecipient(models.Model):
         related_name='messageGroup',
         blank=True,
         null=True,
-        on_delete=models.PROTECT,)
+        on_delete=models.CASCADE,)
 
     # def group_title(self):
     #     return self.recipient_group_id. get_group_title
@@ -109,7 +109,7 @@ class MessageRecipient(models.Model):
     message_id = models.ForeignKey(
         Message,
         related_name='message',
-        on_delete=models.PROTECT,)
+        on_delete=models.CASCADE,)
 
     def message_body(self):
         return self.message_id. get_message_body
