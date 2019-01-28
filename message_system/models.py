@@ -36,6 +36,11 @@ class UserGroup(models.Model):
     def get_uri(self):
         return self.uri
 
+    class Meta:
+        verbose_name = 'UserGroup'
+        verbose_name_plural = 'UserGroups'
+        ordering = ('-date_created',)
+
 
 class Message(models.Model):
     author = models.ForeignKey(
@@ -67,7 +72,7 @@ class Message(models.Model):
     class Meta:
         verbose_name = 'Message'
         verbose_name_plural = 'Messages'
-        ordering = ('date_created',)
+        ordering = ('-date_created',)
 
 
 class MessageRecipient(models.Model):
