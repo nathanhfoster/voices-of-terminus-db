@@ -43,6 +43,11 @@ class PollQuestion(models.Model):
         related_name='pollQuestion',
         on_delete=models.CASCADE,)
 
+    class Meta:
+        verbose_name = 'Question'
+        verbose_name_plural = 'Questions'
+        ordering = ('last_modified',)
+
 
 class PollChoice(models.Model):
     author = models.ForeignKey(
@@ -62,6 +67,11 @@ class PollChoice(models.Model):
         PollQuestion,
         related_name='PollChoice',
         on_delete=models.CASCADE,)
+
+    class Meta:
+        verbose_name = 'Choice'
+        verbose_name_plural = 'Choices'
+        ordering = ('id',)
 
 
 class PollResponse(models.Model):
@@ -86,7 +96,7 @@ class PollResponse(models.Model):
     class Meta:
         verbose_name = 'Response'
         verbose_name_plural = 'Responses'
-        ordering = ('-last_modified',)
+        ordering = ('id',)
         unique_together = ('author', 'choice_id',)
 
 
@@ -108,3 +118,8 @@ class PollRecipient(models.Model):
         blank=True,
         null=True,
         on_delete=models.CASCADE,)
+
+    class Meta:
+        verbose_name = 'Recipient'
+        verbose_name_plural = 'Recipients'
+        ordering = ('id',)
