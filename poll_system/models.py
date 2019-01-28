@@ -71,7 +71,7 @@ class PollChoice(models.Model):
     class Meta:
         verbose_name = 'Choice'
         verbose_name_plural = 'Choices'
-        ordering = ('id',)
+        ordering = ('question_id',)
 
 
 class PollResponse(models.Model):
