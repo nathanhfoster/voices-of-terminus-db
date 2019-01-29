@@ -83,7 +83,7 @@ class PollResponse(models.Model):
     def author_username(self):
         return self.author. get_username()
 
-    response = models.CharField(blank=True, null=True, max_length=280)
+    response = models.TextField(blank=True, null=True)
 
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
