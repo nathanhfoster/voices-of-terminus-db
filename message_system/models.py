@@ -51,7 +51,7 @@ class Message(models.Model):
     def author_username(self):
         return self.author. get_username()
 
-    body = models.TextField(max_length=280)
+    body = models.TextField(blank=True, null=True, max_length=280)
 
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
