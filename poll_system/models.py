@@ -43,10 +43,12 @@ class PollQuestion(models.Model):
         related_name='pollQuestion',
         on_delete=models.CASCADE,)
 
+    position = models.PositiveIntegerField()
+
     class Meta:
         verbose_name = 'Question'
         verbose_name_plural = 'Questions'
-        ordering = ('id',)
+        ordering = ('position',)
 
 
 class PollChoice(models.Model):
@@ -68,10 +70,12 @@ class PollChoice(models.Model):
         related_name='PollChoice',
         on_delete=models.CASCADE,)
 
+    position = models.PositiveIntegerField()
+
     class Meta:
         verbose_name = 'Choice'
         verbose_name_plural = 'Choices'
-        ordering = ('question_id',)
+        ordering = ('question_id', 'position',)
 
 
 class PollResponse(models.Model):
