@@ -28,7 +28,7 @@ class UserView(viewsets.ModelViewSet):
                 permissions.IsAuthenticated, IsUpdateProfile,)
         return super(UserView, self).get_permissions()
 
-    @action(methods=['get'], detail=True, permission_classes=[permission_classes])
+    @action(methods=['patch'], detail=True, permission_classes=[permission_classes])
     def refresh(self, request, pk):
         qs = User.objects.values(
             'primary_race', 'primary_role', 'primary_class', 'secondary_race', 'secondary_role', 'secondary_class',
@@ -40,7 +40,7 @@ class UserView(viewsets.ModelViewSet):
             'can_read_article', 'can_read_newsletter', 'can_read_calendar_event',
             'can_update_article', 'can_update_newsletter', 'can_update_calendar_event',
             'can_delete_article', 'can_delete_newsletter', 'can_delete_calendar_event',
-            'is_active', 'experience_points', 'guild_points', 'opt_in'
+            'is_active', 'experience_points', 'guild_points', 'opt_in', 'last_login',
         ).get(pk=pk)
 
         return Response(Serializer(qs).data)
@@ -65,7 +65,7 @@ class Serializer(serializers.ModelSerializer):
             'can_read_article', 'can_read_newsletter', 'can_read_calendar_event',
             'can_update_article', 'can_update_newsletter', 'can_update_calendar_event',
             'can_delete_article', 'can_delete_newsletter', 'can_delete_calendar_event',
-            'is_active', 'experience_points', 'guild_points'
+            'is_active', 'experience_points', 'guild_points', 'last_login',
         )
 
 
@@ -73,7 +73,7 @@ class AdminSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'id', 'username', 'first_name', 'last_name', 'opt_in',
+            'id', 'username', 'first_name', 'last_name', 'opt_in', 'last_login',
             'bio', 'primary_race', 'primary_role', 'primary_class', 'secondary_race', 'secondary_role', 'secondary_class',
             'profession', 'profession_specialization',
             'is_superuser', 'email', 'is_staff', 'is_leader', 'is_advisor', 'is_council', 'is_general_officer', 'is_officer',
