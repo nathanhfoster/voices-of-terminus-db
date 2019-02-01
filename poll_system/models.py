@@ -14,6 +14,7 @@ class Poll(models.Model):
 
     author_username.short_description = 'authorUsername'
 
+    expiration_date = models.DateTimeField(blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 

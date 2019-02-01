@@ -1,13 +1,14 @@
-from rest_framework import serializers
+from rest_framework import serializers, fields
 from poll_system.models import Poll, PollQuestion, PollChoice, PollResponse, PollRecipient
 from django.contrib.auth.models import User
 
 
 class PollSeializer(serializers.ModelSerializer):
+
     class Meta:
         model = Poll
         fields = ('id', 'title', 'author', 'author_username',
-                  'date_created', 'last_modified', )
+                  'date_created', 'last_modified', 'expiration_date', )
         read_only_fields = ('id', 'date_created', )
 
 
