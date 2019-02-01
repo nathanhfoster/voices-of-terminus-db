@@ -8,7 +8,8 @@ from .serializers import UserSerializer
 from user.permissions import IsUpdateProfile, IsStaffOrTargetUser
 from rest_framework.decorators import action
 from rest_framework.response import Response
-import logging
+from django.utils.timezone import now
+from django.contrib.auth.models import update_last_login
 
 
 class UserView(viewsets.ModelViewSet):
@@ -28,7 +29,7 @@ class UserView(viewsets.ModelViewSet):
                 permissions.IsAuthenticated, IsUpdateProfile,)
         return super(UserView, self).get_permissions()
 
-    @action(methods=['patch'], detail=True, permission_classes=[permission_classes])
+    @action(methods=['get'], detail=True, permission_classes=[permission_classes])
     def refresh(self, request, pk):
         qs = User.objects.values(
             'primary_race', 'primary_role', 'primary_class', 'secondary_race', 'secondary_role', 'secondary_class',
@@ -42,6 +43,11 @@ class UserView(viewsets.ModelViewSet):
             'can_delete_article', 'can_delete_newsletter', 'can_delete_calendar_event',
             'is_active', 'experience_points', 'guild_points', 'opt_in', 'last_login',
         ).get(pk=pk)
+
+        if request.user and request.user.is_authenticated:
+            user = request.user
+            user.last_login = now()
+            user.save(update_fields=['last_login'])
 
         return Response(Serializer(qs).data)
 
