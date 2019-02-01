@@ -33,7 +33,7 @@ class PollQuestion(models.Model):
     def author_username(self):
         return self.author. get_username()
 
-    question = models.TextField(max_length=280)
+    question = models.TextField(blank=True, null=True, max_length=280)
     question_type = models.CharField(max_length=28, default="Multiple")
 
     date_created = models.DateTimeField(auto_now_add=True)
