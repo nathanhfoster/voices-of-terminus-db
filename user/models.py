@@ -27,7 +27,7 @@ class User(AbstractUser):
             'unique': ("A user with that username already exists."),
         },
     )
-    bio = models.TextField(blank=True)
+    bio = models.TextField(blank=True, null=True)
     opt_in = models.BooleanField(blank=True, default=False)
 
     # Connections
@@ -98,3 +98,15 @@ class User(AbstractUser):
     @property
     def get_profile_image(self):
         return self.profile_image
+
+    @property
+    def get_primary_race(self):
+        return self.primary_race
+
+    @property
+    def get_primary_role(self):
+        return self.primary_role
+
+    @property
+    def get_primary_class(self):
+        return self.primary_class

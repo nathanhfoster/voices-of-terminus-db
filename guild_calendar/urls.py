@@ -3,7 +3,7 @@ from . import views
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register('guild/calendar', views.EventView)
+router.register('calendar/events', views.EventView)
 
 urlpatterns = [
     path('', include(router.urls))
