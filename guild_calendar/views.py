@@ -1,6 +1,6 @@
-from .models import Event
+from .models import Event, EventGroup, EventGroupMember
 from rest_framework import viewsets
-from .serializers import EventSerializer
+from .serializers import EventSerializer, EventGroupSerializer, EventGroupMemberSerializer
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -36,4 +36,42 @@ class EventView(viewsets.ModelViewSet):
             end_date__month__lte=month, )
 
         serializer = EventSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class EventGroupView(viewsets.ModelViewSet):
+    serializer_class = EventGroupSerializer
+    queryset = EventGroup.objects.all()
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            self.permission_classes = (AllowAny,)
+        if self.request.method == 'POST':
+            self.permission_classes = (AllowAny,)
+        return super(EventGroupView, self).get_permissions()
+
+    @action(methods=['get'], detail=True)
+    def view(self, request, pk):
+        queryset = EventGroup.objects.all().filter(event_id=pk)
+
+        serializer = EventGroupSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class EventGroupMemberView(viewsets.ModelViewSet):
+    serializer_class = EventGroupMemberSerializer
+    queryset = EventGroupMember.objects.all()
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            self.permission_classes = (AllowAny,)
+        if self.request.method == 'POST':
+            self.permission_classes = (AllowAny,)
+        return super(EventGroupMemberView, self).get_permissions()
+
+    @action(methods=['get'], detail=True)
+    def view(self, request, pk):
+        queryset = EventGroupMember.objects.all().filter(event_group_id=pk)
+
+        serializer = EventGroupMemberSerializer(queryset, many=True)
         return Response(serializer.data)

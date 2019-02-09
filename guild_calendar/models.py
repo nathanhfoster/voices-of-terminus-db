@@ -17,10 +17,8 @@ class Event(models.Model):
     tags = models.CharField(max_length=128, default='Event')
     min_level = models.PositiveIntegerField(default=1)
     max_level = models.PositiveIntegerField(default=60)
-    role_preferences = models.CharField(blank=True, null=True, max_length=256)
-    class_preferences = models.CharField(blank=True, null=True, max_length=256)
     location = models.CharField(blank=True, null=True, max_length=256)
-    congregation_size = models.PositiveIntegerField(default=6)
+    group_size = models.PositiveIntegerField(default=6)
 
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
@@ -37,3 +35,31 @@ class Event(models.Model):
         verbose_name = 'Event'
         verbose_name_plural = 'Events'
         ordering = ('date_created',)
+
+
+class EventGroup(models.Model):
+    event_id = models.ForeignKey(
+        Event,
+        related_name='eventGroup',
+        on_delete=models.CASCADE,)
+    position = models.PositiveIntegerField()
+
+    class Meta:
+        verbose_name = 'EventGroup'
+        verbose_name_plural = 'EventGroups'
+        ordering = ('position',)
+
+
+class EventGroupMember(models.Model):
+    event_group_id = models.ForeignKey(
+        EventGroup,
+        related_name='eventGroupMember',
+        on_delete=models.CASCADE,)
+    position = models.PositiveIntegerField()
+    role_preferences = models.CharField(blank=True, null=True, max_length=512)
+    class_preferences = models.CharField(blank=True, null=True, max_length=512)
+
+    class Meta:
+        verbose_name = 'EventGroupMember'
+        verbose_name_plural = 'EventGroupMembers'
+        ordering = ('position',)
