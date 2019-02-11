@@ -17,10 +17,11 @@ from django.contrib.auth.models import update_last_login
 class CustomAuthToken(ObtainAuthToken):
 
     def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data, context={'request': request})
+        serializer = self.serializer_class(
+            data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
-        update_last_login(None, user)   
+        update_last_login(None, user)
         token, created = Token.objects.get_or_create(user=user)
 
         return Response({
@@ -35,6 +36,7 @@ class CustomAuthToken(ObtainAuthToken):
             'is_active': user.is_active,
             'last_login': user.last_login,
             'opt_in': user.opt_in,
+            'lfg': user.lfg,
 
             'is_superuser': user.is_superuser,
             'is_staff': user.is_staff,
@@ -91,7 +93,6 @@ class CustomAuthToken(ObtainAuthToken):
             'can_delete_calendar_event': user.can_delete_calendar_event
         })
 
-        
 
 # class TokenAuthenticationView(ObtainAuthToken):
 #     """Implementation of ObtainAuthToken with last_login update"""
@@ -101,7 +102,7 @@ class CustomAuthToken(ObtainAuthToken):
 #         try:
 #             request_user, data = requests.get_parameters(request)
 #             user = requests.get_user_by_username(data['username'])
-#             update_last_login(None, user)            
+#             update_last_login(None, user)
 #         except Exception as exc:
 #             return None
 #         return result

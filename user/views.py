@@ -79,7 +79,7 @@ class AdminSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'id', 'username', 'first_name', 'last_name', 'opt_in', 'last_login',
+            'id', 'username', 'first_name', 'last_name', 'opt_in', 'lfg', 'last_login',
             'bio', 'primary_race', 'primary_role', 'primary_class', 'secondary_race', 'secondary_role', 'secondary_class',
             'profession', 'profession_specialization',
             'is_superuser', 'email', 'is_staff', 'is_leader', 'is_advisor', 'is_council', 'is_general_officer', 'is_officer',
