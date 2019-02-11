@@ -18,7 +18,7 @@ class Event(models.Model):
     min_level = models.PositiveIntegerField(default=1)
     max_level = models.PositiveIntegerField(default=60)
     location = models.CharField(blank=True, null=True, max_length=256)
-    group_size = models.PositiveIntegerField(default=6)
+    group_size = models.PositiveIntegerField(blank=True, null=True)
 
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
@@ -56,8 +56,8 @@ class EventGroupMember(models.Model):
         related_name='eventGroupMember',
         on_delete=models.CASCADE,)
     position = models.PositiveIntegerField()
-    role_preferences = models.CharField(blank=True, null=True, max_length=512)
-    class_preferences = models.CharField(blank=True, null=True, max_length=512)
+    role_class_preferences = models.TextField(
+        blank=True, null=True)
 
     class Meta:
         verbose_name = 'EventGroupMember'
