@@ -2,9 +2,9 @@ from rest_framework.permissions import AllowAny
 from django.db.models import F
 from rest_framework import serializers
 
-from .models import User
+from .models import User, Character
 from rest_framework import viewsets, permissions
-from .serializers import UserSerializer
+from .serializers import UserSerializer, CharacterSerializer, Serializer, AdminSerializer
 from user.permissions import IsUpdateProfile, IsStaffOrTargetUser
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -58,38 +58,23 @@ class UserView(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-class Serializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = (
-            'primary_race', 'primary_role', 'primary_class', 'secondary_race', 'secondary_role', 'secondary_class',
-            'profession', 'profession_specialization',
-            'is_superuser', 'is_staff', 'is_leader', 'is_advisor', 'is_council', 'is_general_officer', 'is_officer',
-            'is_senior_member', 'is_junior_member', 'is_recruit',
-            'is_raid_leader', 'is_banker', 'is_recruiter', 'is_class_lead', 'is_crafter_lead',
-            'can_create_article', 'can_create_newsletter', 'can_create_calendar_event', 'can_create_galleries',
-            'can_read_article', 'can_read_newsletter', 'can_read_calendar_event',
-            'can_update_article', 'can_update_newsletter', 'can_update_calendar_event',
-            'can_delete_article', 'can_delete_newsletter', 'can_delete_calendar_event',
-            'is_active', 'experience_points', 'guild_points', 'last_login',
-        )
+class CharacterView(viewsets.ModelViewSet):
+    serializer_class = CharacterSerializer
+    queryset = Character.objects.all()
+    permission_classes = (permissions.IsAuthenticated,)
 
+    def get_permissions(self):
+        # allow an authenticated user to create via POST
+        if self.request.method == 'GET':
+            self.permission_classes = (AllowAny,)
+        if self.request.method == 'PATCH':
+            self.permission_classes = (
+                permissions.IsAuthenticated,)
+        return super(CharacterView, self).get_permissions()
 
-class AdminSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = (
-            'id', 'username', 'first_name', 'last_name', 'opt_in', 'lfg', 'last_login',
-            'bio', 'primary_race', 'primary_role', 'primary_class', 'secondary_race', 'secondary_role', 'secondary_class',
-            'profession', 'profession_specialization',
-            'is_superuser', 'email', 'is_staff', 'is_leader', 'is_advisor', 'is_council', 'is_general_officer', 'is_officer',
-            'is_senior_member', 'is_junior_member', 'is_recruit',
-            'is_raid_leader', 'is_banker', 'is_recruiter', 'is_class_lead', 'is_crafter_lead',
-            'can_create_article', 'can_create_newsletter', 'can_create_calendar_event', 'can_create_galleries',
-            'can_read_article', 'can_read_newsletter', 'can_read_calendar_event',
-            'can_update_article', 'can_update_newsletter', 'can_update_calendar_event',
-            'can_delete_article', 'can_delete_newsletter', 'can_delete_calendar_event',
-            'is_active', 'date_joined', 'last_login', 'experience_points', 'guild_points',
-            'discord_url', 'twitter_url', 'twitch_url', 'youtube_url',
-            'primary_class'
-        )
+    @action(methods=['get'], detail=True, permission_classes=[permission_classes])
+    def view(self, request, pk):
+        queryset = Character.objects.all().filter(author=pk)
+
+        serializer = CharacterSerializer(queryset, many=True)
+        return Response(serializer.data)

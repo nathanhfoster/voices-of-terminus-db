@@ -1,29 +1,29 @@
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
 from django.http import JsonResponse
-from user.models import User
+from user.models import User, Character
+
 
 class UserSerializer(serializers.ModelSerializer):
     # author_name = serializers.CharField(source='author_name')
     class Meta:
         model = User
         fields = (
-        'id', 'username', 'password', 'first_name', 'last_name', 'opt_in', 'lfg',
-        'bio', 'profile_image', 'primary_race', 'primary_role', 'primary_class', 'secondary_race', 'secondary_role', 'secondary_class',
-        'profession', 'profession_specialization',
-        'is_superuser', 'email', 'is_staff', 'is_leader', 'is_advisor', 'is_council','is_general_officer', 'is_officer',
-        'is_senior_member', 'is_junior_member', 'is_recruit',
-        'is_raid_leader', 'is_banker', 'is_recruiter', 'is_class_lead', 'is_crafter_lead',
-        'can_create_article', 'can_create_newsletter', 'can_create_calendar_event', 'can_create_galleries',
-        'can_read_article', 'can_read_newsletter', 'can_read_calendar_event',
-        'can_update_article', 'can_update_newsletter', 'can_update_calendar_event',
-        'can_delete_article', 'can_delete_newsletter', 'can_delete_calendar_event',
-        'is_active', 'date_joined', 'last_login', 'experience_points', 'guild_points',
-        'discord_url', 'twitter_url', 'twitch_url', 'youtube_url',)
+            'id', 'username', 'password', 'first_name', 'last_name', 'opt_in', 'lfg',
+            'bio', 'profile_image', 'primary_race', 'primary_role', 'primary_class', 'secondary_race', 'secondary_role', 'secondary_class',
+            'profession', 'profession_specialization',
+            'is_superuser', 'email', 'is_staff', 'is_leader', 'is_advisor', 'is_council', 'is_general_officer', 'is_officer',
+            'is_senior_member', 'is_junior_member', 'is_recruit',
+            'is_raid_leader', 'is_banker', 'is_recruiter', 'is_class_lead', 'is_crafter_lead',
+            'can_create_article', 'can_create_newsletter', 'can_create_calendar_event', 'can_create_galleries',
+            'can_read_article', 'can_read_newsletter', 'can_read_calendar_event',
+            'can_update_article', 'can_update_newsletter', 'can_update_calendar_event',
+            'can_delete_article', 'can_delete_newsletter', 'can_delete_calendar_event',
+            'is_active', 'date_joined', 'last_login', 'experience_points', 'guild_points',
+            'discord_url', 'twitter_url', 'twitch_url', 'youtube_url',)
         write_only_fields = ('password',)
         extra_kwargs = {'password': {'write_only': True}}
         read_only_fields = ('date_joined',)
-
 
     # def create(self, validated_data):
     #     password = validated_data.pop('password', None)
@@ -37,10 +37,10 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create(
             email=validated_data['email'],
             username=validated_data['username'],
-            password = make_password(validated_data['password']),
-            profile_image = validated_data['profile_image'],
-            opt_in = validated_data['opt_in']
-            )
+            password=make_password(validated_data['password']),
+            profile_image=validated_data['profile_image'],
+            opt_in=validated_data['opt_in']
+        )
         user.set_password(validated_data["password"])
         user.save()
         return user
@@ -66,10 +66,54 @@ class UserSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
-
     # def restore_object(self, attrs, instance=None):
     #     # call set_password on user object. Without this
     #     # the password will be stored in plain text.
     #     user = super(UserSerializer, self).restore_object(attrs, instance)
     #     user.set_password(attrs['password'])
     #     return user
+
+
+class CharacterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Character
+        fields = ('id', 'author', 'author_username', 'name',
+                  'level', 'race', 'role', 'character_class',)
+        read_only_fields = ('id',)
+
+
+class Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'primary_race', 'primary_role', 'primary_class', 'secondary_race', 'secondary_role', 'secondary_class',
+            'profession', 'profession_specialization',
+            'is_superuser', 'is_staff', 'is_leader', 'is_advisor', 'is_council', 'is_general_officer', 'is_officer',
+            'is_senior_member', 'is_junior_member', 'is_recruit',
+            'is_raid_leader', 'is_banker', 'is_recruiter', 'is_class_lead', 'is_crafter_lead',
+            'can_create_article', 'can_create_newsletter', 'can_create_calendar_event', 'can_create_galleries',
+            'can_read_article', 'can_read_newsletter', 'can_read_calendar_event',
+            'can_update_article', 'can_update_newsletter', 'can_update_calendar_event',
+            'can_delete_article', 'can_delete_newsletter', 'can_delete_calendar_event',
+            'is_active', 'experience_points', 'guild_points', 'last_login',
+        )
+
+
+class AdminSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'id', 'username', 'first_name', 'last_name', 'opt_in', 'lfg', 'last_login',
+            'bio', 'primary_race', 'primary_role', 'primary_class', 'secondary_race', 'secondary_role', 'secondary_class',
+            'profession', 'profession_specialization',
+            'is_superuser', 'email', 'is_staff', 'is_leader', 'is_advisor', 'is_council', 'is_general_officer', 'is_officer',
+            'is_senior_member', 'is_junior_member', 'is_recruit',
+            'is_raid_leader', 'is_banker', 'is_recruiter', 'is_class_lead', 'is_crafter_lead',
+            'can_create_article', 'can_create_newsletter', 'can_create_calendar_event', 'can_create_galleries',
+            'can_read_article', 'can_read_newsletter', 'can_read_calendar_event',
+            'can_update_article', 'can_update_newsletter', 'can_update_calendar_event',
+            'can_delete_article', 'can_delete_newsletter', 'can_delete_calendar_event',
+            'is_active', 'date_joined', 'last_login', 'experience_points', 'guild_points',
+            'discord_url', 'twitter_url', 'twitch_url', 'youtube_url',
+            'primary_class'
+        )

@@ -111,3 +111,24 @@ class User(AbstractUser):
     @property
     def get_primary_class(self):
         return self.primary_class
+
+
+class Character(models.Model):
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='characterAuthorName',
+        on_delete=models.CASCADE,)
+
+    def author_username(self):
+        return self.author. get_username()
+
+    name = models.CharField(blank=True, max_length=128)
+    level = models.PositiveIntegerField(blank=True, null=True)
+    race = models.CharField(blank=True, max_length=20)
+    role = models.CharField(blank=True, max_length=20)
+    character_class = models.CharField(blank=True, max_length=20)
+
+    class Meta:
+        verbose_name = 'Character'
+        verbose_name_plural = 'Characters'
+        ordering = ('-name',)
