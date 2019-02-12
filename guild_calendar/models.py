@@ -17,7 +17,7 @@ class Event(models.Model):
     tags = models.CharField(max_length=128, default='Event')
     min_level = models.PositiveIntegerField(default=1)
     max_level = models.PositiveIntegerField(default=60)
-    location = models.CharField(blank=True, null=True, max_length=256)
+    locations = models.CharField(blank=True, null=True, max_length=256)
     group_size = models.PositiveIntegerField(blank=True, null=True)
 
     date_created = models.DateTimeField(auto_now_add=True)
