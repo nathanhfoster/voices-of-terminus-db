@@ -122,11 +122,11 @@ class Character(models.Model):
     def author_username(self):
         return self.author. get_username()
 
-    name = models.CharField(blank=True, max_length=128)
-    level = models.PositiveIntegerField(blank=True, null=True)
-    race = models.CharField(blank=True, max_length=20)
-    role = models.CharField(blank=True, max_length=20)
-    character_class = models.CharField(blank=True, max_length=20)
+    name = models.CharField(blank=True, null=True, max_length=128)
+    level = models.PositiveIntegerField(default=1)
+    race = models.CharField(blank=True, null=True, max_length=20)
+    role = models.CharField(blank=True, null=True, max_length=20)
+    character_class = models.CharField(blank=True, null=True, max_length=20)
 
     class Meta:
         verbose_name = 'Character'
