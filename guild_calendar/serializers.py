@@ -23,5 +23,5 @@ class EventGroupMemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = EventGroupMember
         fields = ('id', 'event_group_id', 'position',
-                  'role_class_preferences', )
+                  'role_class_preferences', 'filled', )
         read_only_fields = ('id',)

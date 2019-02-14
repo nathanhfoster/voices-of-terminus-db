@@ -1,5 +1,7 @@
 from django.db import models
 from django.conf import settings
+from user.models import Character
+from django.shortcuts import get_object_or_404
 
 
 class Event(models.Model):
@@ -56,7 +58,13 @@ class EventGroupMember(models.Model):
         on_delete=models.CASCADE,)
     position = models.PositiveIntegerField()
     role_class_preferences = models.TextField(
-        blank=True, null=True)
+        blank=True, null=True,)
+
+    filled = models.ForeignKey(
+        Character,
+        related_name='eventGroupMemberAuthorName',
+        on_delete=models.CASCADE,
+        blank=True, null=True,)
 
     class Meta:
         verbose_name = 'EventGroupMember'

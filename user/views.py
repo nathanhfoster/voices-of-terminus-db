@@ -12,6 +12,28 @@ from django.utils.timezone import now
 from django.contrib.auth.models import update_last_login
 
 
+class CharacterView(viewsets.ModelViewSet):
+    serializer_class = CharacterSerializer
+    queryset = Character.objects.all()
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_permissions(self):
+        # allow an authenticated user to create via POST
+        if self.request.method == 'GET':
+            self.permission_classes = (AllowAny,)
+        if self.request.method == 'PATCH':
+            self.permission_classes = (
+                permissions.IsAuthenticated,)
+        return super(CharacterView, self).get_permissions()
+
+    @action(methods=['get'], detail=True, permission_classes=[permission_classes])
+    def view(self, request, pk):
+        queryset = Character.objects.all().filter(author=pk)
+
+        serializer = CharacterSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
 class UserView(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
@@ -55,26 +77,4 @@ class UserView(viewsets.ModelViewSet):
     def all(self, request):
         qs = User.objects.all()
         serializer = AdminSerializer(qs, many=True)
-        return Response(serializer.data)
-
-
-class CharacterView(viewsets.ModelViewSet):
-    serializer_class = CharacterSerializer
-    queryset = Character.objects.all()
-    permission_classes = (permissions.IsAuthenticated,)
-
-    def get_permissions(self):
-        # allow an authenticated user to create via POST
-        if self.request.method == 'GET':
-            self.permission_classes = (AllowAny,)
-        if self.request.method == 'PATCH':
-            self.permission_classes = (
-                permissions.IsAuthenticated,)
-        return super(CharacterView, self).get_permissions()
-
-    @action(methods=['get'], detail=True, permission_classes=[permission_classes])
-    def view(self, request, pk):
-        queryset = Character.objects.all().filter(author=pk)
-
-        serializer = CharacterSerializer(queryset, many=True)
         return Response(serializer.data)
