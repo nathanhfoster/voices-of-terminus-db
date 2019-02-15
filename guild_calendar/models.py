@@ -8,6 +8,7 @@ class Event(models.Model):
     start_date = models.DateTimeField(blank=True, null=True)
     end_date = models.DateTimeField(blank=True, null=True)
     title = models.CharField(max_length=250)
+    url = models.CharField(blank=True, null=True, max_length=1024)
     description = models.TextField(blank=True, null=True)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -16,6 +17,9 @@ class Event(models.Model):
 
     def author_username(self):
         return self.author. get_username()
+
+    def author_profile_image(self):
+        return self.author. get_profile_image
     tags = models.CharField(max_length=128, default='Event')
     min_level = models.PositiveIntegerField(default=1)
     max_level = models.PositiveIntegerField(default=60)
