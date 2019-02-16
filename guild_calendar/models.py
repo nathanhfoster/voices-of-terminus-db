@@ -64,7 +64,7 @@ class EventGroupMember(models.Model):
     role_class_preferences = models.TextField(
         blank=True, null=True,)
 
-    filled = models.OneToOneField(
+    filled = models.ForeignKey(
         Character,
         related_name='eventGroupMemberAuthorName',
         on_delete=models.CASCADE,
