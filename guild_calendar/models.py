@@ -64,13 +64,14 @@ class EventGroupMember(models.Model):
     role_class_preferences = models.TextField(
         blank=True, null=True,)
 
-    filled = models.ForeignKey(
+    filled = models.OneToOneField(
         Character,
         related_name='eventGroupMemberAuthorName',
         on_delete=models.CASCADE,
-        blank=True, null=True,)
+        blank=True, null=True, )
 
     class Meta:
         verbose_name = 'EventGroupMember'
         verbose_name_plural = 'EventGroupMembers'
         ordering = ('position',)
+        unique_together = ('filled', 'event_group_id',)
