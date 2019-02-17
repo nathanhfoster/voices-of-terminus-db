@@ -10,8 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = (
             'id', 'username', 'password', 'first_name', 'last_name', 'opt_in', 'lfg',
-            'bio', 'profile_image', 'primary_race', 'primary_role', 'primary_class', 'secondary_race', 'secondary_role', 'secondary_class',
-            'profession', 'profession_specialization',
+            'bio', 'profile_image',
             'is_superuser', 'email', 'is_staff', 'is_leader', 'is_advisor', 'is_council', 'is_general_officer', 'is_officer',
             'is_senior_member', 'is_junior_member', 'is_recruit',
             'is_raid_leader', 'is_banker', 'is_recruiter', 'is_class_lead', 'is_crafter_lead',
@@ -78,7 +77,7 @@ class CharacterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Character
         fields = ('id', 'author', 'author_username', 'name',
-                  'level', 'race', 'role', 'character_class',)
+                  'level', 'race', 'role', 'character_class', 'profession', 'profession_specialization', 'main', 'alt', 'date_created', 'last_modified',)
         read_only_fields = ('id',)
 
 
@@ -86,8 +85,6 @@ class Serializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'primary_race', 'primary_role', 'primary_class', 'secondary_race', 'secondary_role', 'secondary_class',
-            'profession', 'profession_specialization',
             'is_superuser', 'is_staff', 'is_leader', 'is_advisor', 'is_council', 'is_general_officer', 'is_officer',
             'is_senior_member', 'is_junior_member', 'is_recruit',
             'is_raid_leader', 'is_banker', 'is_recruiter', 'is_class_lead', 'is_crafter_lead',
@@ -104,9 +101,7 @@ class AdminSerializer(serializers.ModelSerializer):
         model = User
         fields = (
             'id', 'username', 'first_name', 'last_name', 'opt_in', 'lfg', 'last_login',
-            'bio', 'primary_race', 'primary_role', 'primary_class', 'secondary_race', 'secondary_role', 'secondary_class',
-            'profession', 'profession_specialization',
-            'is_superuser', 'email', 'is_staff', 'is_leader', 'is_advisor', 'is_council', 'is_general_officer', 'is_officer',
+            'bio', 'is_superuser', 'email', 'is_staff', 'is_leader', 'is_advisor', 'is_council', 'is_general_officer', 'is_officer',
             'is_senior_member', 'is_junior_member', 'is_recruit',
             'is_raid_leader', 'is_banker', 'is_recruiter', 'is_class_lead', 'is_crafter_lead',
             'can_create_article', 'can_create_newsletter', 'can_create_calendar_event', 'can_create_galleries',
@@ -115,5 +110,4 @@ class AdminSerializer(serializers.ModelSerializer):
             'can_delete_article', 'can_delete_newsletter', 'can_delete_calendar_event',
             'is_active', 'date_joined', 'last_login', 'experience_points', 'guild_points',
             'discord_url', 'twitter_url', 'twitch_url', 'youtube_url',
-            'primary_class'
         )

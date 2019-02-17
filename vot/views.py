@@ -57,16 +57,6 @@ class CustomAuthToken(ObtainAuthToken):
 
             'bio': user.bio,
 
-            'primary_race': user.primary_race,
-            'primary_role': user.primary_role,
-            'primary_class': user.primary_class,
-
-            'secondary_race': user.secondary_race,
-            'secondary_role': user.secondary_role,
-            'secondary_class': user.secondary_class,
-
-            'profession': user.profession,
-            'profession_specialization': user.profession_specialization,
             'date_joined': user.date_joined,
             'discord_url': user.discord_url,
             'twitter_url': user.twitter_url,

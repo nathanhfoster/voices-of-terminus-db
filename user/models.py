@@ -27,11 +27,18 @@ class Character(models.Model):
     race = models.CharField(blank=True, null=True, max_length=20)
     role = models.CharField(blank=True, null=True, max_length=20)
     character_class = models.CharField(blank=True, null=True, max_length=20)
+    profession = models.CharField(blank=True, max_length=20)
+    profession_specialization = models.CharField(blank=True, max_length=20)
+    main = models.BooleanField(default=False)
+    alt = models.BooleanField(default=False)
+    date_created = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = 'Character'
         verbose_name_plural = 'Characters'
-        ordering = ('-name',)
+        ordering = ('-date_created',)
+        # unique_together = ('main', 'author',)
 
 
 class User(AbstractUser):
@@ -59,16 +66,6 @@ class User(AbstractUser):
     youtube_url = models.CharField(blank=True, max_length=250)
 
     # In game
-    primary_race = models.CharField(blank=True, max_length=20)
-    primary_role = models.CharField(blank=True, max_length=20)
-    primary_class = models.CharField(blank=True, max_length=20)
-
-    secondary_race = models.CharField(blank=True, max_length=20)
-    secondary_role = models.CharField(blank=True, max_length=20)
-    secondary_class = models.CharField(blank=True, max_length=20)
-
-    profession = models.CharField(blank=True, max_length=20)
-    profession_specialization = models.CharField(blank=True, max_length=20)
     experience_points = models.IntegerField(default=0)
     guild_points = models.IntegerField(default=0)
 
@@ -120,15 +117,3 @@ class User(AbstractUser):
     @property
     def get_profile_image(self):
         return self.profile_image
-
-    @property
-    def get_primary_race(self):
-        return self.primary_race
-
-    @property
-    def get_primary_role(self):
-        return self.primary_role
-
-    @property
-    def get_primary_class(self):
-        return self.primary_class

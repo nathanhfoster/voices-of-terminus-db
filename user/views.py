@@ -54,8 +54,6 @@ class UserView(viewsets.ModelViewSet):
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
     def refresh(self, request, pk):
         qs = User.objects.values(
-            'primary_race', 'primary_role', 'primary_class', 'secondary_race', 'secondary_role', 'secondary_class',
-            'profession', 'profession_specialization',
             'is_superuser', 'is_staff', 'is_leader', 'is_advisor', 'is_council', 'is_general_officer', 'is_officer',
             'is_senior_member', 'is_junior_member', 'is_recruit',
             'is_raid_leader', 'is_banker', 'is_recruiter', 'is_class_lead', 'is_crafter_lead',

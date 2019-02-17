@@ -9,8 +9,6 @@ class CustomUserCreationForm(UserCreationForm):
         model = User
         fields = (
             'username', 'id', 'opt_in',
-            'primary_race', 'primary_role', 'primary_class', 'secondary_race', 'secondary_role', 'secondary_class',
-            'profession', 'profession_specialization',
             'is_superuser', 'email', 'is_staff', 'is_leader', 'is_advisor', 'is_council', 'is_general_officer', 'is_officer',
             'is_senior_member', 'is_junior_member', 'is_recruit',
             'is_raid_leader', 'is_banker', 'is_recruiter', 'is_class_lead', 'is_crafter_lead',
@@ -27,8 +25,6 @@ class CustomUserChangeForm(UserChangeForm):
         model = User
         fields = (
             'username', 'opt_in',
-            'primary_race', 'primary_role', 'primary_class', 'secondary_race', 'secondary_role', 'secondary_class',
-            'profession', 'profession_specialization',
             'is_superuser', 'email', 'is_staff', 'is_leader', 'is_advisor', 'is_council', 'is_general_officer', 'is_officer',
             'is_senior_member', 'is_junior_member', 'is_recruit',
             'is_raid_leader', 'is_banker', 'is_recruiter', 'is_class_lead', 'is_crafter_lead',
