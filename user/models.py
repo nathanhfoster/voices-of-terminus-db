@@ -37,7 +37,7 @@ class Character(models.Model):
     class Meta:
         verbose_name = 'Character'
         verbose_name_plural = 'Characters'
-        ordering = ('main', 'alt', '-date_created',)
+        ordering = ('-main', '-alt', '-date_created',)
         # unique_together = ('main', 'author',)
 
 
