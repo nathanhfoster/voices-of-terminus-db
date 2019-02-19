@@ -20,7 +20,7 @@ class TicketView(viewsets.ModelViewSet):
 
     @action(methods=['get'], detail=True)
     def view(self, request, pk):
-        queryset = Ticket.objects.all().filter(offender=pk)
+        queryset = Ticket.objects.all().filter(author=pk)
 
         serializer = TicketSerializer(queryset, many=True)
         return Response(serializer.data)
