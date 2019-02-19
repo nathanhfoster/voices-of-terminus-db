@@ -27,7 +27,8 @@ urlpatterns = [
     path('api/v1/', include('newsletters.urls')),
     path('api/v1/', include('galleries.urls')),
     path('api/v1/', include('message_system.urls')),
-     path('api/v1/', include('poll_system.urls')),
+    path('api/v1/', include('poll_system.urls')),
+    path('api/v1/', include('ticket_system.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('api/token/', TokenObtainPairView.as_view()),
     path('api/token/refresh/', TokenRefreshView.as_view()),
@@ -39,4 +40,5 @@ if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     # Serve static and media files from development server
     urlpatterns += staticfiles_urlpatterns()
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

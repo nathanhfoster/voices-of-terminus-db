@@ -10,7 +10,10 @@ class Poll(models.Model):
         on_delete=models.CASCADE, )
 
     def author_username(self):
-        return self.author. get_username()
+        try:
+            return self.author. get_username()
+        except:
+            return None
 
     author_username.short_description = 'authorUsername'
 
@@ -31,7 +34,10 @@ class PollQuestion(models.Model):
         on_delete=models.CASCADE, )
 
     def author_username(self):
-        return self.author. get_username()
+        try:
+            return self.author. get_username()
+        except:
+            return None
 
     question = models.TextField(blank=True, null=True, max_length=280)
     question_type = models.CharField(max_length=28, default="Multiple")
@@ -59,7 +65,10 @@ class PollChoice(models.Model):
         on_delete=models.CASCADE, )
 
     def author_username(self):
-        return self.author. get_username()
+        try:
+            return self.author. get_username()
+        except:
+            return None
 
     title = models.CharField(blank=True, null=True, max_length=280)
 
@@ -86,7 +95,10 @@ class PollResponse(models.Model):
         on_delete=models.CASCADE, )
 
     def author_username(self):
-        return self.author. get_username()
+        try:
+            return self.author. get_username()
+        except:
+            return None
 
     response = models.TextField(blank=True, null=True)
 

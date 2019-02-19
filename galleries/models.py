@@ -13,7 +13,10 @@ class Gallery(models.Model):
         on_delete=models.CASCADE,)
 
     def author_username(self):
-        return self.author. get_username()
+        try:
+            return self.author. get_username()
+        except:
+            return None
 
     def author_profile_image(self):
         return self.author. get_profile_image
@@ -48,7 +51,10 @@ class GalleryImages(models.Model):
         on_delete=models.CASCADE,)
 
     def author_username(self):
-        return self.author. get_username()
+        try:
+            return self.author. get_username()
+        except:
+            return None
     author_username.short_description = 'Username'
     tags = models.CharField(max_length=128, null=True)
     date_created = models.DateTimeField(auto_now_add=True)

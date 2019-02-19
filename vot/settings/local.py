@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'galleries',
     'message_system',
     'poll_system',
+    'ticket_system',
     'corsheaders',
 ]
 

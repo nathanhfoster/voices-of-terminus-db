@@ -16,7 +16,10 @@ class Event(models.Model):
         on_delete=models.CASCADE, )
 
     def author_username(self):
-        return self.author. get_username()
+        try:
+            return self.author. get_username()
+        except:
+            return None
 
     def author_profile_image(self):
         return self.author. get_profile_image
@@ -62,13 +65,13 @@ class EventGroupMember(models.Model):
         on_delete=models.CASCADE,)
     position = models.PositiveIntegerField()
     role_class_preferences = models.TextField(
-        blank=True, null=True,)
+        default="Any",)
 
     filled = models.ForeignKey(
         Character,
         related_name='eventGroupMemberAuthorName',
         on_delete=models.CASCADE,
-        blank=True, null=True, )
+        blank=True, null=True, default=None, )
 
     class Meta:
         verbose_name = 'EventGroupMember'

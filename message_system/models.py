@@ -10,7 +10,10 @@ class UserGroup(models.Model):
         on_delete=models.CASCADE, )
 
     def author_username(self):
-        return self.author. get_username()
+            try:
+                return self.author. get_username()
+            except:
+                return None
 
     author_username.short_description = 'authorUsername'
 
@@ -49,7 +52,10 @@ class Message(models.Model):
         on_delete=models.CASCADE, )
 
     def author_username(self):
-        return self.author. get_username()
+            try:
+                return self.author. get_username()
+            except:
+                return None
 
     body = models.TextField(blank=True, null=True, max_length=280)
 

@@ -20,7 +20,10 @@ class Character(models.Model):
         on_delete=models.CASCADE,)
 
     def author_username(self):
-        return self.author. get_username()
+        try:
+            return self.author. get_username()
+        except:
+            return None
 
     name = models.CharField(blank=True, null=True, max_length=128)
     level = models.PositiveIntegerField(default=1)
