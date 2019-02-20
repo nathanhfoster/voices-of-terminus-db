@@ -25,11 +25,24 @@ class Ticket(models.Model):
         except:
             return None
 
+    corroborator = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='corroboratorAuthorName',
+        on_delete=models.CASCADE, blank=True, null=True)
+
+    def corroborator_username(self):
+        try:
+            return self.corroborator. get_username()
+        except:
+            return None
+    others_involved = models.CharField(max_length=128, blank=True, null=True)
+
     description = models.TextField()
     ticket_type = models.CharField(max_length=128, default='Report')
     image = models.TextField(blank=True)
     priority = models.PositiveIntegerField(default=1)
     status = models.CharField(max_length=10, default='Open')
+    notes = models.TextField(blank=True, null=True)
 
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
@@ -37,4 +50,23 @@ class Ticket(models.Model):
     class Meta:
         verbose_name = 'Ticket'
         verbose_name_plural = 'Tickets'
-        ordering = ('-last_modified',)
+        ordering = ('status', '-priority',)
+
+
+# class PersonInvolved(models.Model):
+#     ticket_id = models.ForeignKey(
+#         Ticket,
+#         related_name='ticketId',
+#         on_delete=models.PROTECT, )
+#     person = models.ForeignKey(
+#         settings.AUTH_USER_MODEL,
+#         related_name='personInvolvedAuthorName',
+#         on_delete=models.CASCADE, )
+
+#     def person_username(self):
+#         try:
+#             return self.person. get_username()
+#         except:
+#             return None
+
+#     someone = models.CharField(max_length=128, blank=True, null=True)
