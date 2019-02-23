@@ -46,6 +46,31 @@ class Ticket(models.Model):
 
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
+    date_resolved = models.DateTimeField(blank=True, null=True)
+
+    judge = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='judgeAuthorName',
+        on_delete=models.CASCADE, blank=True, null=True)
+
+    def judge_username(self):
+        try:
+            return self.judge. get_username()
+        except:
+            return None
+
+    escalated = models.BooleanField(default=False)
+    viewed = models.BooleanField(default=False)
+    person_who_viewed = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='personWhoViewedAuthorName',
+        on_delete=models.CASCADE, blank=True, null=True)
+
+    def person_who_viewed_username(self):
+        try:
+            return self.person_who_viewed. get_username()
+        except:
+            return None
 
     class Meta:
         verbose_name = 'Ticket'
