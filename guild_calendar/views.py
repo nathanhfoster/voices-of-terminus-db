@@ -31,9 +31,9 @@ class EventView(viewsets.ModelViewSet):
 
         queryset = Event.objects.all().filter(
             start_date__year__gte=year,
-            start_date__month__gte=month,
-            end_date__year__lte=year,
-            end_date__month__lte=month, )
+            start_date__month__gte=month,)
+        # end_date__year__lte=year,
+        # end_date__month__lte=month, )
 
         serializer = EventSerializer(queryset, many=True)
         return Response(serializer.data)
