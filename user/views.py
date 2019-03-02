@@ -2,9 +2,9 @@ from rest_framework.permissions import AllowAny
 from django.db.models import F
 from rest_framework import serializers
 
-from .models import User, Character
+from .models import User, Character, Setting
 from rest_framework import viewsets, permissions
-from .serializers import UserSerializer, CharacterSerializer, Serializer, AdminSerializer
+from .serializers import UserSerializer, CharacterSerializer, SettingSerializer, Serializer, AdminSerializer
 from user.permissions import IsUpdateProfile, IsStaffOrTargetUser
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -75,4 +75,26 @@ class UserView(viewsets.ModelViewSet):
     def all(self, request):
         qs = User.objects.all()
         serializer = AdminSerializer(qs, many=True)
+        return Response(serializer.data)
+
+
+class SettingView(viewsets.ModelViewSet):
+    serializer_class = SettingSerializer
+    queryset = Setting.objects.all()
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_permissions(self):
+        # allow an authenticated user to create via POST
+        if self.request.method == 'GET':
+            self.permission_classes = (permissions.IsAuthenticated,)
+        if self.request.method == 'PATCH':
+            self.permission_classes = (
+                permissions.IsAuthenticated,)
+        return super(SettingView, self).get_permissions()
+
+    @action(methods=['get'], detail=True, permission_classes=[permission_classes])
+    def view(self, request, pk):
+        queryset = Setting.objects.all().filter(user=pk)
+
+        serializer = SettingSerializer(queryset, many=True)
         return Response(serializer.data)

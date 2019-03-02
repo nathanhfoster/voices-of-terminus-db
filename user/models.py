@@ -120,3 +120,18 @@ class User(AbstractUser):
     @property
     def get_profile_image(self):
         return self.profile_image
+
+
+class Setting(models.Model):
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        related_name='userSettings',
+        on_delete=models.CASCADE,)
+
+    show_footer = models.BooleanField(default=False)
+    push_messages = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = 'Setting'
+        verbose_name_plural = 'Settings'
+        ordering = ('-user',)

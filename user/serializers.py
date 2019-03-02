@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
 from django.http import JsonResponse
-from user.models import User, Character
+from user.models import User, Character, Setting
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -78,6 +78,13 @@ class CharacterSerializer(serializers.ModelSerializer):
         model = Character
         fields = ('id', 'author', 'author_username', 'name',
                   'level', 'race', 'role', 'character_class', 'profession', 'profession_specialization', 'main', 'alt', 'date_created', 'last_modified',)
+        read_only_fields = ('id',)
+
+
+class SettingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Setting
+        fields = ('id', 'user', 'show_footer', 'push_messages',)
         read_only_fields = ('id',)
 
 
