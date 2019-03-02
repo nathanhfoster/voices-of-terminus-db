@@ -97,4 +97,8 @@ class SettingView(viewsets.ModelViewSet):
         queryset = Setting.objects.all().filter(user=pk)
 
         serializer = SettingSerializer(queryset, many=True)
-        return Response(serializer.data)
+        
+        if serializer.data:
+            return Response(serializer.data[0])
+        else:
+            return Response({'show_footer': False, 'push_messages': False})
