@@ -44,7 +44,7 @@ class NewsletterView(viewsets.ModelViewSet):
         # Increment the view count
         # qs.views += 1
         # qs.save()  # save
-        return Response(NewsletterSerializer(qs).data)
+        return Response(NewsletterNoDesignSerializer(qs).data)
 
     @action(methods=['get'], detail=False, permission_classes=[permission_classes])
     def all(self, request):
