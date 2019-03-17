@@ -88,6 +88,7 @@ class User(AbstractUser):
     is_class_lead = models.BooleanField(default=False)
     is_crafter_lead = models.BooleanField(default=False)
     is_host = models.BooleanField(default=False)
+    is_lore_master = models.BooleanField(default=False)
 
     # Permissions
     can_create_article = models.BooleanField(default=False)

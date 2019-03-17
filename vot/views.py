@@ -55,6 +55,7 @@ class CustomAuthToken(ObtainAuthToken):
             'is_class_lead': user.is_class_lead,
             'is_crafter_lead': user.is_crafter_lead,
             'is_host': user.is_host,
+            'is_lore_master': user.is_lore_master,
 
             'bio': user.bio,
 

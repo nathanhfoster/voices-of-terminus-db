@@ -56,7 +56,8 @@ class UserView(viewsets.ModelViewSet):
         qs = User.objects.values(
             'is_superuser', 'is_staff', 'is_leader', 'is_advisor', 'is_council', 'is_general_officer', 'is_officer',
             'is_senior_member', 'is_junior_member', 'is_recruit',
-            'is_raid_leader', 'is_banker', 'is_recruiter', 'is_class_lead', 'is_crafter_lead', 'is_host',
+            'is_raid_leader', 'is_banker', 'is_recruiter',
+            'is_class_lead', 'is_crafter_lead', 'is_host', 'is_lore_master',
             'can_create_article', 'can_create_newsletter', 'can_create_calendar_event',
             'can_create_galleries', 'can_create_lore', 'can_create_references',
             'can_read_article', 'can_read_newsletter', 'can_read_calendar_event',
