@@ -24,8 +24,8 @@ class Event(models.Model):
     def author_profile_image(self):
         return self.author. get_profile_image
     tags = models.CharField(max_length=128, default='Event')
-    min_level = models.PositiveIntegerField(default=1)
-    max_level = models.PositiveIntegerField(default=60)
+    min_level = models.PositiveIntegerField(blank=True, null=True)
+    max_level = models.PositiveIntegerField(blank=True, null=True)
     locations = models.CharField(blank=True, null=True, max_length=256)
     group_size = models.PositiveIntegerField(blank=True, null=True)
 
