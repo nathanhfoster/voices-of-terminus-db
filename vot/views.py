@@ -54,6 +54,7 @@ class CustomAuthToken(ObtainAuthToken):
             'is_recruiter': user.is_recruiter,
             'is_class_lead': user.is_class_lead,
             'is_crafter_lead': user.is_crafter_lead,
+            'is_host': user.is_host,
 
             'bio': user.bio,
 
@@ -69,6 +70,8 @@ class CustomAuthToken(ObtainAuthToken):
             'can_create_newsletter': user.can_create_newsletter,
             'can_create_calendar_event': user.can_create_calendar_event,
             'can_create_galleries': user.can_create_galleries,
+            'can_create_lore': user.can_create_lore,
+            'can_create_references': user.can_create_references,
 
             'can_read_article': user.can_read_article,
             'can_read_newsletter': user.can_read_newsletter,

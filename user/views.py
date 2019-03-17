@@ -56,8 +56,9 @@ class UserView(viewsets.ModelViewSet):
         qs = User.objects.values(
             'is_superuser', 'is_staff', 'is_leader', 'is_advisor', 'is_council', 'is_general_officer', 'is_officer',
             'is_senior_member', 'is_junior_member', 'is_recruit',
-            'is_raid_leader', 'is_banker', 'is_recruiter', 'is_class_lead', 'is_crafter_lead',
-            'can_create_article', 'can_create_newsletter', 'can_create_calendar_event', 'can_create_galleries',
+            'is_raid_leader', 'is_banker', 'is_recruiter', 'is_class_lead', 'is_crafter_lead', 'is_host',
+            'can_create_article', 'can_create_newsletter', 'can_create_calendar_event',
+            'can_create_galleries', 'can_create_lore', 'can_create_references',
             'can_read_article', 'can_read_newsletter', 'can_read_calendar_event',
             'can_update_article', 'can_update_newsletter', 'can_update_calendar_event',
             'can_delete_article', 'can_delete_newsletter', 'can_delete_calendar_event',
@@ -97,7 +98,7 @@ class SettingView(viewsets.ModelViewSet):
         queryset = Setting.objects.all().filter(user=pk)
 
         serializer = SettingSerializer(queryset, many=True)
-        
+
         if serializer.data:
             return Response(serializer.data[0])
         else:
