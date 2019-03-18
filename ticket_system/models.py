@@ -35,7 +35,7 @@ class Ticket(models.Model):
             return self.corroborator. get_username()
         except:
             return None
-    others_involved = models.CharField(max_length=128, blank=True, null=True)
+    others_involved = models.CharField(max_length=1024, blank=True, null=True)
 
     description = models.TextField()
     ticket_type = models.CharField(max_length=128, default='Report')
@@ -77,6 +77,56 @@ class Ticket(models.Model):
         verbose_name_plural = 'Tickets'
         ordering = ('status', '-priority',)
 
+
+class Note(models.Model):
+    ticket_id = models.ForeignKey(
+        Ticket,
+        related_name='ticketNotes',
+        on_delete=models.PROTECT, )
+
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='noteAuthorName',
+        on_delete=models.CASCADE, )
+
+    def author_username(self):
+        try:
+            return self.author. get_username()
+        except:
+            return None
+
+    date_created = models.DateTimeField(auto_now_add=True)
+    text = models.TextField()
+
+    class Meta:
+        verbose_name = 'Note'
+        verbose_name_plural = 'Notes'
+        ordering = ('-date_created',)
+
+
+class StatusChange(models.Model):
+    ticket_id = models.ForeignKey(
+        Ticket,
+        related_name='statusChanges',
+        on_delete=models.PROTECT, )
+
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='statusChangeAuthorName',
+        on_delete=models.CASCADE, )
+
+    def author_username(self):
+        try:
+            return self.author. get_username()
+        except:
+            return None
+
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'StatusChange'
+        verbose_name_plural = 'StatusChanges'
+        ordering = ('-date_created',)
 
 # class PersonInvolved(models.Model):
 #     ticket_id = models.ForeignKey(
