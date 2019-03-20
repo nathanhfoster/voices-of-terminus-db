@@ -42,7 +42,6 @@ class Ticket(models.Model):
     image = models.TextField(blank=True)
     priority = models.PositiveIntegerField(default=1)
     status = models.CharField(max_length=10, default='Open')
-    notes = models.TextField(blank=True, null=True)
 
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
@@ -78,6 +77,32 @@ class Ticket(models.Model):
         ordering = ('status', '-priority',)
 
 
+class StatusChange(models.Model):
+    ticket_id = models.ForeignKey(
+        Ticket,
+        related_name='statusChanges',
+        on_delete=models.PROTECT, )
+
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='statusChangeAuthorName',
+        on_delete=models.CASCADE, )
+
+    def author_username(self):
+        try:
+            return self.author. get_username()
+        except:
+            return None
+
+    date_created = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=10, default='Open')
+
+    class Meta:
+        verbose_name = 'StatusChange'
+        verbose_name_plural = 'StatusChanges'
+        ordering = ('-date_created',)
+
+
 class Note(models.Model):
     ticket_id = models.ForeignKey(
         Ticket,
@@ -103,30 +128,6 @@ class Note(models.Model):
         verbose_name_plural = 'Notes'
         ordering = ('-date_created',)
 
-
-class StatusChange(models.Model):
-    ticket_id = models.ForeignKey(
-        Ticket,
-        related_name='statusChanges',
-        on_delete=models.PROTECT, )
-
-    author = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        related_name='statusChangeAuthorName',
-        on_delete=models.CASCADE, )
-
-    def author_username(self):
-        try:
-            return self.author. get_username()
-        except:
-            return None
-
-    date_created = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        verbose_name = 'StatusChange'
-        verbose_name_plural = 'StatusChanges'
-        ordering = ('-date_created',)
 
 # class PersonInvolved(models.Model):
 #     ticket_id = models.ForeignKey(
