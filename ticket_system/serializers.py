@@ -9,7 +9,7 @@ class TicketSerializer(serializers.ModelSerializer):
                   'offender', 'offender_username',
                   'corroborator', 'corroborator_username',
                   'others_involved', 'description',
-                  'ticket_type', 'image', 'priority', 'status',
+                  'ticket_type', 'image', 'priority', 'status', 'notes',
                   'date_created', 'last_modified',
                   'date_resolved', 'judge', 'judge_username',
                   'escalated', 'viewed', 'person_who_viewed', 'person_who_viewed_username',

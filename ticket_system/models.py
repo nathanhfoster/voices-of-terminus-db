@@ -41,6 +41,7 @@ class Ticket(models.Model):
     ticket_type = models.CharField(max_length=128, default='Report')
     image = models.TextField(blank=True)
     priority = models.PositiveIntegerField(default=1)
+    notes = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=10, default='Open')
 
     date_created = models.DateTimeField(auto_now_add=True)
