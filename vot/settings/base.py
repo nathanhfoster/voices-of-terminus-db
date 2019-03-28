@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
 
+    'authentication_authorization',
     'guild_calendar',
     'user',
     'articles',

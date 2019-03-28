@@ -2,6 +2,7 @@ from rest_framework.permissions import AllowAny
 from django.db.models import F
 from rest_framework import serializers
 
+from django.contrib.auth.models import Group
 from .models import User, Character, Setting
 from rest_framework import viewsets, permissions
 from .serializers import UserSerializer, CharacterSerializer, SettingSerializer, Serializer, AdminSerializer
@@ -10,6 +11,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.utils.timezone import now
 from django.contrib.auth.models import update_last_login
+
 
 
 class CharacterView(viewsets.ModelViewSet):
