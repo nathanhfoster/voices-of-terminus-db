@@ -14,9 +14,18 @@ class UserGroupsView(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     permission_classes = (permissions.IsAuthenticated,)
 
+    def get_permissions(self):
+        # allow an authenticated user to create via POST
+        if self.request.method == 'GET':
+            self.permission_classes = (permissions.AllowAny,)
+        if self.request.method == 'PATCH':
+            self.permission_classes = (
+                permissions.IsAuthenticated,)
+        return super(UserGroupsView, self).get_permissions()
+
     @action(methods=['post'], detail=True)
     def add(self, request, pk):
-        groups = json.loads(request.data['user_groups'])
+        groups = json.loads(request.data['groups'])
         for i in groups:
             g = Group.objects.get(id=i)
             try:
@@ -31,6 +40,15 @@ class UserPermissionsView(viewsets.ModelViewSet):
     serializer_class = PermissionSerializer
     queryset = Permission.objects.all()
     permission_classes = (permissions.IsAuthenticated,)
+
+    def get_permissions(self):
+        # allow an authenticated user to create via POST
+        if self.request.method == 'GET':
+            self.permission_classes = (permissions.AllowAny,)
+        if self.request.method == 'PATCH':
+            self.permission_classes = (
+                permissions.IsAuthenticated,)
+        return super(UserPermissionsView, self).get_permissions()
 
     @action(methods=['post'], detail=True)
     def add(self, request, pk):
