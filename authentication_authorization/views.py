@@ -11,7 +11,7 @@ import json
 class UserGroupsView(viewsets.ModelViewSet):
     serializer_class = GroupsSerializer
     queryset = Group.objects.all()
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.AllowAny,)
 
     @action(methods=['post'], detail=True)
     def add(self, request, pk):
@@ -29,7 +29,7 @@ class UserGroupsView(viewsets.ModelViewSet):
 class UserPermissionsView(viewsets.ModelViewSet):
     serializer_class = PermissionSerializer
     queryset = Permission.objects.all()
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.AllowAny,)
 
     @action(methods=['post'], detail=True)
     def add(self, request, pk):
