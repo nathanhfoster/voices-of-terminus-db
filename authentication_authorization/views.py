@@ -4,7 +4,6 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import permissions, viewsets
 from django.contrib.auth import get_user_model
-
 from .serializers import GroupsSerializer, PermissionSerializer
 import json
 
@@ -12,16 +11,7 @@ import json
 class UserGroupsView(viewsets.ModelViewSet):
     serializer_class = GroupsSerializer
     queryset = Group.objects.all()
-    permission_classes = (permissions.IsAuthenticated,)
-
-    def get_permissions(self):
-        # allow an authenticated user to create via POST
-        if self.request.method == 'GET':
-            self.permission_classes = (permissions.AllowAny,)
-        if self.request.method == 'PATCH':
-            self.permission_classes = (
-                permissions.IsAuthenticated,)
-        return super(UserGroupsView, self).get_permissions()
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     @action(methods=['post'], detail=True)
     def add(self, request, pk):
@@ -39,21 +29,21 @@ class UserGroupsView(viewsets.ModelViewSet):
 class UserPermissionsView(viewsets.ModelViewSet):
     serializer_class = PermissionSerializer
     queryset = Permission.objects.all()
-    permission_classes = (permissions.IsAuthenticated,)
-
-    def get_permissions(self):
-        # allow an authenticated user to create via POST
-        if self.request.method == 'GET':
-            self.permission_classes = (permissions.AllowAny,)
-        if self.request.method == 'PATCH':
-            self.permission_classes = (
-                permissions.IsAuthenticated,)
-        return super(UserPermissionsView, self).get_permissions()
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     @action(methods=['post'], detail=True)
     def add(self, request, pk):
         permissions = json.loads(request.data['user_permissions'])
         user = get_user_model().objects.get(id=pk)
-        user.user_permissions.set(permissions)
-
+        try:
+            user.user_permissions.set(permissions)
+        except:
+            print("SQLite3")
+            user.user_permissions.clear()
+            for i in permissions:
+                p = Permission.objects.get(id=i)
+                try:
+                    user.user_permissions.add(p)
+                except:
+                    next
         return Response(json.dumps(permissions))
