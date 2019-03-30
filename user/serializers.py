@@ -11,7 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = (
             'id', 'groups', 'user_permissions',
             'username', 'password', 'first_name', 'last_name', 'opt_in', 'lfg',
-            'bio',
+            'bio', 'profile_image',
             'is_superuser', 'email', 'is_staff', 'is_leader',
             'is_advisor', 'is_council', 'is_general_officer', 'is_officer',
             'is_senior_member', 'is_junior_member', 'is_recruit',
