@@ -34,12 +34,11 @@ class UserPermissionsView(viewsets.ModelViewSet):
     @action(methods=['post'], detail=True)
     def add(self, request, pk):
         permissions = json.loads(request.data['user_permissions'])
-        user = get_user_model().objects.get(id=pk)
+        user = get_user_model().objects.get(id=pk) 
+        user.user_permissions.clear()
         try:
             user.user_permissions.set(permissions)
         except:
-            print("SQLite3")
-            user.user_permissions.clear()
             for i in permissions:
                 p = Permission.objects.get(id=i)
                 try:
