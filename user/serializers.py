@@ -5,20 +5,9 @@ from user.models import User, Character, Setting
 
 
 class UserSerializer(serializers.ModelSerializer):
-    # author_name = serializers.CharField(source='author_name')
     class Meta:
         model = User
-        fields = (
-            'id', 'groups', 'user_permissions',
-            'username', 'password', 'first_name', 'last_name', 'opt_in', 'lfg',
-            'bio', 'profile_image',
-            'is_superuser', 'email', 'is_staff', 'is_leader',
-            'is_advisor', 'is_council', 'is_general_officer', 'is_officer',
-            'is_senior_member', 'is_junior_member', 'is_recruit',
-            'is_raid_leader', 'is_banker', 'is_recruiter',
-            'is_class_lead', 'is_crafter_lead', 'is_host', 'is_lore_master',
-            'is_active', 'date_joined', 'last_login', 'experience_points', 'guild_points',
-            'discord_url', 'twitter_url', 'twitch_url', 'youtube_url',)
+        fields = '__all__'
         write_only_fields = ('password',)
         extra_kwargs = {'password': {'write_only': True}}
         read_only_fields = ('date_joined',)
@@ -104,7 +93,7 @@ class AdminSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'id', 'username', 'first_name', 'last_name', 'opt_in', 'lfg', 'last_login',
+            'id', 'groups', 'user_permissions', 'username', 'first_name', 'last_name', 'opt_in', 'lfg', 'last_login',
             'bio', 'is_superuser', 'email', 'is_staff', 'is_leader', 'is_advisor', 'is_council', 'is_general_officer', 'is_officer',
             'is_senior_member', 'is_junior_member', 'is_recruit',
             'is_raid_leader', 'is_banker', 'is_recruiter',

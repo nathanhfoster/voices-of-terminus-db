@@ -16,13 +16,14 @@ class UserGroupsView(viewsets.ModelViewSet):
     @action(methods=['post'], detail=True)
     def add(self, request, pk):
         groups = json.loads(request.data['groups'])
-        for i in groups:
-            g = Group.objects.get(id=i)
-            try:
+        user = get_user_model().objects.get(id=pk)
+        user.groups.clear()
+        try:
+            user.groups.set(groups)
+        except:
+            for i in groups:
+                g = Group.objects.get(id=i)
                 g.user_set.add(pk)
-            except:
-                next
-
         return Response(json.dumps(groups))
 
 
@@ -34,15 +35,12 @@ class UserPermissionsView(viewsets.ModelViewSet):
     @action(methods=['post'], detail=True)
     def add(self, request, pk):
         permissions = json.loads(request.data['user_permissions'])
-        user = get_user_model().objects.get(id=pk) 
+        user = get_user_model().objects.get(id=pk)
         user.user_permissions.clear()
         try:
             user.user_permissions.set(permissions)
         except:
             for i in permissions:
                 p = Permission.objects.get(id=i)
-                try:
-                    user.user_permissions.add(p)
-                except:
-                    next
+                user.user_permissions.add(p)
         return Response(json.dumps(permissions))
