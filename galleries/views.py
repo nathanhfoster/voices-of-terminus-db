@@ -4,7 +4,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from galleries.permissions import IsOwnerOrReadOnly, IsUpdateProfile
+from galleries.permissions import IsOwnerOrReadOnly
 
 from .models import Gallery, GalleryImages
 from .serializers import GallerySerializer, GalleryNoImageSerializer, GalleryImageSerializer, GalleryImagesSerializer, GalleryNoImagesSerializer, GalleryImagesImageSerializer
@@ -28,7 +28,7 @@ class GalleryView(viewsets.ModelViewSet):
             self.permission_classes = (AllowAny,)
         if self.request.method == 'PATCH':
             self.permission_classes = (
-                permissions.IsAuthenticated, IsUpdateProfile,)
+                permissions.IsAuthenticated,)
         return super(GalleryView, self).get_permissions()
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
@@ -74,7 +74,7 @@ class GalleryImagesView(viewsets.ModelViewSet):
             self.permission_classes = (AllowAny,)
         if self.request.method == 'PATCH':
             self.permission_classes = (
-                permissions.IsAuthenticated, IsUpdateProfile,)
+                permissions.IsAuthenticated,)
         return super(GalleryImagesView, self).get_permissions()
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])

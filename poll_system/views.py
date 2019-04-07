@@ -4,7 +4,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from poll_system.permissions import IsOwnerOrReadOnly, CanUpdateRecipient
+from poll_system.permissions import IsOwnerOrReadOnly
 
 from .models import Poll, PollQuestion, PollChoice, PollResponse, PollRecipient
 from .serializers import PollSeializer, PollQuestionSeializer, PollChoiceSeializer, PollResponseSeializer, PollRecipientSeializer
@@ -34,7 +34,7 @@ class PollView(viewsets.ModelViewSet):
             self.permission_classes = (permissions.IsAuthenticated,)
         if self.request.method == 'PATCH':
             self.permission_classes = (
-                permissions.IsAuthenticated, CanUpdateRecipient,)
+                permissions.IsAuthenticated,)
         return super(PollView, self).get_permissions()
 
 
@@ -50,10 +50,10 @@ class PollQuestionView(viewsets.ModelViewSet):
             self.permission_classes = (permissions.IsAuthenticated,)
         if self.request.method == 'PATCH':
             self.permission_classes = (
-                permissions.IsAuthenticated, CanUpdateRecipient,)
+                permissions.IsAuthenticated,)
         if self.request.method == 'DELETE':
             self.permission_classes = (
-                permissions.IsAuthenticated, CanUpdateRecipient,)
+                permissions.IsAuthenticated,)
         return super(PollQuestionView, self).get_permissions()
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
@@ -83,10 +83,10 @@ class PollChoiceView(viewsets.ModelViewSet):
             self.permission_classes = (permissions.IsAuthenticated,)
         if self.request.method == 'PATCH':
             self.permission_classes = (
-                permissions.IsAuthenticated, CanUpdateRecipient,)
+                permissions.IsAuthenticated,)
         if self.request.method == 'DELETE':
             self.permission_classes = (
-                permissions.IsAuthenticated, CanUpdateRecipient,)
+                permissions.IsAuthenticated,)
         return super(PollChoiceView, self).get_permissions()
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
@@ -116,10 +116,10 @@ class PollResponseView(viewsets.ModelViewSet):
             self.permission_classes = (permissions.IsAuthenticated,)
         if self.request.method == 'PATCH':
             self.permission_classes = (
-                permissions.IsAuthenticated, CanUpdateRecipient,)
+                permissions.IsAuthenticated,)
         if self.request.method == 'DELETE':
             self.permission_classes = (
-                permissions.IsAuthenticated, CanUpdateRecipient,)
+                permissions.IsAuthenticated,)
         return super(PollResponseView, self).get_permissions()
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
@@ -149,7 +149,7 @@ class PollRecipientView(viewsets.ModelViewSet):
             self.permission_classes = (permissions.IsAuthenticated,)
         if self.request.method == 'PATCH':
             self.permission_classes = (
-                permissions.IsAuthenticated, CanUpdateRecipient,)
+                permissions.IsAuthenticated,)
         return super(PollRecipientView, self).get_permissions()
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])

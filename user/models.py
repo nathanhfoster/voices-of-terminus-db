@@ -90,26 +90,6 @@ class User(AbstractUser):
     is_host = models.BooleanField(default=False)
     is_lore_master = models.BooleanField(default=False)
 
-    # Permissions
-    can_create_article = models.BooleanField(default=False)
-    can_create_newsletter = models.BooleanField(default=False)
-    can_create_calendar_event = models.BooleanField(default=False)
-    can_create_galleries = models.BooleanField(default=False)
-    can_create_lore = models.BooleanField(default=False)
-    can_create_references = models.BooleanField(default=False)
-
-    can_read_article = models.BooleanField(default=True)
-    can_read_newsletter = models.BooleanField(default=True)
-    can_read_calendar_event = models.BooleanField(default=True)
-
-    can_update_article = models.BooleanField(default=False)
-    can_update_newsletter = models.BooleanField(default=False)
-    can_update_calendar_event = models.BooleanField(default=False)
-
-    can_delete_article = models.BooleanField(default=False)
-    can_delete_newsletter = models.BooleanField(default=False)
-    can_delete_calendar_event = models.BooleanField(default=False)
-
     class Meta:
         verbose_name = 'User'
         verbose_name_plural = 'Users'

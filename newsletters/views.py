@@ -3,7 +3,7 @@ from django.db.models import F
 from rest_framework import viewsets, permissions, pagination
 from rest_framework.permissions import AllowAny
 from .serializers import NewsletterSerializer, NewsletterNoDesignSerializer, NewsletterNoHtmlSerializer, NewsletterHtmlSerializer, NewsletterLikesSerializer, NewsletterCommentSerializer
-from newsletters.permissions import IsOwnerOrReadOnly, IsUpdateProfile
+from newsletters.permissions import IsOwnerOrReadOnly
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
@@ -32,7 +32,7 @@ class NewsletterView(viewsets.ModelViewSet):
             self.permission_classes = (AllowAny,)
         if self.request.method == 'PATCH':
             self.permission_classes = (
-                permissions.IsAuthenticated, IsUpdateProfile)
+                permissions.IsAuthenticated,)
         return super(NewsletterView, self).get_permissions()
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
@@ -90,7 +90,7 @@ class NewsletterLikesView(viewsets.ModelViewSet):
             self.permission_classes = (AllowAny,)
         if self.request.method == 'PATCH':
             self.permission_classes = (
-                permissions.IsAuthenticated, IsUpdateProfile,)
+                permissions.IsAuthenticated,)
         return super(NewsletterLikesView, self).get_permissions()
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
@@ -120,7 +120,7 @@ class NewsletterCommentView(viewsets.ModelViewSet):
             self.permission_classes = (AllowAny,)
         if self.request.method == 'PATCH':
             self.permission_classes = (
-                permissions.IsAuthenticated, IsUpdateProfile,)
+                permissions.IsAuthenticated,)
         return super(NewsletterCommentView, self).get_permissions()
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])

@@ -4,7 +4,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from message_system.permissions import IsOwnerOrReadOnly, CanUpdateMessage
+from message_system.permissions import IsOwnerOrReadOnly
 
 from .models import UserGroup, Message, MessageRecipient
 from .serializers import UserGroupSeializer, MessageSeializer, MessageRecipientSeializer, MessageRecipientViewSeializer, MessageGroupRecipientsSeializer
@@ -34,7 +34,7 @@ class UserGroupView(viewsets.ModelViewSet):
             self.permission_classes = (permissions.IsAuthenticated,)
         if self.request.method == 'PATCH':
             self.permission_classes = (
-                permissions.IsAuthenticated, CanUpdateMessage,)
+                permissions.IsAuthenticated,)
         return super(UserGroupView, self).get_permissions()
 
 
@@ -50,10 +50,10 @@ class MessageView(viewsets.ModelViewSet):
             self.permission_classes = (permissions.IsAuthenticated,)
         if self.request.method == 'PATCH':
             self.permission_classes = (
-                permissions.IsAuthenticated, CanUpdateMessage,)
+                permissions.IsAuthenticated,)
         if self.request.method == 'DELETE':
             self.permission_classes = (
-                permissions.IsAuthenticated, CanUpdateMessage,)
+                permissions.IsAuthenticated,)
         return super(MessageView, self).get_permissions()
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
@@ -83,7 +83,7 @@ class MessageRecipientView(viewsets.ModelViewSet):
             self.permission_classes = (permissions.IsAuthenticated,)
         if self.request.method == 'PATCH':
             self.permission_classes = (
-                permissions.IsAuthenticated, CanUpdateMessage,)
+                permissions.IsAuthenticated,)
         return super(MessageRecipientView, self).get_permissions()
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])

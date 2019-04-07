@@ -65,26 +65,7 @@ class CustomAuthToken(ObtainAuthToken):
             'twitch_url': user.twitch_url,
             'youtube_url': user.youtube_url,
             'experience_points': user.experience_points,
-            'guild_points': user.guild_points,
-
-            'can_create_article': user.can_create_article,
-            'can_create_newsletter': user.can_create_newsletter,
-            'can_create_calendar_event': user.can_create_calendar_event,
-            'can_create_galleries': user.can_create_galleries,
-            'can_create_lore': user.can_create_lore,
-            'can_create_references': user.can_create_references,
-
-            'can_read_article': user.can_read_article,
-            'can_read_newsletter': user.can_read_newsletter,
-            'can_read_calendar_event': user.can_read_calendar_event,
-
-            'can_update_article': user.can_update_article,
-            'can_update_newsletter': user.can_update_newsletter,
-            'can_update_calendar_event': user.can_update_calendar_event,
-
-            'can_delete_article': user.can_delete_article,
-            'can_delete_newsletter': user.can_delete_newsletter,
-            'can_delete_calendar_event': user.can_delete_calendar_event
+            'guild_points': user.guild_points
         })
 
 

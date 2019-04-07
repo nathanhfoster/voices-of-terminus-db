@@ -4,7 +4,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from articles.permissions import IsOwnerOrReadOnly, IsUpdateProfile
+from articles.permissions import IsOwnerOrReadOnly
 
 from .models import Article, ArticleLikes, ArticleComment
 from .serializers import ArticleSerializer, ArticleNoHtmlSerializer, ArticleHtmlSerializer, ArticleLikesSerializer, ArticleCommentSerializer
@@ -34,7 +34,7 @@ class ArticleView(viewsets.ModelViewSet):
             self.permission_classes = (AllowAny,)
         if self.request.method == 'PATCH':
             self.permission_classes = (
-                permissions.IsAuthenticated, IsUpdateProfile,)
+                permissions.IsAuthenticated,)
         return super(ArticleView, self).get_permissions()
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
@@ -92,7 +92,7 @@ class ArticleLikesView(viewsets.ModelViewSet):
             self.permission_classes = (AllowAny,)
         if self.request.method == 'PATCH':
             self.permission_classes = (
-                permissions.IsAuthenticated, IsUpdateProfile,)
+                permissions.IsAuthenticated,)
         return super(ArticleLikesView, self).get_permissions()
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
@@ -122,7 +122,7 @@ class ArticleCommentView(viewsets.ModelViewSet):
             self.permission_classes = (AllowAny,)
         if self.request.method == 'PATCH':
             self.permission_classes = (
-                permissions.IsAuthenticated, IsUpdateProfile,)
+                permissions.IsAuthenticated,)
         return super(ArticleCommentView, self).get_permissions()
 
     @action(methods=['get'], detail=True, permission_classes=[permission_classes])
