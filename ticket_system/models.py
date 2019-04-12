@@ -35,9 +35,9 @@ class Ticket(models.Model):
             return self.corroborator. get_username()
         except:
             return None
-    others_involved = models.CharField(max_length=1024, blank=True, null=True)
+    others_involved = models.TextField(blank=True, null=True)
 
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
     ticket_type = models.CharField(max_length=128, default='Report')
     image = models.TextField(blank=True)
     priority = models.PositiveIntegerField(default=1)
