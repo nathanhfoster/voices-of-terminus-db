@@ -41,6 +41,7 @@ class PollQuestion(models.Model):
 
     question = models.TextField(blank=True, null=True, max_length=280)
     question_type = models.CharField(max_length=28, default="Multiple")
+    image = models.TextField(blank=True)
 
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)

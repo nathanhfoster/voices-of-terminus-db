@@ -16,7 +16,7 @@ class PollQuestionSeializer(serializers.ModelSerializer):
     class Meta:
         model = PollQuestion
         fields = ('id', 'author', 'author_username', 'question', 'question_type',
-                  'date_created', 'last_modified', 'poll_id', 'position',
+                  'image', 'date_created', 'last_modified', 'poll_id', 'position',
                   )
         read_only_fields = ('id', 'date_created',)
 
