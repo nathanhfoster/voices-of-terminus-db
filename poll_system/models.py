@@ -20,6 +20,7 @@ class Poll(models.Model):
     expiration_date = models.DateTimeField(blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
+    is_private = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = 'Poll'
