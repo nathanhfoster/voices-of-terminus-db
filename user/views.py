@@ -13,7 +13,6 @@ from django.utils.timezone import now
 from django.contrib.auth.models import update_last_login
 
 
-
 class CharacterView(viewsets.ModelViewSet):
     serializer_class = CharacterSerializer
     queryset = Character.objects.all()
@@ -94,4 +93,4 @@ class SettingView(viewsets.ModelViewSet):
         if serializer.data:
             return Response(serializer.data[0])
         else:
-            return Response({'show_footer': False, 'push_messages': False})
+            return Response({'show_footer': True, 'push_messages': False})
