@@ -6,8 +6,7 @@ class TicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
         fields = ('id', 'author', 'author_username',
-                  'offender', 'offender_username',
-                  'corroborator', 'corroborator_username',
+                  'offenders', 'corroborators',
                   'others_involved', 'description',
                   'ticket_type', 'image', 'priority', 'status', 'notes',
                   'date_created', 'last_modified',
@@ -32,6 +31,3 @@ class NoteSerializer(serializers.ModelSerializer):
                   'author_username', 'date_created',
                   'text', )
         read_only_fields = ('id', 'date_created',)
-
-
-

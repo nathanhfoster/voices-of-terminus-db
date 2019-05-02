@@ -14,27 +14,10 @@ class Ticket(models.Model):
         except:
             return None
 
-    offender = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        related_name='ticketOffenderName',
-        on_delete=models.CASCADE, blank=True, null=True)
+    offenders = models.TextField(blank=True, null=True)
 
-    def offender_username(self):
-        try:
-            return self.offender. get_username()
-        except:
-            return None
+    corroborators = models.TextField(blank=True, null=True)
 
-    corroborator = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        related_name='corroboratorAuthorName',
-        on_delete=models.CASCADE, blank=True, null=True)
-
-    def corroborator_username(self):
-        try:
-            return self.corroborator. get_username()
-        except:
-            return None
     others_involved = models.TextField(blank=True, null=True)
 
     description = models.TextField(blank=True, null=True)
