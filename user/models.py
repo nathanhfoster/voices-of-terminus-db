@@ -112,7 +112,7 @@ class Setting(models.Model):
         related_name='userSettings',
         on_delete=models.CASCADE,)
 
-    show_footer = models.BooleanField(default=False)
+    show_footer = models.BooleanField(default=True)
     push_messages = models.BooleanField(default=False)
 
     class Meta:
