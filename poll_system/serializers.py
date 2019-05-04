@@ -8,7 +8,7 @@ class PollSeializer(serializers.ModelSerializer):
     class Meta:
         model = Poll
         fields = ('id', 'title', 'author', 'author_username',
-                  'date_created', 'last_modified', 'expiration_date', 'is_private',)
+                  'date_created', 'last_modified', 'expiration_date',)
         read_only_fields = ('id', 'date_created', )
 
 

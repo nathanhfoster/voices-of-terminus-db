@@ -22,7 +22,7 @@ class Ticket(models.Model):
 
     description = models.TextField(blank=True, null=True)
     ticket_type = models.CharField(max_length=128, default='Report')
-    image = models.TextField(blank=True)
+    image = models.TextField(blank=True, null=True)
     priority = models.PositiveIntegerField(default=1)
     notes = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=10, default='Open')
