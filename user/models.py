@@ -25,7 +25,7 @@ class Character(models.Model):
         except:
             return None
 
-    name = models.CharField(blank=True, null=True, max_length=128)
+    name = models.CharField(blank=True, null=True, max_length=512)
     level = models.PositiveIntegerField(default=1)
     race = models.CharField(blank=True, null=True, max_length=20)
     role = models.CharField(blank=True, null=True, max_length=20)

@@ -17,7 +17,7 @@ class Newsletter(models.Model):
             return None
     author_username.short_description = 'Username'
     html = models.TextField()
-    tags = models.CharField(max_length=128, default='Newsletter')
+    tags = models.CharField(max_length=512, default='Newsletter')
     design = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)

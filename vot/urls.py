@@ -28,7 +28,7 @@ urlpatterns = [
     path('api/v1/', include('newsletters.urls')),
     path('api/v1/', include('galleries.urls')),
     path('api/v1/', include('message_system.urls')),
-    path('api/v1/', include('poll_system.urls')),
+    path('api/v1/', include('form_system.urls')),
     path('api/v1/', include('ticket_system.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('api/token/', TokenObtainPairView.as_view()),

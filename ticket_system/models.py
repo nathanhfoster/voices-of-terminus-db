@@ -21,7 +21,7 @@ class Ticket(models.Model):
     others_involved = models.TextField(blank=True, null=True)
 
     description = models.TextField(blank=True, null=True)
-    ticket_type = models.CharField(max_length=128, default='Report')
+    ticket_type = models.CharField(max_length=512, default='Report')
     image = models.TextField(blank=True, null=True)
     priority = models.PositiveIntegerField(default=1)
     notes = models.TextField(blank=True, null=True)
@@ -129,4 +129,4 @@ class Note(models.Model):
 #         except:
 #             return None
 
-#     someone = models.CharField(max_length=128, blank=True, null=True)
+#     someone = models.CharField(max_length=512, blank=True, null=True)
