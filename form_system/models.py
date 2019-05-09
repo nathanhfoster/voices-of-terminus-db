@@ -131,7 +131,7 @@ class FormRecipient(models.Model):
 
     recipient_username.short_description = 'recipientUsername'
 
-    recipient_Form_id = models.ForeignKey(
+    recipient_form_id = models.ForeignKey(
         Form,
         related_name='FormGroup',
         blank=True,

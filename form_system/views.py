@@ -156,7 +156,7 @@ class FormRecipientView(viewsets.ModelViewSet):
     def view(self, request, pk):
         # TODO Check that the object exist
         # Query database for the object with the given PK
-        queryset = FormRecipient.objects.all().filter(recipient_poll_id=pk)
+        queryset = FormRecipient.objects.all().filter(recipient_form_id=pk)
 
         page = self.paginate_queryset(queryset)
         if page is not None:
@@ -172,7 +172,7 @@ class FormRecipientView(viewsets.ModelViewSet):
         # Query database for the object with the given PK
         # .distinct('recipient')
         queryset = FormRecipient.objects.all().filter(
-            recipient_poll_id=pk).values('recipient_id').distinct()
+            recipient_form_id=pk).values('recipient_id').distinct()
 
         # newlist = []
         # for i in queryset:

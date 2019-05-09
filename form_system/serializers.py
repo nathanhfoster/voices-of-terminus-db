@@ -8,7 +8,7 @@ class FormSerializer(serializers.ModelSerializer):
     class Meta:
         model = Form
         fields = ('id', 'title', 'author', 'author_username',
-                  'date_created', 'last_modified', 'expiration_date',)
+                  'date_created', 'last_modified', 'expiration_date', 'tags',)
         read_only_fields = ('id', 'date_created', )
 
 
@@ -43,5 +43,5 @@ class FormRecipientSeializer(serializers.ModelSerializer):
     class Meta:
         model = FormRecipient
         fields = ('id', 'recipient',
-                  'recipient_username', 'recipient_poll_id',)
+                  'recipient_username', 'recipient_form_id',)
         read_only_fields = ('id',)
