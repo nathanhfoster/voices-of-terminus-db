@@ -8,7 +8,7 @@ class FormSerializer(serializers.ModelSerializer):
     class Meta:
         model = Form
         fields = ('id', 'title', 'author', 'author_username',
-                  'date_created', 'last_modified', 'expiration_date', 'tags',)
+                  'date_created', 'last_modified', 'expiration_date', 'form_type',)
         read_only_fields = ('id', 'date_created', )
 
 

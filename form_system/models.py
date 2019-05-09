@@ -17,7 +17,7 @@ class Form(models.Model):
 
     author_username.short_description = 'authorUsername'
 
-    tags = models.CharField(max_length=512, default='Form')
+    form_type = models.CharField(max_length=128, default='Form')
     expiration_date = models.DateTimeField(blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
