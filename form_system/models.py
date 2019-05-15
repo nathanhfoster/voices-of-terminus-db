@@ -107,6 +107,11 @@ class FormResponse(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 
+    question_id = models.ForeignKey(
+        FormQuestion,
+        related_name='FormQuestion',
+        on_delete=models.CASCADE,)
+
     choice_id = models.ForeignKey(
         FormChoice,
         related_name='FormResponse',

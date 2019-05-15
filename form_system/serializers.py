@@ -34,7 +34,7 @@ class FormResponseSeializer(serializers.ModelSerializer):
     class Meta:
         model = FormResponse
         fields = ('id', 'author', 'author_username', 'response',
-                  'date_created', 'last_modified',
+                  'date_created', 'last_modified', 'question_id',
                   'choice_id', )
         read_only_fields = ('id',)
 
