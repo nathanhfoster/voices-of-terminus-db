@@ -23,7 +23,9 @@ class MessageSeializer(serializers.ModelSerializer):
 class MessageRecipientSeializer(serializers.ModelSerializer):
     class Meta:
         model = MessageRecipient
-        fields = ('id', 'recipient', 'recipient_username', 'is_read',
+        fields = ('id', 'recipient',
+                  'recipient_username',
+                  'is_read',
                   'recipient_group_id',
                   #   'group_author', 'group_title', 'group_last_modified', 'group_uri',
                   'message_id', 'message_body', 'message_last_modified')

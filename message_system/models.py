@@ -10,10 +10,10 @@ class UserGroup(models.Model):
         on_delete=models.CASCADE, )
 
     def author_username(self):
-            try:
-                return self.author. get_username()
-            except:
-                return None
+        try:
+            return self.author. get_username()
+        except:
+            return None
 
     author_username.short_description = 'authorUsername'
 
@@ -52,10 +52,10 @@ class Message(models.Model):
         on_delete=models.CASCADE, )
 
     def author_username(self):
-            try:
-                return self.author. get_username()
-            except:
-                return None
+        try:
+            return self.author. get_username()
+        except:
+            return None
 
     body = models.TextField(blank=True, null=True, max_length=280)
 
@@ -85,7 +85,6 @@ class MessageRecipient(models.Model):
     recipient = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='messageRecipient',
-        null=True,
         on_delete=models.CASCADE,)
 
     def recipient_username(self):
@@ -96,8 +95,6 @@ class MessageRecipient(models.Model):
     recipient_group_id = models.ForeignKey(
         UserGroup,
         related_name='messageGroup',
-        blank=True,
-        null=True,
         on_delete=models.CASCADE,)
 
     # def group_title(self):
