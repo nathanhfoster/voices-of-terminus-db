@@ -58,7 +58,7 @@ class User(AbstractUser):
             'unique': ("A user with that username already exists."),
         },
     )
-    bio = models.TextField(blank=True, null=True)
+    bio = models.TextField(blank=True)
     opt_in = models.BooleanField(blank=True, default=False)
     lfg = models.BooleanField(blank=True, default=False)
 
