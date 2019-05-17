@@ -40,6 +40,7 @@ class CustomAuthToken(ObtainAuthToken):
 
             'is_superuser': user.is_superuser,
             'is_staff': user.is_staff,
+            'is_moderator': user.is_moderator,
             'is_leader': user.is_leader,
             'is_advisor': user.is_advisor,
             'is_council': user.is_council,

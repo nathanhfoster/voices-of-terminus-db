@@ -73,6 +73,7 @@ class User(AbstractUser):
     guild_points = models.IntegerField(default=0)
 
     # Roles
+    is_moderator = models.BooleanField(default=False)
     is_leader = models.BooleanField(default=False)
     is_advisor = models.BooleanField(default=False)
     is_council = models.BooleanField(default=False)
