@@ -21,7 +21,7 @@ class Ticket(models.Model):
     others_involved = models.TextField(blank=True, null=True)
 
     description = models.TextField(blank=True, null=True)
-    ticket_type = models.CharField(max_length=512, default='Report')
+    ticket_type = models.CharField(max_length=256, default='Report')
     image = models.TextField(blank=True, null=True)
     priority = models.PositiveIntegerField(default=1)
     notes = models.TextField(blank=True, null=True)

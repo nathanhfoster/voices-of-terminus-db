@@ -21,7 +21,7 @@ class Gallery(models.Model):
     def author_profile_image(self):
         return self.author. get_profile_image
     author_username.short_description = 'Username'
-    tags = models.CharField(max_length=512, null=True)
+    tags = models.CharField(blank=True, max_length=512)
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
     last_modified_by = models.ForeignKey(
@@ -56,7 +56,7 @@ class GalleryImages(models.Model):
         except:
             return None
     author_username.short_description = 'Username'
-    tags = models.CharField(max_length=512, null=True)
+    tags = models.CharField(blank=True, max_length=512)
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
     last_modified_by = models.ForeignKey(
