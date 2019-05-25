@@ -33,6 +33,7 @@ class CustomAuthToken(ObtainAuthToken):
             'email': user.email,
             'first_name': user.first_name,
             'last_name': user.last_name,
+            'bio': user.bio,
             'is_active': user.is_active,
             'last_login': user.last_login,
             'opt_in': user.opt_in,
@@ -57,8 +58,6 @@ class CustomAuthToken(ObtainAuthToken):
             'is_crafter_lead': user.is_crafter_lead,
             'is_host': user.is_host,
             'is_lore_master': user.is_lore_master,
-
-            'bio': user.bio,
 
             'date_joined': user.date_joined,
             'discord_url': user.discord_url,

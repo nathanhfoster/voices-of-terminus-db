@@ -3,7 +3,7 @@ from . import views
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register('user/groups', views.UserGroupView)
+router.register('message/groups', views.UserGroupView)
 router.register('messages', views.MessageView)
 router.register('message/recipients', views.MessageRecipientView)
 
