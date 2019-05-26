@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate
+from django.contrib.auth.models import Group
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
@@ -23,6 +24,9 @@ class CustomAuthToken(ObtainAuthToken):
         user = serializer.validated_data['user']
         update_last_login(None, user)
         token, created = Token.objects.get_or_create(user=user)
+
+        defaultGroup = Group.objects.all().filter(name="Default")
+        user.groups.set(defaultGroup)
 
         return Response({
             'token': token.key,
