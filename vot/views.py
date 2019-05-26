@@ -25,8 +25,15 @@ class CustomAuthToken(ObtainAuthToken):
         update_last_login(None, user)
         token, created = Token.objects.get_or_create(user=user)
 
-        defaultGroup = Group.objects.all().filter(name="Default")
-        user.groups.set(defaultGroup)
+        groups = Group.objects.all()
+        guildMember = user.is_recruit or user.is_junior_member or user.is_officer or user.is_senior_member or user.is_general_officer or user.is_council or user.is_advisor or user.is_leader
+
+        defaultGroup = Group.objects.get(name='Default')
+        defaultGroup.user_set.add(user)
+
+        if(guildMember):
+            guildMemberGroup = Group.objects.get(name="Guild Member")
+            guildMemberGroup.user_set.add(user)
 
         return Response({
             'token': token.key,
