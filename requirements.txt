@@ -53,7 +53,7 @@ pipenv==2018.11.26
 pluggy==0.8.1
 psycopg2==2.7.7
 psycopg2-binary==2.7.7
-py==1.7.0
+py==1.10.0
 pycodestyle==2.5.0
 pycparser==2.19
 PyJWT==1.7.1
